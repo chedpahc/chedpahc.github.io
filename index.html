@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Speed Spieler">
+    <title>web portfolio</title>
+    <link rel="stylesheet" href="styles2.css">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css"/>
+    <script src="https://unpkg.com/wavesurfer.js@7"></script>
+    <script src="https://unpkg.com/wavesurfer.js@7/dist/plugins/spectrogram.min.js"></script>
+    <script defer src="script3.js"></script>
+</head>
+
+<!-- emboss/deboss filter-->
+<svg width="0" height="0" style="position:absolute">
+    <defs>
+        <filter id="emboss" width="200%" height="200%">
+            <!-- Highlight (상단 효과) -->
+            <feOffset in="SourceAlpha" dx="0" dy="-1" result="highlightOffset"/>
+            <feGaussianBlur in="highlightOffset" stdDeviation="0.75" result="highlightBlur"/>
+            <feFlood flood-color="white" flood-opacity="0.75" result="highlightFlood"/>
+            <feComposite in="highlightFlood" in2="highlightBlur" operator="in" result="highlight"/>
+          
+            <!-- Shadow (하단 효과) -->
+            <feOffset in="SourceAlpha" dx="0" dy="1" result="shadowOffset"/>
+            <feGaussianBlur in="shadowOffset" stdDeviation="0.75" result="shadowBlur"/>
+            <feFlood flood-color="black" flood-opacity="0.75" result="shadowFlood"/>
+            <feComposite in="shadowFlood" in2="shadowBlur" operator="in" result="shadow"/>
+          
+            <!-- 원본과 효과들을 합침 -->
+            <feMerge>
+              <feMergeNode in="highlight"/>
+              <feMergeNode in="shadow"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+          
+        <filter id="emboss-invert" width="200%" height="200%">
+            <!-- Highlight (상단 효과) -->
+            <feOffset in="SourceAlpha" dx="0" dy="1" result="highlightOffset"/>
+            <feGaussianBlur in="highlightOffset" stdDeviation="0.75" result="highlightBlur"/>
+            <feFlood flood-color="white" flood-opacity="0.75" result="highlightFlood"/>
+            <feComposite in="highlightFlood" in2="highlightBlur" operator="in" result="highlight"/>
+          
+            <!-- Shadow (하단 효과) -->
+            <feOffset in="SourceAlpha" dx="0" dy="-1" result="shadowOffset"/>
+            <feGaussianBlur in="shadowOffset" stdDeviation="0.75" result="shadowBlur"/>
+            <feFlood flood-color="black" flood-opacity="0.75" result="shadowFlood"/>
+            <feComposite in="shadowFlood" in2="shadowBlur" operator="in" result="shadow"/>
+          
+            <!-- 원본과 효과들을 합침 -->
+            <feMerge>
+              <feMergeNode in="highlight"/>
+              <feMergeNode in="shadow"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+
+        <filter id="deboss" width="200%" height="200%">
+            <!-- Shadow Offset -->
+            <feOffset dx="0" dy="1" />
+            <!-- Shadow Blur -->
+            <feGaussianBlur stdDeviation="0.75"  result="offset-blur" />
+            <!-- Invert the drop shadow to create an inner shadow -->
+            <feComposite operator="out" in="SourceGraphic" result="inverse" />
+            <!-- Color & Opacity -->
+            <feFlood flood-color="black" flood-opacity="1" result="color" />
+            <!-- Clip color inside shadow -->
+            <feComposite operator="in" in="color" in2="inverse" result="shadow" />
+            <!-- Shadow Opacity -->
+            <feComponentTransfer in="shadow" result="shadow">
+              <feFuncA type="linear" slope="1.5" />
+            </feComponentTransfer>
+            <!-- Put shadow over original object -->
+            <feComposite operator="over" in="shadow" in2="SourceGraphic"/>
+        </filter>
+
+        <filter id="inset-shadow-orig" width="200%" height="200%">
+            <!-- Shadow Offset -->
+            <feOffset dx="0" dy="1" />
+            <!-- Shadow Blur -->
+            <feGaussianBlur stdDeviation="1"  result="offset-blur" />
+            <!-- Invert the drop shadow to create an inner shadow -->
+            <feComposite operator="out" in="SourceGraphic" result="inverse" />
+            <!-- Color & Opacity -->
+            <feFlood flood-color="black" flood-opacity=".75" result="color" />
+            <!-- Clip color inside shadow -->
+            <feComposite operator="in" in="color" in2="inverse" result="shadow" />
+            <!-- Shadow Opacity -->
+            <feComponentTransfer in="shadow" result="shadow">
+              <feFuncA type="linear" slope="1" />
+            </feComponentTransfer>
+            <!-- Put shadow over original object -->
+            <!--<feComposite operator="over" in="shadow" in2="SourceGraphic"/>-->
+        </filter>
+    </defs>
+</svg>
+
+<body>
+    <!-- header bar-->
+    <header id="site-header" class="hidden">
+        <div id="back-to" class="header-design nav-link"></div>
+    </header>
+    <main>
+        <!-- landing page --->
+        <section id="home" class="page active">
+            <div class="grid3x">
+                <!-- 1, 2, 3 -->
+                <span id="go-to-about" class="grid3x-item nav-link"><p class="pressable-text">⋯</p></span>
+                <span></span>
+                <span><button class="hidden" id="reset">clear local storage</button></span>
+                <!-- 4, 5, 6 -->
+                <span></span>
+                <span class="logo">
+                    <svg width="1000" height="1000" viewBox="0 0 1000 1000" fill="none" xmlns="http://www.w3.org/2000/svg" filter="url(#emboss)">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M978.826 703.249C932.261 807.911 851.169 893.409 749.115 945.443C647.062 997.476 530.236 1012.89 418.179 989.103C306.123 965.317 205.632 903.775 133.516 814.771C61.4002 725.766 22.0331 614.698 22 500.145C21.9669 385.592 61.2697 274.501 133.334 185.455C205.398 96.4095 305.854 34.8091 417.896 10.9583C529.939 -12.8925 646.774 2.45282 748.858 54.4274C850.941 106.402 932.083 191.854 978.709 296.488L978.658 296.461C945.374 237.32 900.133 188.124 843 151.501L841.619 150.442C817.032 133.624 787.109 121.021 757.592 117.001C728.075 112.98 699.78 117.654 671.59 127.284C643.401 136.915 617.847 152.989 596.96 174.228C576.073 195.468 560.429 221.288 551.272 249.635C542.115 277.981 539.697 308.074 544.211 337.519C548.725 366.964 560.046 394.95 577.275 419.252C594.503 443.554 617.163 463.502 643.453 477.509C669.102 491.175 697.799 499.501 727 499.501L958 499.501C852.164 512.056 751.208 558.082 673.384 630.9C595.561 703.717 543.041 799.497 523.487 904.266C610.77 924.471 701.977 915.979 784.028 879.904C866.385 843.695 934.745 781.704 978.81 703.27L978.826 703.249ZM268.5 726.501L270 728.501C284.443 747.659 302.151 761.002 324.026 770.76C345.902 780.517 369.886 784.546 393.736 782.469C417.585 780.391 440.519 772.276 460.392 758.882C480.265 745.488 496.427 727.253 507.365 705.884C518.303 684.515 523.66 660.71 522.935 636.698C522.21 612.685 515.425 589.25 503.217 568.585C491.009 547.92 473.777 530.702 453.132 518.54C432.487 506.379 413.431 500.124 389.5 499.501H381.5L202 499.501C202 579.825 224.596 659.084 268.5 726.501ZM202.027 495.257C203.08 403.129 234.762 313.965 292.085 241.824C349.485 169.586 429.32 118.538 518.973 96.7443C517.919 188.95 486.186 278.181 428.778 350.35C371.385 422.5 291.604 473.482 202.027 495.257Z" fill="black"/>
+                    </svg>
+                </span>
+                <span></span>
+                <!-- 7, 8, 9 -->
+                <div class="grid2x">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span id="theme-toggle" class="grid3x-item nav-link utility"></span>
+                </div>
+                <div class="grid2x">
+                    <span></span>
+                    <span></span>
+                    <span id="lang-toggle" class="grid3x-item nav-link utility">En</span>
+                    <span></span>
+                </div>
+                <span class="grid3x-item nav-link" id="go-to-works"><p class="pressable-text">→</p></span>
+            </div>
+        </section>
+
+        <!-- about page -->
+        <section id="about" class="page">
+            <div class="grid3x">
+                <!-- 1, 2, 3 -->
+                <span id="go-to-home" class="grid3x-item nav-link"><p class="pressable-text">←</p></span>
+                <span></span>
+                <div class="grid2x">
+                    <span class="grid2x-item nav-link" data-link="https://instagram.com">
+                        <p data-i18n="aboutlink1" class="pressable-text"></p>
+                    </span>
+                    <span class="grid2x-item nav-link" data-link="https://tr.ee/9MCBCCRKdv">
+                        <p data-i18n="aboutlink2" class="pressable-text"></p>
+                    </span>
+                    <span class="grid2x-item nav-link" data-link="mail">
+                        <p data-i18n="aboutlink3" class="pressable-text"></p>
+                    </span>
+                    <span class="grid2x-item nav-link" data-link="https://linktr.ee/chedpahc">
+                        <p data-i18n="aboutlink4" class="pressable-text"></p>
+                    </span>
+                </div>
+                <!-- 4 + (CV) -->
+                <div class="cv">
+                    <span class="cvtext">
+                    <p data-i18n="cv-title1" class="cvtitlebig"></p>
+                    <br>
+                    <span id="mailtext">contact : abcdefg(at)gmail.com</span>
+                    <p></p>
+                    <br>
+                    <p data-i18n="cv-text1"></p>
+                    <br><br>
+                    <p data-i18n="cv-title2" class="cvtitle"></p>
+                    <br>
+                    <p data-i18n="cv-text2"></p>
+                    <br><br>
+                    <p data-i18n="cv-title3" class="cvtitle"></p>
+                    <br>
+                    <p data-i18n="cv-text3"></p>
+                    <br><br>
+                    <p data-i18n="cv-title4" class="cvtitle"></p>
+                    <br>
+                    <p data-i18n="cv-text4"></p>
+                    <br><br>
+                    <p data-i18n="cv-title5" class="cvtitle"></p>
+                    <br>
+                    <p data-i18n="cv-text5"></p>
+                    <br>
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- works search page -->
+        <section id="works" class="page">
+            <div class="grid3x">
+                <!-- 1, 2, 3 -->
+                <!-- upper interface area -->
+                <div id="serach-container" class="search">
+                    <div class="tag-area-main">
+                        <span class="tag-button active" data-tag="all"><p data-i18n="tag1" class="pressable-text"></p></span>
+                        <span class="tag-button" data-tag="interactive"><p data-i18n="tag2" class="pressable-text"></p></span>
+                        <span class="tag-button" data-tag="audio"><p data-i18n="tag3" class="pressable-text"></p></span>
+                        <span class="tag-button" data-tag="visual"><p data-i18n="tag4" class="pressable-text"></p></span>
+                        <span class="tag-button" data-tag="solo"><p data-i18n="tag5" class="pressable-text"></p></span>
+                        <span class="tag-button" data-tag="co-"><p data-i18n="tag6" class="pressable-text"></p></span>
+                        <span class="expand-collapse-button nav-link math">+</span>
+                    </div>
+                    <div class="expand-container">
+                        <div class="tag-area-more">
+                            <span class="tag-button" data-tag="performance"><p data-i18n="tag7" class="pressable-text"></p></span>
+                            <span class="tag-button" data-tag="exhibition"><p data-i18n="tag8" class="pressable-text"></p></span>
+                            <span class="tag-button" data-tag="music"><p data-i18n="tag9" class="pressable-text"></p></span>
+                            <span class="tag-button" data-tag="film"><p data-i18n="tag10" class="pressable-text"></p></span>
+                            <span class="tag-button" data-tag="collabo"><p data-i18n="tag11" class="pressable-text"></p></span>
+                            <span class="tag-button" data-tag="commission"><p data-i18n="tag12"class="pressable-text"></p></span>
+                        </div>
+                        <div class="tag-area-year">
+                            <span class="tag-button year" data-tag="older"><p data-i18n="tag13" class="pressable-text"></p></span>
+                            <span class="tag-button year" data-tag="2021" ><p class="pressable-text">2021</p></span>
+                            <span class="tag-button year" data-tag="2022"><p class="pressable-text">2022</p></span>
+                            <span class="tag-button year" data-tag="2023"><p class="pressable-text">2023</p></span>
+                            <span class="tag-button year" data-tag="2024"><p class="pressable-text">2024</p></span>
+                            <span class="tag-button year" data-tag="2025"><p class="pressable-text">2025</p></span>
+                        </div>
+                    </div>
+                    <div class="tag-area-text">
+                        <span class="tag-text"></span>
+                        <span class="bottom-left"></span>
+                        <span class="bottom-right"></span>
+                    </div>
+                </div>
+                <!-- 4, 5, 6, 7, . . . -->
+                <!-- works item / link area -->
+                <!--#14-->
+                <div class="works-item" data-id="work14" data-tags="visual solo">
+                    <p class="pressable-text">Gique</p>
+                    <img class="works-tmb" src=".png" alt="Description of image" width="100%" height="100%">
+                </div>
+                <!--#13-->
+                <div class="works-item" data-id="work13" data-tags="visual solo">
+                    <p class="pressable-text">TROPIC</p>
+                    <img class="works-tmb" src=".png" alt="Description of image" width="100%" height="100%">
+                </div>
+                <!--#12-->
+                <div class="works-item" data-id="work12" data-tags="visual solo">
+                    <p class="pressable-text">Eye don't know</p>
+                    <img class="works-tmb" src=".png" alt="Description of image" width="100%" height="100%">
+                </div>
+                <!--#11-->
+                <div class="works-item" data-id="work11" data-tags="interactive co-">
+                    <p class="pressable-text">LET</p>
+                    <img class="works-tmb" src=".png" alt="Description of image" width="100%" height="100%">
+                </div>
+                <!--#10-->
+                <div class="works-item" data-id="work10" data-tags="visual interactive tag10">
+                    <p class="pressable-text">Gagamsok</p>
+                    <img class="works-tmb" src=".png" alt="Description of image" width="100%" height="100%">
+                </div>
+                <!--#9-->
+                <div class="works-item" data-id="work9" data-tags="tag1 interactive tag10">
+                    <p class="pressable-text">Dotstripesfurs</p>
+                    <img class="works-tmb" src=".png" alt="Description of image" width="100%" height="100%">
+                </div>
+                <!--#8-->
+                <div class="works-item" data-id="work8" data-tags="tag1 tag10">
+                    <p class="pressable-text">Cat7</p>
+                    <img class="works-tmb" src=".png" alt="Description of image" width="100%" height="100%">
+                </div>
+                <!--#7-->
+                <div class="works-item" data-id="work7" data-tags="tag1 tag10">
+                    <p class="pressable-text">Visuals for Boiler room - seoul</p>
+                    <img class="works-tmb" src=".png" alt="Description of image" width="100%" height="100%">
+                </div>
+                <!--#6-->
+                <div class="works-item" data-id="work6" data-tags="tag1 audio">
+                    <p class="pressable-text">Saccade</p>
+                    <img class="works-tmb" src=".png" alt="Description of image" width="100%" height="100%">
+                </div>
+                <!--#5-->
+                <div class="works-item" data-id="work5" data-tags="solo co-">
+                    <p class="pressable-text">Horsepower</p>
+                    <img class="works-tmb" src=".png" alt="Description of image" width="100%" height="100%">
+                </div>
+                <!--#4-->
+                <div class="works-item" data-id="work4" data-tags="solo tag10">
+                    <p class="pressable-text">REST...REST</p>
+                    <img class="works-tmb" src=".png" alt="Description of image" width="100%" height="100%">
+                </div>
+                <!--#3-->
+                <div class="works-item" data-id="work3" data-tags="solo tag10">
+                    <p class="pressable-text">AAOX4</p>
+                    <img class="works-tmb" src=".png" alt="Description of image" width="100%" height="100%">
+                </div>
+                <!--#2-->
+                <div class="works-item" data-id="work2" data-tags="audio tag10">
+                    <p class="pressable-text">BABEL</p>
+                    <img class="works-tmb" src=".png" alt="Description of image" width="100%" height="100%">
+                </div>
+                <!--#1-->
+                <div class="works-item" data-id="work1" data-tags="performance">
+                    <p class="pressable-text">Echolocation</p>
+                    <img class="works-tmb" src=".png" alt="Description of image" width="100%" height="100%">
+                </div>
+            </div>
+        </section>
+
+        <!-- works detail page -->
+        <section id="works-detail" class="page works-detail">
+            <!-- for pullup animation -->
+            <div class="grid5x-container">
+                <!-- for box-shadow around edges
+                <span class="grid5x-shadow"></span> -->
+                <!-- for border radius(rounded corner) effect -->
+                <div class="grid5x-wrapper">
+                    <!-- modular grid generation -->
+                    <div id="grid5x" class="grid5x"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+<!-- modal -->
+<div id="modal" class="modal">
+    <span class="close close-tl">╳</span>
+    <span class="close close-tr">╳</span>
+    <span class="close close-bl">╳</span>
+    <span class="close close-br">╳</span>
+    <img id="modal-img" class="modal-content">
+</div>
+</body>
+</html>
