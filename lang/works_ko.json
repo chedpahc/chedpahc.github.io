@@ -1,0 +1,39 @@
+{
+    "work1": {
+        "layout": [
+            ["txt-title", "txt-title", "txt-title", "txt-title", "txt-title"],
+            ["img-main", "img-main", "txt-sub2", "img-main", "img-main"],
+            ["txt-main", "txt-main", "txt-main", "txt-sub1", "txt-sub1"],
+            ["img-main", "img-sub", "txt-main", "img-sub", "txt-sub1"]
+        ],
+        "content": {
+            "img-main": "/media/test.jpg",
+            "img-sub": "/media/test2.png",
+            "txt-title": "한글 제목입니다. ...  ",
+            "txt-main": "메인 텍스트 ",
+            "txt-sub1": "서브텍스트.",
+            "txt-sub2": ""
+        }
+    },
+    "work2": {
+        "layout": [
+            ["img-main", "img-main", "img-main", "img-main", "txt-main"],
+            ["img-main", "img-main", "img-main", "img-main", "txt-main"],
+            ["txt-title", "txt-title", "txt-title", "txt-title", "txt-title"],
+            ["txt-sub1", "txt-sub1", "txt-sub1", "txt-sub1", "txt-sub1"],
+            ["txt-main", "txt-main", "txt-main", "txt-sub2", "txt-sub2"],
+            ["emb-video", "emb-video", "emb-video", "emb-video", "txt-main"],
+            ["emb-video2", "emb-video2", "emb-video2", "emb-video2", "txt-main"]
+            
+        ],
+        "content": {
+            "img-main": "/media/test16b09.jpg",
+            "txt-title": "This a title of this work",
+            "txt-main": "Another description",
+            "txt-sub1": "subtext subtext subtext subtext",
+            "txt-sub2": "subtext2 subtext2222222 subtext subtext",
+            "emb-video": "<iframe width='1080' height='315' src='https://www.youtube.com/emb-videoed/example' frameborder='0'></iframe>",
+            "emb-video2": "<iframe width='1080' height='315' src='https://www.youtube.com/emb-videoed/example' frameborder='0'></iframe>"
+        }
+    }
+}

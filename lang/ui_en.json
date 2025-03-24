@@ -1,0 +1,49 @@
+{
+    "translations": {
+        "aboutlink1": "IG",
+        "aboutlink2": "hear",
+        "aboutlink3": "mail",
+        "aboutlink4": "more",
+        "cv-title1": "CV",
+        "cv-text1": "Based in Korea, chedpahc is an artist who keenly explores the evolving modalities that shape the relationship between individuals and machines in a technologically accelerated environment. In his role as an operator, he has internalized a simultaneous expansion of possibility and impossibility, the depoliticization of speed, and the expansion and transformation of the body as it interacts with media interfaces—coupled with an unsettling attitude of a player. Drawing on these experiences, he weaves his work by interlacing computer codes. The resulting fabric can be a combination of independent generative systems, real-time or pre-rendered moving images and MIDI sound, as well as custom hardware devices. These typically emerge as performances, installations, and recordings.",
+        "cv-title2": "Education",
+        "cv-text2": "2017-2024  B.F.A Major in Sculpture, Hongik University of Arts ",
+        "cv-title3": "Performance / Exhibition",
+        "cv-text3": "2023 AAOX4, SAPY, Seoul.\n2023 WeSA UNDER Festival, Thila ground, Seoul.\n2024 Do androids dream of electronic sheep?, Senggi studio, Seoul.\n2024 Artificial Sun, Candid Arts, London.\n2024 Goodbye, good morning, Poolmujil, Seoul.",
+        "cv-title4": "Collaboration & Commission",
+        "cv-text4": "2024 BoilerRoom : Seoul / Projection visual.\n2024 Cat7 / Brand concept visual and music.\n2025 TROPIC(director : Park Jungyoon) / Music and sound design.\n2025 Target A(director : Hong Cyan) / Music and sound design.",
+        "cv-title5": "Discography",
+        "cv-text5": "2024 AAOX4 (digital album)\n2024 Saccade (digital album)\n2024 LET (digital album)",
+        
+        "works": "Works",
+        "tag1": "All", 
+        "tag2": "Interactive",
+        "tag3": "Audio",
+        "tag4": "Visual",
+        "tag5": "Solo",
+        "tag6": "Co-work",
+        "tag7": "Performance",
+        "tag8": "Exhibition",
+        "tag9": "Music",
+        "tag10": "Film",
+        "tag11": "Collabo",
+        "tag12": "Commission",
+        "tag13": "Older"
+    },
+
+    "tagMappings": {
+        "all": "tag1",
+        "interactive": "tag2",
+        "audio": "tag3",
+        "visual": "tag4",
+        "solo": "tag5",
+        "co-": "tag6",
+        "performance": "tag7",
+        "exhibition": "tag8",
+        "music": "tag9",
+        "film": "tag10",
+        "collabo": "tag11",
+        "commission": "tag12",
+        "older": "tag13"
+    }
+}

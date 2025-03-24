@@ -1,0 +1,49 @@
+{
+    "translations": {
+        "aboutlink1": "인스타",
+        "aboutlink2": "듣기",
+        "aboutlink3": "메일",
+        "aboutlink4": "더보기",
+        "cv-title1": "CV",
+        "cv-text1": "박상우(chedpahc)는 한국에서 활동하는 예술가로, 기술 가속화된 환경 속 개인과 기계 관계의 갱신되는 양상을 기민하게 탐구한다. 그는 한 명의 조작자로서 가능성과 불가능성의 동시적 확장, 속도의 탈정치화, 매체 인터페이스와 접촉하는 신체의 확장 및 변형과 불안한 유희자의 태도를 체득해왔고, 컴퓨터 코드를 엮어 작업을 직조한다. 그 직물은 독립적 생성형 시스템, 실시간 혹은 사전 렌더링된 무빙 이미지와 MIDI 사운드 그리고 자체 개발한  하드웨어 장치의 결합일 수 있다. 이들은 일반적으로 공연과 설치, 음반의 형태로 드러난다.",
+        "cv-title2": "학력",
+        "cv-text2": "2017-2024  홍익대학교 미술대학 학사, 조소 전공.",
+        "cv-title3": "공연 / 전시",
+        "cv-text3": "2023 AAOX4, 청년예술청, 서울, 한국.\n2023 위사 언더 페스티벌 2023, 틸라 그라운드, 서울, 한국.\n2024 Do androids dream of electronic sheep?, 생기 스튜디오, 서울, 한국.\n2024 Artificial Sun, 캔디드 아트 갤러리(Candid Arts Trust), 런던, 영국.\n2024 Goodbye, good morning, 풀무질, 서울, 한국 ",
+        "cv-title4": "협업 & 외주",
+        "cv-text4": "2024 BoilerRoom : Seoul / 프로젝션 영상 제작. \n2024 Cat7 / 브랜드 컨셉 영상과 음악 제작. \n2025 TROPIC(박정윤 감독) / 음악 제작과 사운드 디자인.",
+        "cv-title5": "음반",
+        "cv-text5": "2024 AAOX4 (디지털 앨범)\n2024 Saccade (디지털 앨범)\n2024 LET (디지털 앨범) \n",
+        
+        "works": "작업",
+        "tag1": "전체", 
+        "tag2": "인터랙티브",
+        "tag3": "청각",
+        "tag4": "시각",
+        "tag5": "개인",
+        "tag6": "협동",
+        "tag7": "공연",
+        "tag8": "전시",
+        "tag9": "음악",
+        "tag10": "영화",
+        "tag11": "협업",
+        "tag12": "외주",
+        "tag13": "이전"
+    },
+
+    "tagMappings": {
+        "all": "tag1",
+        "interactive": "tag2",
+        "audio": "tag3",
+        "visual": "tag4",
+        "solo": "tag5",
+        "co-": "tag6",
+        "performance": "tag7",
+        "exhibition": "tag8",
+        "music": "tag9",
+        "film": "tag10",
+        "collabo": "tag11",
+        "commission": "tag12",
+        "older": "tag13"
+    }
+}
