@@ -7,7 +7,7 @@
   --font-h6: 1rem;
 
   --base-vw: 39vw;
-  --grid3x-paddingtop: calc((100vh - var(--base-vw)) / 2);
+  --grid3x-paddingtop: calc((100dvh - var(--base-vw)) / 2);
   --color-header-height: clamp(2rem, 6vh, 3.75rem);
   --grid5x-wrapper-vw: 80vw;
   --items-gap: 0.3rem;
@@ -406,7 +406,7 @@ header {
 }
 .math {
   font-family: STIX Math, Latin Modern Math;
-  font-weight: 700;
+  font-weight: 600;
 }
 .year {
   aspect-ratio: 3/1;
