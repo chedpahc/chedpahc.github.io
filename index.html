@@ -15,7 +15,59 @@
 
 <!-- emboss/deboss filter-->
 <svg width="0" height="0" style="position:absolute">
-    
+    <defs>
+        <!-- Optimized Emboss Filter -->
+        <filter id="emboss" x="-50%" y="-50%" width="200%" height="200%">
+            <!-- Highlight (upper light) -->
+            <feOffset in="SourceAlpha" dx="0" dy="-1" result="hOffset"/>
+            <feGaussianBlur in="hOffset" stdDeviation="0.5" result="hBlur"/>
+            <feFlood flood-color="white" flood-opacity="0.5" result="hFlood"/>
+            <feComposite in="hFlood" in2="hBlur" operator="in" result="highlight"/>
+            
+            <!-- Shadow (lower dark) -->
+            <feOffset in="SourceAlpha" dx="0" dy="1" result="sOffset"/>
+            <feGaussianBlur in="sOffset" stdDeviation="0.5" result="sBlur"/>
+            <feFlood flood-color="black" flood-opacity="0.5" result="sFlood"/>
+            <feComposite in="sFlood" in2="sBlur" operator="in" result="shadow"/>
+            
+            <!-- Merge shadows and original -->
+            <feMerge>
+            <feMergeNode in="highlight"/>
+            <feMergeNode in="shadow"/>
+            <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+          
+        <!-- Optimized Inverted Emboss Filter -->
+        <filter id="emboss-invert" x="-50%" y="-50%" width="200%" height="200%">
+            
+            <!-- Shadow inverted: offset upward -->
+            <feOffset in="SourceAlpha" dx="0" dy="-1" result="sOffset"/>
+            <feGaussianBlur in="sOffset" stdDeviation="0.5" result="sBlur"/>
+            <feFlood flood-color="black" flood-opacity="0.5" result="sFlood"/>
+            <feComposite in="sFlood" in2="sBlur" operator="in" result="shadow"/>
+            
+            <!-- Merge -->
+            <feMerge>
+            <feMergeNode in="highlight"/>
+            <feMergeNode in="shadow"/>
+            <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+
+        <!-- Optimized Deboss Filter -->
+        <filter id="deboss" x="-50%" y="-50%" width="200%" height="200%">
+            <feOffset in="SourceAlpha" dx="0" dy="0.5" result="offset"/>
+            <feGaussianBlur in="offset" stdDeviation="0.5" result="blur"/>
+            <feComposite operator="out" in="SourceGraphic" in2="blur" result="inverse"/>
+            <feFlood flood-color="black" flood-opacity="1" result="color"/>
+            <feComposite in="color" in2="inverse" operator="in" result="shadow"/>
+            <feComponentTransfer in="shadow" result="shadow">
+            <feFuncA type="linear" slope="1.5" />
+            </feComponentTransfer>
+            <feComposite operator="over" in="shadow" in2="SourceGraphic"/>
+        </filter>
+    </defs>
 </svg>
 
 <body>
