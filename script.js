@@ -41,25 +41,6 @@ document.addEventListener("DOMContentLoaded", async() => {
     }
     updateDOMLanguage();
 
-    
-
-    // ------------------------ Theme detection ------------------------ //
-    const storedTheme = localStorage.getItem("theme");
-    // get system preference
-    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const theme = storedTheme ? storedTheme : (prefersDark ? "dark" : "light");
-
-    // setting theme in css
-    function setTheme(theme) {
-        if (theme === "dark") {
-            document.documentElement.classList.add("dark-mode");
-        } else {
-            document.documentElement.classList.remove("dark-mode");
-        }
-        localStorage.setItem("theme", theme);
-        }
-    setTheme(theme);
-
     // ------------------------ Language toggle ------------------------ //
     const langToggleButton = document.querySelector("#lang-toggle");
     if (langToggleButton) {
@@ -71,23 +52,83 @@ document.addEventListener("DOMContentLoaded", async() => {
         location.reload();
         });
     }
-    
-    // ------------------------ Theme toggle ------------------------ //
-    const themeToggleButton = document.querySelector("#theme-toggle");
-    // theme toggle
-    function updateToggleButton(theme) {
-        // 버튼 텍스트를 현재 테마의 반대 모드로 표시 (클릭하면 전환될 모드)
-        if (themeToggleButton) {
-            themeToggleButton.innerHTML = `<span class="pressable-text">${theme === "dark" ? "0.564" : "0.721"}</span>`;
+
+    // ------------------------ Theme detection, cycle ------------------------ //
+    const themes = ["light", "one", "dark", "zero"];
+
+    const storedTheme = localStorage.getItem("theme");
+    // get system preference
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    let initialTheme = storedTheme ? storedTheme : (prefersDark ? "dark" : "light");
+    if (!themes.includes(initialTheme)) {
+        initialTheme = "light";
+    }
+    let currentThemeIndex = themes.indexOf(initialTheme);
+
+    // setting theme in css
+    function setTheme(theme) {
+        document.documentElement.className = `${theme}-mode`;
+        localStorage.setItem("theme", theme);
+        updateLogoSlope(theme);
+    }
+
+    // logo slope value per theme
+    function updateLogoSlope(theme) {
+        const feFuncAList = document.querySelectorAll('#deboss feFuncA');
+        if (feFuncAList.length < 2) return;
+        switch (theme) {
+        case "dark":
+            feFuncAList[0].setAttribute('slope', "1.25");
+            feFuncAList[1].setAttribute('slope', "0.25");
+            break;
+        case "zero":
+            feFuncAList[0].setAttribute('slope', "0");
+            feFuncAList[1].setAttribute('slope', "0");
+            break;
+        case "one":
+            feFuncAList[0].setAttribute('slope', "0");
+            feFuncAList[1].setAttribute('slope', "0");
+            break;
+        default: // "light"
+            feFuncAList[0].setAttribute('slope', "1");
+            feFuncAList[1].setAttribute('slope', "0.75");
         }
     }
-    if (themeToggleButton) {
-        updateToggleButton(theme);
-        themeToggleButton.addEventListener("click", () => {
-        // 현재 테마가 dark이면 light로, 아니면 dark로 전환
-        const newTheme = (document.documentElement.classList.contains("dark-mode") ? "light" : "dark");
-        setTheme(newTheme);
-        updateToggleButton(newTheme);
+    setTheme(initialTheme);
+
+    // ------------------------ Theme cycle button ------------------------ //
+    const themeCycleButton = document.querySelector("#theme-cycle");
+    function updateToggleButton(theme) {
+        if (themeCycleButton) {
+        let text;
+        switch (theme) {
+            case "light":
+            text = "0.72";
+            break;
+            case "one":
+            text = "1.00";
+            break;
+            case "dark":
+            text = "0.56";
+            break;
+            case "zero":
+            text = "0.00";
+            break;
+            default:
+            text = theme;
+        }
+        themeCycleButton.innerHTML = `<span class="pressable-text">${text}</span>`;
+        }
+    }
+    if (themeCycleButton) {
+        updateToggleButton(themes[currentThemeIndex]);
+        themeCycleButton.addEventListener("click", () => {
+            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+            const newTheme = themes[currentThemeIndex];
+            setTheme(newTheme);
+            updateToggleButton(newTheme);
+            location.reload();
         });
     }
 
@@ -169,8 +210,8 @@ document.addEventListener("DOMContentLoaded", async() => {
         if (page && (page.id === "works" || page.id === "works-detail")) {
             header.classList.remove("hidden");
             backTo.innerHTML = (page.id === "works-detail")
-            ? '<span class="pressable-text">← ↚ ↫ ⟵ ⟸ ⬰ ⬺ 🡨 🡰 ⟻ ⟽ ⬲ ⬾ ⮄ ⭠ 🡠 ⮘ ⮜</span>'
-            : '<span class="pressable-text">↞ ↤ ↫ ⟻ ⟽ ← ↚ </span>';
+            ? '<span class="pressable-text">←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←</span>'
+            : '<span class="pressable-text">←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←</span>';
         } else {
             header.classList.add("hidden");
         }
@@ -233,7 +274,7 @@ document.addEventListener("DOMContentLoaded", async() => {
             showPage("works");
             //reset
             backToWorksScrollOffset();
-            stopAudio()
+            stopMedia()
         } else {
             window.scrollTo({
                 top: 0,
@@ -252,7 +293,7 @@ document.addEventListener("DOMContentLoaded", async() => {
         const container = document.querySelector(".tag-area-text");
         if (!container || !textcontent) return;
         
-        let currentFontSize = window.innerWidth <= 768 ? 33 : 40;
+        let currentFontSize = window.innerWidth <= 768 ? 45 : 50;
         textcontent.style.fontSize = currentFontSize + "px";
         
         // Decrease font size until text fits within its container
@@ -416,11 +457,7 @@ document.addEventListener("DOMContentLoaded", async() => {
     });
 
     // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Works detail <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< //
-    const waveInstances = [];
-    const waveColor = getComputedStyle(document.documentElement).getPropertyValue('--color-item-hover').trim();
-    //const progressColor = getComputedStyle(document.documentElement).getPropertyValue('--color-text').trim();
-
-    function stopAudio() {
+    function stopMedia() {
         waveInstances.forEach(instance => {
             if (instance && instance.isPlaying()) {
                 instance.pause();
@@ -429,200 +466,356 @@ document.addEventListener("DOMContentLoaded", async() => {
         });
         // Optionally clear the array:
         waveInstances.length = 0;
+        const videos = document.querySelectorAll("video");
+        videos.forEach(video => {
+            if (!video.paused) {
+                video.pause();  // 비디오 멈추기
+            }
+            // video.currentTime = 0; // 필요 시 비디오를 처음으로 되돌리기 (선택사항)
+        });
     }
 
     // ------------------------ Load work content and form Grid5x layout from json data ------------------------ //
-
     function loadWorkDetail(workId) {
-    savedScrollY = window.pageYOffset; // save scroll point before loading detail
+        savedScrollY = window.pageYOffset; // save scroll point before loading detail
 
-    const work = worksData[workId];
-    if (!work) return;
+        const work = worksData[workId];
+        if (!work) return;
 
-    const container = document.getElementById("grid5x");
-    container.innerHTML = ""; // Clear existing content
+        const container = document.getElementById("grid5x");
+        container.innerHTML = ""; // Clear existing content
 
-    const rowCount = work.layout.length;
-    const colCount = work.layout[0].length;
-    const visited = Array.from({ length: rowCount }, () => Array(colCount).fill(false));
+        const rowCount = work.layout.length;
+        const colCount = work.layout[0].length;
+        const visited = Array.from({ length: rowCount }, () => Array(colCount).fill(false));
 
-    work.layout.forEach((row, rowIndex) => {
-        row.forEach((item, colIndex) => {
-        if (visited[rowIndex][colIndex]) return;
+        work.layout.forEach((row, rowIndex) => {
+            row.forEach((item, colIndex) => {
+            if (visited[rowIndex][colIndex]) return;
 
-        // Create the grid cell element
-        const cell = document.createElement("div");
-        cell.classList.add("grid5x-cell");
+            // Create the grid cell element
+            const cell = document.createElement("div");
+            cell.classList.add("grid5x-cell");
 
-        // Calculate span sizes
-        const { colSpan, rowSpan } = calculateSpanSizes(work.layout, rowIndex, colIndex, colCount, rowCount, item);
-        if (colSpan > 1) cell.style.gridColumn = `span ${colSpan}`;
-        if (rowSpan > 1) cell.style.gridRow = `span ${rowSpan}`;
+            // Calculate span sizes
+            const { colSpan, rowSpan } = calculateSpanSizes(work.layout, rowIndex, colIndex, colCount, rowCount, item);
+            if (colSpan > 1) cell.style.gridColumn = `span ${colSpan}`;
+            if (rowSpan > 1) cell.style.gridRow = `span ${rowSpan}`;
 
-        markVisited(visited, rowIndex, colIndex, rowSpan, colSpan);
+            markVisited(visited, rowIndex, colIndex, rowSpan, colSpan);
 
-        // Create the cell content based on its type
-        const content = work.content[item];
-        if (content) {
-            cell.classList.add(item);
-            let contentElem = createContentElement(item, content);
-            if (contentElem) {
-            cell.appendChild(contentElem);
+            // Create the cell content based on its type
+            const content = work.content[item];
+            if (content) {
+                cell.classList.add(item);
+                let contentElem = createContentElement(item, content);
+                if (contentElem) {
+                cell.appendChild(contentElem);
+                }
             }
-        }
 
-        container.appendChild(cell);
+            container.appendChild(cell);
+            });
         });
-    });
 
-    window.scrollTo(0, 0);
+        window.scrollTo(0, 0);
     }
 
     // Helper function to calculate span sizes
     function calculateSpanSizes(layout, rowIndex, colIndex, colCount, rowCount, item) {
-    let colSpan = 1, rowSpan = 1;
-    while (colIndex + colSpan < colCount && layout[rowIndex][colIndex + colSpan] === item) colSpan++;
-    while (rowIndex + rowSpan < rowCount && layout[rowIndex + rowSpan][colIndex] === item) rowSpan++;
-    return { colSpan, rowSpan };
-    }
-
-    // Helper function to mark visited cells in the 2D visited array
-    function markVisited(visited, rowIndex, colIndex, rowSpan, colSpan) {
-    for (let r = 0; r < rowSpan; r++) {
-        for (let c = 0; c < colSpan; c++) {
-        visited[rowIndex + r][colIndex + c] = true;
+        let colSpan = 1, rowSpan = 1;
+        while (colIndex + colSpan < colCount && layout[rowIndex][colIndex + colSpan] === item) colSpan++;
+        while (rowIndex + rowSpan < rowCount && layout[rowIndex + rowSpan][colIndex] === item) rowSpan++;
+        return { colSpan, rowSpan };
         }
-    }
+
+        // Helper function to mark visited cells in the 2D visited array
+        function markVisited(visited, rowIndex, colIndex, rowSpan, colSpan) {
+        for (let r = 0; r < rowSpan; r++) {
+            for (let c = 0; c < colSpan; c++) {
+            visited[rowIndex + r][colIndex + c] = true;
+            }
+        }
     }
 
     // Helper function to create content element based on the type prefix
-    function createContentElement(item, content) {
-    if (item.startsWith("txt-")) {
-        return createTextContent(content);
-    } else if (item.startsWith("aud-")) {
-        return createAudioContent(item, content);
-    } else if (item.startsWith("img-")) {
-        return createImageContent(content);
-    } else if (item.startsWith("vid-")) {
-        return createVideoContent(content);
-    }
-    return null;
+        function createContentElement(item, content) {
+        if (item.startsWith("txt-")) {
+            return createTextContent(content);
+        } else if (item.startsWith("aud-")) {
+            return createAudioContent(item, content);
+        } else if (item.startsWith("img-")) {
+            return createImageContent(content);
+        } else if (item.startsWith("vid-")) {
+            return createVideoContent(content);
+        }
+        return null;
+        }
+
+    // ------------------------ Text ------------------------ //
+    function createTextContent(content) {
+        const elem = document.createElement("div");
+        let textContent = "";
+        if (typeof content === "object") {
+            textContent = content.text || "";
+            if (content.classes) {
+            content.classes.split(" ").forEach(cls => {
+                if (cls.trim()) elem.classList.add(cls.trim());
+            });
+            }
+        } else {
+            textContent = content;
+        }
+        elem.innerHTML = textContent;
+        return elem;
     }
 
-    function createTextContent(content) {
-    const elem = document.createElement("div");
-    let textContent = "";
-    if (typeof content === "object") {
-        textContent = content.text || "";
-        if (content.classes) {
-        content.classes.split(" ").forEach(cls => {
-            if (cls.trim()) elem.classList.add(cls.trim());
-        });
-        }
-    } else {
-        textContent = content;
-    }
-    elem.innerHTML = textContent;
-    return elem;
-    }
+    // ------------------------ Audio ------------------------ //
+    const waveInstances = [];
+    const waveColor = getComputedStyle(document.documentElement).getPropertyValue('--color-item-active').trim();
+    const progressColor = getComputedStyle(document.documentElement).getPropertyValue('--color-waveprogress').trim();
 
     function createAudioContent(item, content) {
-    // Create a wrapper for the audio content
-    const audioWrapper = document.createElement("div");
-    audioWrapper.classList.add("audio-wrapper");
+        // Create a wrapper for the audio content
+        const audioWrapper = document.createElement("div");
+        audioWrapper.classList.add("audio-wrapper");
 
-    const waveContainer = document.createElement("div");
-    waveContainer.classList.add("waveform");
-    waveContainer.id = `waveform-${item}`;
+        const waveContainer = document.createElement("div");
+        waveContainer.classList.add("waveform");
+        waveContainer.id = `waveform-${item}`;
 
-    // Append container to wrapper
-    audioWrapper.appendChild(waveContainer);
+        // Append container to wrapper
+        audioWrapper.appendChild(waveContainer);
 
-    // Initialize WaveSurfer instance using the container element
-    const waveSurfer = WaveSurfer.create({
-        container: waveContainer,
-        waveColor: waveColor, 
-        progressColor: '#333333',
-        barWidth: 2,
-        cursorColor: '#333333',
-        cursorWidth: 1,
-        responsive: true,
-        backend: 'WebAudio',
-        normalize: true,
-    });
-    waveSurfer.load(content.src);
-    waveInstances.push(waveSurfer);
+        // Initialize WaveSurfer instance using the container element
+        const waveSurfer = WaveSurfer.create({
+            container: waveContainer,
+            waveColor: waveColor, 
+            progressColor: progressColor,
+            barWidth: 2,
+            cursorColor: progressColor,
+            cursorWidth: 1,
+            responsive: true,
+            backend: 'WebAudio',
+            normalize: true,
+        });
+        waveSurfer.load(content.src);
+        waveInstances.push(waveSurfer);
+        
 
-    // Toggle play on waveform click
-    waveContainer.addEventListener("click", () => {
-        if (waveSurfer.isPlaying()) {
-        waveSurfer.pause();
-        } else {
-        waveSurfer.play();
-        }
-    });
+        // Toggle play on waveform click
+        waveContainer.addEventListener("click", () => {
+            if (waveSurfer.isPlaying()) {
+            waveSurfer.pause();
+            } else {
+            waveSurfer.play();
+            }
+        });
 
-    // Optionally add caption if provided
-    if (content.caption) {
-        const caption = document.createElement("figcaption");
-        caption.textContent = content.caption;
-        audioWrapper.appendChild(caption);
-    }
-    return audioWrapper;
-    }
-
-    function createImageContent(content) {
-    const figure = document.createElement("figure");
-    const img = document.createElement("img");
-    if (typeof content === "object") {
-        img.src = content.src;
+        // Optionally add caption if provided
         if (content.caption) {
-        const figcaption = document.createElement("figcaption");
-        figcaption.textContent = content.caption;
-        figure.appendChild(img);
-        figure.appendChild(figcaption);
-        } else {
-        figure.appendChild(img);
+            const caption = document.createElement("figcaption");
+            caption.textContent = content.caption;
+            audioWrapper.appendChild(caption);
         }
-    } else {
-        img.src = content;
-        figure.appendChild(img);
-    }
-    return figure;
+        return audioWrapper;
     }
 
+    // ------------------------ Image ------------------------ //
+    function createImageContent(content) {
+        const figure = document.createElement("figure");
+        const img = document.createElement("img");
+        if (typeof content === "object") {
+            img.src = content.src;
+            if (content.caption) {
+            const figcaption = document.createElement("figcaption");
+            figcaption.textContent = content.caption;
+            figure.appendChild(img);
+            figure.appendChild(figcaption);
+            } else {
+            figure.appendChild(img);
+            }
+        } else {
+            img.src = content;
+            figure.appendChild(img);
+        }
+        return figure;
+    }
+
+    // ------------------------ Video ------------------------ //
     function createVideoContent(content) {
-    const videoWrapper = document.createElement("div");
-    videoWrapper.classList.add("video-wrapper");
+        // video-wrapper 생성
+        const videoWrapper = document.createElement("div");
+        videoWrapper.classList.add("video-wrapper");
+      
+        // 비디오를 감쌀 컨테이너 생성 (position: relative)
+        const videoContainer = document.createElement("div");
+        videoContainer.classList.add("video-container");
+      
+        // video 요소 생성 (HTML5 video 태그)
+        const videoElem = document.createElement("video");
+        videoElem.controls = false; // 네이티브 컨트롤 제거
+        videoElem.setAttribute("preload", "auto");
+      
+        // source 설정 (mp4 URL로 가정)
+        const sourceElem = document.createElement("source");
+        sourceElem.src = content.src;
+        sourceElem.type = "video/mp4";
+        videoElem.appendChild(sourceElem);
+      
+        // poster 이미지 설정 (있다면)
+        if (content.poster) {
+          videoElem.setAttribute("poster", content.poster);
+        }
+      
+        // aspectRatio 처리
+        let ratio = "16/9"; // 기본값
+        if (content.aspectRatio) {
+          ratio = content.aspectRatio;
+        }
+        videoContainer.style.aspectRatio = ratio.replace("/", " / ");
+      
+        // video 요소를 컨테이너에 추가
+        videoContainer.appendChild(videoElem);
+        videoWrapper.appendChild(videoContainer);
+      
+        // controls-div 생성 (비디오 컨테이너 내부에 위치)
+        const controlsDiv = document.createElement("div");
+        controlsDiv.classList.add("controls-div");
+      
+        // 사운드 버튼 (mute/unmute)
+        const soundButton = document.createElement("div");
+        soundButton.classList.add("sound-button");
+        soundButton.innerHTML = "&#128266;&#65038;"; // unmuted 상태
+        controlsDiv.appendChild(soundButton);
+      
+        // Play/Pause 버튼
+        const playPauseButton = document.createElement("div");
+        playPauseButton.classList.add("play-pause-button");
+        playPauseButton.innerHTML = "&#9654;"; // ▶ 모양
+        controlsDiv.appendChild(playPauseButton);
+      
+        // 전체 화면 버튼
+        const fullscreenButton = document.createElement("div");
+        fullscreenButton.classList.add("fullscreen-button");
+        fullscreenButton.innerHTML = "⛶"; // ⛶ 모양
+        controlsDiv.appendChild(fullscreenButton);
+      
+        // controlsDiv를 videoContainer 내부에 추가
+        videoContainer.appendChild(controlsDiv);
+      
+        let hideControlsTimeout;
+      
+        // 컨트롤 보이기 함수: 모든 컨트롤 즉시 표시
+        function showControls() {
+          clearTimeout(hideControlsTimeout);
+          playPauseButton.style.display = 'block';
+          soundButton.style.display = 'block';
+          fullscreenButton.style.display = 'block';
+          videoContainer.classList.add("video-overlay");
+        }
+      
+        // 컨트롤 숨김 함수: 1초 후에 모든 컨트롤 숨김
+        function hideControlsDelayed() {
+          clearTimeout(hideControlsTimeout);
+          hideControlsTimeout = setTimeout(() => {
+            playPauseButton.style.display = 'none';
+            soundButton.style.display = 'none';
+            fullscreenButton.style.display = 'none';
+            videoContainer.classList.remove("video-overlay");
+          }, 1000);
+        }
+      
+        // 플레이/일시정지 토글 함수
+        function togglePlayPause() {
+          if (videoElem.paused) {
+            videoElem.play();
+            playPauseButton.innerHTML = "&#10074;&#10074;"; // Pause 아이콘 (||)
+          } else {
+            videoElem.pause();
+            playPauseButton.innerHTML = "&#9654;"; // Play 아이콘 (▶)
+          }
+          showControls();
+          hideControlsDelayed();
+        }
+      
+        // 사운드 토글 함수 (mute/unmute)
+        function toggleSound() {
+          videoElem.muted = !videoElem.muted;
+          soundButton.innerHTML = videoElem.muted 
+            ? "&#128263;&#65038;"  // Muted: 🔇 (텍스트 스타일)
+            : "&#128266;&#65038;"; // Unmuted: 🔊︎ (텍스트 스타일)
+          showControls();
+          hideControlsDelayed();
+        }
+      
+        // 전체 화면 토글 함수
+        function toggleFullscreen() {
+          if (document.fullscreenElement) {
+            document.exitFullscreen();
+          } else {
+            videoContainer.requestFullscreen();
+          }
+          showControls();
+          hideControlsDelayed();
+        }
+      
+        // 이벤트 핸들러 등록
+        // 버튼 클릭 시: 이벤트 전파 차단
+        playPauseButton.addEventListener("click", (e) => {
+          e.stopPropagation();
+          togglePlayPause();
+        });
+        soundButton.addEventListener("click", (e) => {
+          e.stopPropagation();
+          toggleSound();
+        });
+        fullscreenButton.addEventListener("click", (e) => {
+          e.stopPropagation();
+          toggleFullscreen();
+        });
+      
+        // videoContainer 내부에서 마우스 움직임이 있으면 즉시 보이고 hide 타이머 재설정
+        videoContainer.addEventListener("mousemove", () => {
+          showControls();
+          hideControlsDelayed();
+        });
+      
+        // videoContainer 클릭(컨트롤 영역 외) 시 플레이/일시정지 토글
+        videoContainer.addEventListener("click", (e) => {
+          // 만약 클릭 대상이 controlsDiv 내부의 요소라면 이벤트를 이미 처리했으므로 건너뛰기
+          if (e.target.closest(".controls-div")) return;
+          togglePlayPause();
+        });
+      
+        // 더블 클릭 시 전체 화면 토글
+        videoContainer.addEventListener("dblclick", (e) => {
+          e.stopPropagation();
+          toggleFullscreen();
+        });
+      
+        // 비디오 이벤트: 재생 또는 일시정지 시 컨트롤 보이기와 숨김 타이머 실행
+        videoElem.addEventListener('play', () => {
+          playPauseButton.innerHTML = "&#10074;&#10074;";
+          showControls();
+          hideControlsDelayed();
+        });
+        videoElem.addEventListener('pause', () => {
+          playPauseButton.innerHTML = "&#9654;";
+          showControls();
+          hideControlsDelayed();
+        });
 
-    const videoContainer = document.createElement("div");
-    videoContainer.classList.add("iframe-container");
-
-    let iframeHTML, ratio, captionText;
-    if (typeof content === "object") {
-        iframeHTML = content.iframe;
-        ratio = content.aspectRatio;
-        captionText = content.caption;
-    } else {
-        iframeHTML = content;
-        ratio = "16/9"; // default ratio
-        captionText = "";
+          // 캡션 추가 (옵션)
+        if (content.caption) {
+            const caption = document.createElement("figcaption");
+            caption.classList.add("video-caption");
+            caption.textContent = content.caption;
+            videoWrapper.appendChild(caption);
+        }
+        return videoWrapper;
     }
-
-    videoContainer.innerHTML = iframeHTML;
-    videoContainer.style.aspectRatio = ratio.replace("/", " / ");
-    videoWrapper.appendChild(videoContainer);
-
-    if (captionText) {
-        const caption = document.createElement("figcaption");
-        caption.textContent = captionText;
-        caption.classList.add("video-caption");
-        videoWrapper.appendChild(caption);
-    }
-    return videoWrapper;
-    }
-
-    
+      
     // ------------------------ modal for img content ------------------------ //
     function initializeModal() {
         const modal = document.getElementById("modal");
@@ -654,7 +847,6 @@ document.addEventListener("DOMContentLoaded", async() => {
             }
         });
     }
-
     initializeModal();
 
     // ------------------------ on clicking works-item ------------------------ //
@@ -700,7 +892,7 @@ document.addEventListener("DOMContentLoaded", async() => {
             mailText.classList.remove("highlight");
         }
         backToWorksScrollOffset();
-        stopAudio()
+        stopMedia()
     });
 
     // ------------------------ check URL on page load ------------------------ //
@@ -711,4 +903,3 @@ document.addEventListener("DOMContentLoaded", async() => {
         showPage(currentPath[0] || "home");
     }
 });
-

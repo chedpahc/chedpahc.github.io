@@ -32,8 +32,8 @@
             ["txt-2", "txt-2", "txt-2", "txt-4", "txt-4"],
             ["vid-1", "vid-1", "vid-1", "txt-2", "txt-2"],
             ["vid-2", "vid-2", "txt-3", "txt-3", "txt-3"],
-            ["aud-1", "aud-1", "txt-3", "txt-3", "txt-3"],
-            ["aud-2", "aud-2", "aud-2", "aud-2", "aud-2"]
+            ["aud-1", "aud-1", "txt-1", "txt-3", "txt-3"],
+            ["aud-2", "aud-2", "aud-2", "aud-2", "txt-2"]
         ],
         "content": {
             "img-1": "/media/test16b09.jpg",
@@ -54,13 +54,14 @@
                 "classes": "txt-S"
             },
             "vid-1": {
-                "iframe": "<iframe width='1080' height='315' src='https://www.youtube.com/embed/ZIcYmQ56GZk?si=vRHWY15w_i2gjs9F&amp;controls=0' title='YouTube vid player' frameborder='0'></iframe>",
-                "aspectRatio": "16/9",
+                "src": "https://htmlchedpahc.b-cdn.net/!dsf_2048x2048.mp4",
+                "aspectRatio": "1/1",
                 "caption": "video caption for vid-1"
             },
             "vid-2": {
-                "iframe": "<iframe width='360' height='600' src='https://www.youtube.com/embed/y6oMutwJQCw?si=LiODx1-EbZXQa92z&amp;controls=0' title='YouTube vid player' frameborder='0'></iframe>",
-                "aspectRatio": "9/16"
+                "src": "https://htmlchedpahc.b-cdn.net/!!e_frostpetrol.mp4",
+                "aspectRatio": "2/3",
+                "caption": "some sample caption"
             },
             "aud-1": {
                 "src": "/media/test.mp3",

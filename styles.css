@@ -1,8 +1,8 @@
 :root {
   color-scheme: light dark;
 
-  --font-h1: 2.8rem;
-  --font-h2: 2.1rem;
+  --font-h1: 3rem;
+  --font-h2: 2.4rem;
   --font-h3: 1.65rem;
   --font-h4: 1.3rem;
   --font-h5: 1.15rem;
@@ -10,33 +10,112 @@
 
   --base-vw: 39vw;
   --grid3x-paddingtop: calc((100dvh - var(--base-vw)) / 2);
-  --color-header-height: clamp(2rem, 6vh, 3.75rem);
+  --header-height: clamp(2rem, 7dvh, 4rem);
   --grid5x-wrapper-vw: 80vw;
   --items-gap: 0.3rem;
 
-  --color-text: rgba(63, 62, 66, 0.5);
+  /*light mode*/
+  --color-text: rgba(184, 183, 187, 0.4);
   --color-bg: rgb(184, 183, 187); 
-  --color-item: /*rgb(198, 197, 202);*/ rgb(187, 186, 190);
-  --color-header: /*rgba(198, 197, 202, 0.5);*/ rgba(188, 187, 191, 0.5);
-
+  --color-item: rgb(184, 183, 187); 
+  --color-header: rgba(188, 187, 191, 0.5);
   --color-item-hover: rgb(202, 200, 205); 
   --color-item-active: rgb(222, 220, 225); 
+  --color-waveprogress: rgb(0, 0, 0);
+
+  --filter-deboss: inset 0rem 0rem 1rem rgba(255, 255, 255, 0.3), inset 0rem 0rem 0.4rem rgba(0, 0, 0, 0.65);
+  --filter-deboss-invert: inset 0rem 0.05rem 0.5rem rgba(0, 0, 0, 0.5);
+  --filter-deboss-text: 1px 3px 6px var(--color-bg), 0 0 0 #000, 1px 3px 6px var(--color-bg), 1px 1px 1px var(--color-item-active);
+  --filter-deboss-text-hover: 1px 3px 6px var(--color-item-hover), 0 0 0 #000, 1px 3px 6px var(--color-item-hover), 1px 1px 1px var(--color-item-active);
+  --filter-deboss-text-active: 1px 3px 6px var(--color-item-active), 0 0 0 #000, 1px 3px 6px var(--color-item-active), 1px 1px 1px var(--color-item-active);
 }
 
 .dark-mode {
-  --color-text: rgb(36, 36, 39, 0.5); 
+  --color-text: rgba(144, 143, 147, 0.2); 
   --color-bg: rgb(144, 143, 147); 
-  --color-item: /*rgb(160, 159, 163); */ rgb(147, 146, 150);
-  --color-header: /*rgba(160, 159, 163, 0.5);*/ rgba(146, 145, 149, 0.5);
-  --color-item-hover: rgb(189, 188, 192); 
-  --color-item-active: rgb(209, 208, 212); 
-  
+  --color-item: rgb(144, 143, 147); 
+  --color-header: rgba(146, 145, 149, 0.5);
+  --color-item-hover: rgb(159, 158, 162); 
+  --color-item-active: rgb(169, 168, 172); 
+  --color-waveprogress: rgb(0, 0, 0);
+
+  --filter-deboss: inset 0rem 0rem 1rem rgba(255, 255, 255, 0.1), inset 0rem 0rem 0.4rem rgba(0, 0, 0, 0.75);
 }
+
+.one-mode {
+  --color-text: rgb(0, 0, 0); 
+  --color-bg: rgb(255, 255, 255); 
+  --color-item: rgb(255, 255, 255); 
+  --color-header: rgba(255, 255, 255, 0.5);
+  --color-item-hover: rgb(231, 231, 231); 
+  --color-item-active: rgb(145, 145, 145); 
+  --color-waveprogress: rgb(0, 0, 0);
+
+  --filter-deboss: none;
+  --filter-deboss-invert: none;
+  --filter-deboss-text: none;
+  --filter-deboss-text-hover: none;
+  --filter-deboss-text-active: none;
+}
+.one-mode .logo path {
+  filter: none;
+  stroke: black;
+  stroke-width: 3px;
+}
+.one-mode .grid3x-item,
+.one-mode .grid2x-item,
+.one-mode .cv,
+.one-mode .works-item,
+.one-mode .tag-button,
+.one-mode .expand-collapse-button,
+.one-mode .tag-area-text::before,
+.one-mode .tag-area-text::after,
+.one-mode .header-design,
+.one-mode .grid5x-cell,
+.one-mode .grid5x-cell {
+  border: 1px solid black
+}
+
+.zero-mode {
+  --color-text: rgb(255, 255, 255); 
+  --color-bg: rgb(0, 0, 0); 
+  --color-item: rgb(0, 0, 0); 
+  --color-header: rgba(0, 0, 0, 0.5);
+  --color-item-hover: rgb(26, 26, 26); 
+  --color-item-active: rgb(109, 109, 109); 
+  --color-waveprogress: rgb(255, 255, 255);
+
+  --filter-deboss: none;
+  --filter-deboss-invert: none;
+  --filter-deboss-text: none;
+  --filter-deboss-text-hover: none;
+  --filter-deboss-text-active: none;
+}
+.zero-mode .logo path {
+  filter: none;
+  stroke: white;
+  stroke-width: 3px;
+}
+.zero-mode .grid3x-item,
+.zero-mode .grid2x-item,
+.zero-mode .cv,
+.zero-mode .works-item,
+.zero-mode .tag-button,
+.zero-mode .expand-collapse-button,
+.zero-mode .tag-area-text::before,
+.zero-mode .tag-area-text::after,
+.zero-mode .header-design,
+.zero-mode .grid5x-cell,
+.zero-mode .grid5x-cell {
+  border: 1px solid white
+}
+
 
 /* --------------------------------------------- intrinsic --------------------------------------------- */
 html {
   overflow-x: hidden;
   overflow-y: scroll;
+  
 }
 
 @supports (scrollbar-gutter: stable) { 
@@ -53,12 +132,14 @@ html {
   font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
   "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   font-weight: 400;
-  line-height: 1.3;
+  line-height: 1.25;
+  
 }
 
 body {
   background: var(--color-bg);
   color: var(--color-text);
+  text-shadow: var(--filter-deboss-text);
 }
 
 header {
@@ -115,29 +196,49 @@ header {
   background-color: var(--color-item-hover);
   cursor: pointer;
 }
+
 .nav-link:active,
 .works-item:active {
   background-color: var(--color-item-active);
-  filter:  url(#emboss-invert);
-  transition: background-color 0.1s linear, filter 0.1s linear;
+  box-shadow: var(--filter-deboss-invert);
+  transition: all 0.1s linear;
 }
 
 .pressable-text {
   transform: none;
-  filter: url(#deboss);
+  transition: all 0.1s linear;
+  
+}
+
+.nav-link:hover .pressable-text,
+.tag-button:hover .pressable-text,
+.works-item:hover .pressable-text{
+  text-shadow: var(--filter-deboss-text-hover);
 }
 
 .nav-link:active .pressable-text,
 .works-item:active .pressable-text{
-  transform: translate(0rem, 0.15rem); 
+  transform: translate(0rem, 0.15rem);
+  text-shadow: var(--filter-deboss-text-active);
 }
 
 /* --------------------------------------------- HOME PAGE --------------------------------------------- */
+.infotext {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  padding-left: 1vw;
+  font-size: calc(var(--base-vw)/50);
+  word-spacing: 0.3rem;
+  margin-left: 0.2rem;
+}
+
 .grid3x {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   width: var(--base-vw);
   /*gap: var(--items-gap);*/
+ /* border: solid 1px gray;*/
 }
 .grid3x-item {
   display: flex;
@@ -148,29 +249,30 @@ header {
   border-radius: 50%;
   font-size: var(--font-h2);
   background-color: var(--color-item);
-  filter: url(#emboss);
-
+  box-shadow: var(--filter-deboss);
 
   /* gap */
   transform: scale(0.96);
+  z-index: 99;
 }
 
 .logo svg {
   max-width: 100%; /* Ensures it doesn’t exceed its container */
   height: auto; /* Maintains aspect ratio */
-  transform: translateX(-4%) scale(1.3);
+  transform: translate(-3%, -0%) scale(1.33);
   display: block; /* Removes unwanted extra space */
+  z-index: 0;
+  opacity: 1;
+  filter: url(#deboss);
 }
-
 .logo path {
   fill: var(--color-item);
 }
 
-
 .utility {
   font-size: var(--font-h4);
   /* gap */
-  transform: scale(0.94);
+  transform: scale(0.96);
 }
 
 /* --------------------------------------------- ABOUT PAGE --------------------------------------------- */
@@ -191,7 +293,7 @@ header {
   font-size: var(--font-h4);
   text-align: center;
   background-color: var(--color-item);
-  filter: url(#emboss);
+  box-shadow: var(--filter-deboss);
   cursor: pointer;
 }
 
@@ -216,15 +318,13 @@ header {
   aspect-ratio: 3/2;
 
   text-align: left;
-  padding: 2vw 3.3vw;
-  margin-top: 1vh;
-  margin-bottom: 2vh;
+  padding: 2vw 3.8vw;
+  margin-top: 1dvh;
+  margin-bottom: 1.75vw;
   border-radius: 4rem 4rem 3rem 3rem;
 
   background-color: var(--color-item);
-  filter: url(#emboss);
-
-  transform: scale(0.99);
+  box-shadow: var(--filter-deboss);
 }
 .cvtitlebig {
   font-size: var(--font-h1);
@@ -240,7 +340,6 @@ header {
   margin-top: 1.25rem;
   font-size: var(--font-h4);
   word-break: break-word;
-  filter: url(#deboss);
 }
 
 /* --------------------------------------------- WORKS-SEARCH PAGE --------------------------------------------- */
@@ -248,13 +347,13 @@ header {
   display: flex;
   position: absolute;
   width: 100%;
-  min-height: var(--color-header-height);
+  min-height: var(--header-height);
   justify-content: center;
   align-items: center;
   font-size: var(--font-h4);
   border-radius: 0 0 10vw 10vw;
   background: var(--color-header);
-  filter: url(#emboss);
+  box-shadow: var(--filter-deboss);
   backdrop-filter: blur(4px);
 }
 
@@ -305,7 +404,7 @@ header {
   right: 0;
   height: 0.75rem;
   pointer-events: none;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), var(--color-bg)); /* emboss-lowering bottom side*/
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), var(--color-bg)); /* deboss-lowering bottom side*/
 
   opacity: 0;
   transition: transform 0.5s ease, opacity 0.5s ease-out;
@@ -345,7 +444,7 @@ header {
   height: 0.7rem;
   width: 0.7rem;
   background: var(--color-item);
-  filter: url(#emboss);
+  box-shadow: var(--filter-deboss);
   border-radius: 50%;
 }
 .tag-area-text::before {
@@ -361,8 +460,6 @@ header {
   width: 90%;
   white-space: nowrap;
   transition: opacity 0.1s linear;
-
-  filter: url(#deboss);
 }
 .tag-text.fade-out {
   opacity: 0;
@@ -382,12 +479,12 @@ header {
   min-height: 3rem;
   padding: 0.4vw;
   border-radius: 50%;
-  font-size: var(--font-h5);
+  font-size: var(--font-h6);
   text-align: center;
   word-break: break-all;
 
   background-color: var(--color-item);
-  filter: url(#emboss);
+  box-shadow: var(--filter-deboss);
   cursor: pointer;
   transition: filter 0.1s ease;
 }
@@ -395,11 +492,12 @@ header {
 .tag-button.active {
   background-color: var(--color-item-active);
   color: var(--color-text);
-  filter: url(#emboss-invert);
+  box-shadow: var(--filter-deboss-invert);
 }
 
 .tag-button.active .pressable-text {
   transform: translate(0rem, 0.1rem); /* 텍스트만 살짝 아래로 이동 */
+  text-shadow: var(--filter-deboss-text-active);
 }
 
 .expand-collapse-button {
@@ -409,6 +507,7 @@ header {
 .math {
   font-family: STIX Math, Latin Modern Math;
   font-weight: 600;
+  
 }
 .year {
   aspect-ratio: 3/1;
@@ -434,10 +533,10 @@ header {
   pointer-events: none;
   
   background-color: var(--color-item);
-  filter: url(#emboss);
+  box-shadow: var(--filter-deboss);
 
   opacity: 0;
-  color: rgba(0, 0, 0, 0);
+
   transform: translateY(15px);
 
 }
@@ -492,7 +591,7 @@ header {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  filter: url(#emboss);
+  filter: url(#deboss);
   border-radius: 1vw;
 
   z-index: 2;
@@ -523,25 +622,18 @@ header {
 
   word-break: break-all;
   padding: 1rem 2rem 1rem 2rem;
-  filter: url(#emboss);
+  
+  box-shadow: var(--filter-deboss);
 }
 
 /* --------------------------------------------- WORKS-DETAIL grid5x media elements --------------------------------------------- */
-/* text */
-.txt-L,
-.txt-M,
-.txt-S {
-  filter: url(#deboss);
-}
 
 .txt-L {
   font-size: var(--font-h1);
 }
-
 .txt-M {
   font-size: var(--font-h4);
 }
-
 .txt-S {
   font-size: var(--font-h5);
 }
@@ -554,17 +646,16 @@ header {
   align-items: center;
   margin-top: 2vh;
   margin-bottom: 2vh;
-  filter: url(#emboss);
 }
 
 .waveform {
   width: 100%;
   margin-top: 1vh;
   margin-bottom: 1vh;
-  transition: filter 0.5s ease;
+  filter: url(#deboss);
 }
 .waveform:hover {
-  filter: brightness(1.2);
+  filter: url(#deboss) brightness(1.4);
 }
 
 /* still image */
@@ -574,8 +665,9 @@ header {
   object-fit: contain;
 
   cursor: pointer;
-  border-radius: 0.1vw;
+  border-radius: 0.15vw;
   z-index: 999;
+  filter: url(#deboss);
 }
 .grid5x-cell figure {
   margin: 0;
@@ -588,8 +680,7 @@ header {
   padding: 0.15rem;
   text-align: center;
   font-size: var(--font-h6);
-
-  filter: url(#deboss);
+  
 }
 
 /* modal */
@@ -622,7 +713,6 @@ header {
   position: absolute;
   color: var(--color-item-active);
   font-size: var(--font-h2);
-  filter: url(#deboss);
   cursor: pointer;
 }
 .close-tl {
@@ -653,21 +743,51 @@ header {
   width: 100%;
 }
 
-.iframe-container {
-  width: 100%;
-  aspect-ratio: 16 / 9;
+.video-container {
+  max-width: 100%;
   position: relative;
   overflow: hidden;
-  border-radius: 0.1vw;
+  border-radius: 0.15vw;
 }
 
-.iframe-container iframe {
+.video-container.video-overlay video {
+  filter: brightness(0.6);
+}
+
+.video-container video {
   width: 100%;
   height: 100%;
   border: 0;
+  transition: filter 0.15s linear;
+  filter: url(#deboss);
+}
+
+.controls-div {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.sound-button,
+.play-pause-button,
+.fullscreen-button {
+  position: relative;
+  font-size: 3rem;
+  text-align: center;
+  width: 3.5rem;
+  color: white;
+  cursor: pointer;
+  display: none;
+  text-shadow: none;
+}
+.video-container:hover .sound-button,
+.video-container:hover .play-pause-button,
+.video-container:hover .fullscreen-button {
+  display: block;
 }
 
 .video-caption {
@@ -675,6 +795,12 @@ header {
   width: 100%;
   text-align: center;
   font-size: var(--font-h6);
+}
+
+video:fullscreen {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
 }
 
 /* --------------------------------------------- conditions --------------------------------------------- */
@@ -687,13 +813,13 @@ header {
 }
 
 #works-detail.page.active {
-  padding-top: var(--color-header-height);
+  padding-top: var(--header-height);
 }
 
 /* --------------------------------------------- media queries --------------------------------------------- */
 @media (min-aspect-ratio: 21/9) {
   .search {
-    padding-top: var(--color-header-height);
+    padding-top: var(--header-height);
   }
 }
 
@@ -726,11 +852,12 @@ header {
 /* mobile devices */
 @media (max-width: 768px) {
   :root {
-    --font-h1: 2.5rem;
-    --font-h2: 1.85rem;
+    --font-h1: 2.2rem;
+    --font-h2: 1.65rem;
     --font-h3: 1.45rem;
-    --font-h4: 1.25rem;
-    --font-h5: 0.9rem;
+    --font-h4: 1rem;
+    --font-h5: 0.75rem;
+    --font-h6: 0.55rem;
 
     --base-vw: 93vw; 
     --grid5x-wrapper-vw: 100vw;
@@ -738,7 +865,7 @@ header {
 
   .cv {
     border-radius: 2.5rem 2.5rem 2.5rem 2.5rem;
-    padding: 2.8vw 9.2vw;
+    padding: 3.8vw 9.2vw;
   }
 
   .header-design {
@@ -748,15 +875,15 @@ header {
     position: relative;
     transform: translateY(
       calc(
-        (var(--grid3x-paddingtop) - var(--color-header-height)) * -0.5
+        (var(--grid3x-paddingtop) - var(--header-height)) * -0.5
     ));
   }
   .tag-button {
-    font-size: calc(1rem - 0.2vw);
+    font-size: calc(1rem - 0.5vw);
   }
   .tag-area-text {
     transform: translateY(
-      calc(var(--color-header-height)*.25)
+      calc(var(--header-height)*.25)
     );
   }
   .works-item {
@@ -771,7 +898,8 @@ header {
 /*smaller mobile device*/
 @media (max-width: 480px) {
   .tag-button {
-    font-size: calc(1rem - 0.5vw);
+    font-size: calc(1rem - 1vw);
     padding: 0.5rem;
   }
+  
 }

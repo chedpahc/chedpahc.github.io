@@ -9,63 +9,38 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css"/>
     <script src="https://unpkg.com/wavesurfer.js@7"></script>
-    <script src="https://unpkg.com/wavesurfer.js@7/dist/plugins/spectrogram.min.js"></script>
+    <script type="text/javascript" src="//assets.mediadelivery.net/playerjs/player-0.1.0.min.js"></script>
     <script defer src="script.js"></script>
 </head>
 
-<!-- emboss/deboss filter-->
 <svg width="0" height="0" style="position:absolute">
     <defs>
-        <!-- Optimized Emboss Filter -->
-        <filter id="emboss" x="-50%" y="-50%" width="200%" height="200%">
-            <!-- Highlight (upper light) -->
-            <feOffset in="SourceAlpha" dx="0" dy="-1" result="hOffset"/>
-            <feGaussianBlur in="hOffset" stdDeviation="0.5" result="hBlur"/>
-            <feFlood flood-color="white" flood-opacity="0.5" result="hFlood"/>
-            <feComposite in="hFlood" in2="hBlur" operator="in" result="highlight"/>
-            
-            <!-- Shadow (lower dark) -->
-            <feOffset in="SourceAlpha" dx="0" dy="1" result="sOffset"/>
-            <feGaussianBlur in="sOffset" stdDeviation="0.5" result="sBlur"/>
-            <feFlood flood-color="black" flood-opacity="0.5" result="sFlood"/>
-            <feComposite in="sFlood" in2="sBlur" operator="in" result="shadow"/>
-            
-            <!-- Merge shadows and original -->
-            <feMerge>
-            <feMergeNode in="highlight"/>
-            <feMergeNode in="shadow"/>
-            <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-        </filter>
-          
-        <!-- Optimized Inverted Emboss Filter -->
-        <filter id="emboss-invert" x="-50%" y="-50%" width="200%" height="200%">
-            
-            <!-- Shadow inverted: offset upward -->
-            <feOffset in="SourceAlpha" dx="0" dy="-1" result="sOffset"/>
-            <feGaussianBlur in="sOffset" stdDeviation="0.5" result="sBlur"/>
-            <feFlood flood-color="black" flood-opacity="0.5" result="sFlood"/>
-            <feComposite in="sFlood" in2="sBlur" operator="in" result="shadow"/>
-            
-            <!-- Merge -->
-            <feMerge>
-            <feMergeNode in="highlight"/>
-            <feMergeNode in="shadow"/>
-            <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-        </filter>
-
         <!-- Optimized Deboss Filter -->
         <filter id="deboss" x="-50%" y="-50%" width="200%" height="200%">
             <feOffset in="SourceAlpha" dx="0" dy="0.5" result="offset"/>
-            <feGaussianBlur in="offset" stdDeviation="0.5" result="blur"/>
+            <feGaussianBlur in="offset" stdDeviation="3" result="blur"/>
             <feComposite operator="out" in="SourceGraphic" in2="blur" result="inverse"/>
             <feFlood flood-color="black" flood-opacity="1" result="color"/>
             <feComposite in="color" in2="inverse" operator="in" result="shadow"/>
+
+            <feOffset in="SourceAlpha" dx="0" dy="0.5" result="offset2"/>
+            <feGaussianBlur in="offse2t" stdDeviation="6" result="blur2"/>
+            <feComposite operator="out" in="SourceGraphic" in2="blur2" result="inverse2"/>
+            <feFlood flood-color="white" flood-opacity="0.5" result="color2"/>
+            <feComposite in="color2" in2="inverse2" operator="in" result="shadow2"/>
+            
             <feComponentTransfer in="shadow" result="shadow">
-            <feFuncA type="linear" slope="1.5" />
+            <feFuncA type="linear" slope="1" />
             </feComponentTransfer>
-            <feComposite operator="over" in="shadow" in2="SourceGraphic"/>
+
+            <feComponentTransfer in="shadow2" result="shadow2">
+            <feFuncA type="linear" slope="0.75" />
+            </feComponentTransfer>
+            
+            <feComposite operator="over" in="shadow" in2="shadow2" result="combinedShadow"/>
+        
+            <!-- 최종적으로 SourceGraphic 위에 그림자 합성 -->
+            <feComposite operator="over" in="combinedShadow" in2="SourceGraphic"/>
         </filter>
     </defs>
 </svg>
@@ -82,28 +57,37 @@
                 <!-- 1, 2, 3 -->
                 <span id="go-to-about" class="grid3x-item nav-link"><p class="pressable-text">⋯</p></span>
                 <span></span>
+                <div class="grid2x">
+                <span class="infotext">:: utilities ::</span>
+                <span id="theme-cycle" class="grid3x-item nav-link utility"></span>
                 <span><button class="hidden" id="reset">clear local storage</button></span>
+                <span id="lang-toggle" class="grid3x-item nav-link utility"></span>
+                </div>
                 <!-- 4, 5, 6 -->
                 <span></span>
                 <span class="logo">
-                    <svg width="1000" height="1000" viewBox="0 0 1000 1000" fill="none" xmlns="http://www.w3.org/2000/svg" filter="url(#emboss)">
+                    <svg width="1000" height="1000" viewBox="0 0 1000 1000" fill="none" xmlns="http://www.w3.org/2000/svg" filter="url(#deboss)">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M978.826 703.249C932.261 807.911 851.169 893.409 749.115 945.443C647.062 997.476 530.236 1012.89 418.179 989.103C306.123 965.317 205.632 903.775 133.516 814.771C61.4002 725.766 22.0331 614.698 22 500.145C21.9669 385.592 61.2697 274.501 133.334 185.455C205.398 96.4095 305.854 34.8091 417.896 10.9583C529.939 -12.8925 646.774 2.45282 748.858 54.4274C850.941 106.402 932.083 191.854 978.709 296.488L978.658 296.461C945.374 237.32 900.133 188.124 843 151.501L841.619 150.442C817.032 133.624 787.109 121.021 757.592 117.001C728.075 112.98 699.78 117.654 671.59 127.284C643.401 136.915 617.847 152.989 596.96 174.228C576.073 195.468 560.429 221.288 551.272 249.635C542.115 277.981 539.697 308.074 544.211 337.519C548.725 366.964 560.046 394.95 577.275 419.252C594.503 443.554 617.163 463.502 643.453 477.509C669.102 491.175 697.799 499.501 727 499.501L958 499.501C852.164 512.056 751.208 558.082 673.384 630.9C595.561 703.717 543.041 799.497 523.487 904.266C610.77 924.471 701.977 915.979 784.028 879.904C866.385 843.695 934.745 781.704 978.81 703.27L978.826 703.249ZM268.5 726.501L270 728.501C284.443 747.659 302.151 761.002 324.026 770.76C345.902 780.517 369.886 784.546 393.736 782.469C417.585 780.391 440.519 772.276 460.392 758.882C480.265 745.488 496.427 727.253 507.365 705.884C518.303 684.515 523.66 660.71 522.935 636.698C522.21 612.685 515.425 589.25 503.217 568.585C491.009 547.92 473.777 530.702 453.132 518.54C432.487 506.379 413.431 500.124 389.5 499.501H381.5L202 499.501C202 579.825 224.596 659.084 268.5 726.501ZM202.027 495.257C203.08 403.129 234.762 313.965 292.085 241.824C349.485 169.586 429.32 118.538 518.973 96.7443C517.919 188.95 486.186 278.181 428.778 350.35C371.385 422.5 291.604 473.482 202.027 495.257Z" fill="black"/>
                     </svg>
                 </span>
                 <span></span>
                 <!-- 7, 8, 9 -->
-                <div class="grid2x">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span id="theme-toggle" class="grid3x-item nav-link utility"></span>
-                </div>
-                <div class="grid2x">
-                    <span></span>
-                    <span></span>
-                    <span id="lang-toggle" class="grid3x-item nav-link utility">En</span>
-                    <span></span>
-                </div>
+                <span class="infotext">
+                    chedpahc
+                    <br>
+                    web db version 000
+                    <br>
+                    last updated on 2025.03.26
+                    <br>
+                    ::
+                    <br>
+                    under construction . . .
+                    <br>
+                    :: :: :: :: :: :: :: :: :: :: :: :: 
+                    <br>
+                    ...
+                </span>
+                <span></span>
                 <span class="grid3x-item nav-link" id="go-to-works"><p class="pressable-text">→</p></span>
             </div>
         </section>
