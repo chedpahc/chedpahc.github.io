@@ -15,31 +15,31 @@
 
 <svg width="0" height="0" style="position:absolute">
     <defs>
-        <!-- Optimized Deboss Filter -->
         <filter id="deboss" x="-50%" y="-50%" width="200%" height="200%">
+            <!-- black -->
             <feOffset in="SourceAlpha" dx="0" dy="0.5" result="offset"/>
             <feGaussianBlur in="offset" stdDeviation="3" result="blur"/>
             <feComposite operator="out" in="SourceGraphic" in2="blur" result="inverse"/>
             <feFlood flood-color="black" flood-opacity="1" result="color"/>
             <feComposite in="color" in2="inverse" operator="in" result="shadow"/>
 
+            <!-- white -->
             <feOffset in="SourceAlpha" dx="0" dy="0.5" result="offset2"/>
             <feGaussianBlur in="offse2t" stdDeviation="6" result="blur2"/>
             <feComposite operator="out" in="SourceGraphic" in2="blur2" result="inverse2"/>
             <feFlood flood-color="white" flood-opacity="0.5" result="color2"/>
             <feComposite in="color2" in2="inverse2" operator="in" result="shadow2"/>
             
+            <!-- slopes( controled in JS dynamically) -->
             <feComponentTransfer in="shadow" result="shadow">
             <feFuncA type="linear" slope="1" />
             </feComponentTransfer>
-
             <feComponentTransfer in="shadow2" result="shadow2">
             <feFuncA type="linear" slope="0.75" />
             </feComponentTransfer>
             
+            <!-- comp -->
             <feComposite operator="over" in="shadow" in2="shadow2" result="combinedShadow"/>
-        
-            <!-- 최종적으로 SourceGraphic 위에 그림자 합성 -->
             <feComposite operator="over" in="combinedShadow" in2="SourceGraphic"/>
         </filter>
     </defs>
@@ -48,8 +48,13 @@
 <body>
     <!-- header bar-->
     <header id="site-header" class="hidden">
-        <div id="back-to" class="header-design nav-link"></div>
-    </header>
+        <div id="back-to" class="header-design nav-link">
+          <div class="header-text-wrapper">
+            <span class="scrolling">←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←</span>
+          </div>
+        </div>
+      </header>
+      
     <main>
         <!-- landing page --->
         <section id="home" class="page active">
@@ -59,9 +64,9 @@
                 <span></span>
                 <div class="grid2x">
                 <span class="infotext">:: utilities ::</span>
-                <span id="theme-cycle" class="grid3x-item nav-link utility"></span>
+                <span id="theme-cycle" class="grid2x-item nav-link utility"></span>
                 <span><button class="hidden" id="reset">clear local storage</button></span>
-                <span id="lang-toggle" class="grid3x-item nav-link utility"></span>
+                <span id="lang-toggle" class="grid2x-item nav-link utility"></span>
                 </div>
                 <!-- 4, 5, 6 -->
                 <span></span>
@@ -99,18 +104,19 @@
                 <span id="go-to-home" class="grid3x-item nav-link"><p class="pressable-text">←</p></span>
                 <span></span>
                 <div class="grid2x">
-                    <span class="grid2x-item nav-link" data-link="https://instagram.com">
+                    <span class="grid2x-item nav-link external-link" data-link="https://instagram.com">
                         <p data-i18n="aboutlink1" class="pressable-text"></p>
                     </span>
-                    <span class="grid2x-item nav-link" data-link="https://tr.ee/9MCBCCRKdv">
+                    <span id="go-to-links" class="grid2x-item nav-link" data-link="links">
                         <p data-i18n="aboutlink2" class="pressable-text"></p>
                     </span>
                     <span class="grid2x-item nav-link" data-link="mail">
                         <p data-i18n="aboutlink3" class="pressable-text"></p>
                     </span>
-                    <span class="grid2x-item nav-link" data-link="https://linktr.ee/chedpahc">
+                    <span class="grid2x-item nav-link external-link" data-link="https://tr.ee/9MCBCCRKdv">
                         <p data-i18n="aboutlink4" class="pressable-text"></p>
                     </span>
+                    
                 </div>
                 <!-- 4 + (CV) -->
                 <div class="cv">
@@ -140,6 +146,37 @@
                     <br>
                     </span>
                 </div>
+            </div>
+        </section>
+
+        <!-- links -->
+        <section id="links" class="page">
+            <div class="grid3x">
+                <!-- 1, 2, 3 -->
+                <span></span>
+                <span class="infotext">:: External Links ::</span>
+                <div class="grid2x">
+                    <span></span>
+                    <span id="close-links" class="grid2x-item nav-link" data-link="closelinks">←</span>
+                    
+                </div>
+                <span class="grid3x-item nav-link external-link" data-link="https://google.com">Linktree</span>
+                <span class="grid3x-item nav-link external-link" data-link="https://google.com">Bandcamp</span>
+                <span class="grid3x-item nav-link external-link" data-link="https://google.com">Spotify</span>
+                <span class="grid3x-item nav-link external-link" data-link="https://google.com">Soundcloud</span>
+                <div class="grid2x">
+                    <span class="grid2x-item nav-link external-link" data-link="https://en.wikipedia.org/wiki/Infinite_monkey_theorem">?..</span>
+                    <span class="grid2x-item nav-link external-link">??</span>
+                    <span></span>
+                    <span class="grid2x-item nav-link external-link">???</span>
+                </div>
+                <span></span>
+                <span class="grid3x-item nav-link external-link" data-link="https://google.com">example</span>
+                <span></span>
+                <span class="grid3x-item nav-link external-link" data-link="https://google.com">example</span>
+                
+                <!-- 4, 5, 6 -->
+                <!-- 7, 8, 9 -->
             </div>
         </section>
 

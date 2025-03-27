@@ -1,17 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting...</title>
-    <script>
-        (function() {
-            var path = window.location.pathname;
-            window.location.replace("/" + "#" + path);
-        })();
-    </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redirecting...</title>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const userLang = navigator.language || navigator.languages[0]; 
+      let langCode = localStorage.getItem("lang") || (userLang.startsWith("ko") ? "ko" : "en");
+      document.documentElement.lang = langCode;
+      
+      window.location.replace(window.location.pathname);
+    });
+  </script>
 </head>
 <body>
-    <p>Redirecting...</p>
+  <p>Redirecting...</p>
 </body>
 </html>

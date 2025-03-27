@@ -141,11 +141,10 @@ document.addEventListener("DOMContentLoaded", async() => {
     // ------------------------ Caching ------------------------ //
     const header = document.getElementById("site-header");
     const backTo = document.getElementById("back-to");
+    const backToText = document.getElementById("back-to-text");
     const filterButtons = document.querySelectorAll(".tag-button");
     const textcontent = document.querySelector(".tag-text");
     const worksItem = document.querySelectorAll(".works-item");
-    const mailLink = document.querySelector("[data-link='mail']");
-    const mailText = document.getElementById("mailtext");
     const grid5xContainer = document.querySelector(".grid5x-container"); // it's not grid5x-wrapper nor grid5x itself.. stupid but works
 
     // ------------------------ Initializing #home page ------------------------ //
@@ -206,51 +205,43 @@ document.addEventListener("DOMContentLoaded", async() => {
     }
 
     // ------------------------ Dynamic header behaviour ------------------------ //
+
+    function updateMaskStops(page) {
+        const headerTextWrapper = document.querySelector('.header-text-wrapper');
+        if (!headerTextWrapper) return;
+        
+        const rootStyles = getComputedStyle(document.documentElement);
+        let varVW;
+        
+        if (page && page.id === "works-detail") {
+          // Use alternative variables for works-detail page
+          varVW = parseFloat(rootStyles.getPropertyValue('--grid5x-wrapper-vw'));
+          console.log(varVW);
+        } else {
+          varVW = parseFloat(rootStyles.getPropertyValue('--base-vw'));
+          console.log(varVW);
+        }
+        
+        // Calculate extra space and corresponding mask stops:
+        const extra = 100 - varVW;
+        const leftGap = extra / 2;
+        const leftStop = (leftGap / 100) * 100 + 1;
+        const rightStop = 100 - leftStop;
+        
+        headerTextWrapper.style.setProperty('--mask-stop-left', `${leftStop}%`);
+        headerTextWrapper.style.setProperty('--mask-stop-right', `${rightStop}%`);
+        console.log(leftStop, rightStop);
+    }
+      
+      
     function updateHeaderVisibility(page) {
         if (page && (page.id === "works" || page.id === "works-detail")) {
             header.classList.remove("hidden");
-            backTo.innerHTML = (page.id === "works-detail")
-            ? '<span class="pressable-text">←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←</span>'
-            : '<span class="pressable-text">←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←</span>';
+            requestAnimationFrame(() => updateMaskStops(page));
         } else {
             header.classList.add("hidden");
         }
-    }    
-
-    // ------------------------ "about" + "works" navigation ------------------------ //
-    // #about page open/close handlers
-    document.getElementById("go-to-about").addEventListener("click", () => {
-        if (document.getElementById("about").classList.contains("active")) return;
-        history.pushState({}, "", "/about");
-        showPage("about");
-    });
-    
-    document.getElementById("go-to-home").addEventListener("click", (e) => {
-        e.preventDefault();
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-        });
-        history.pushState({}, "", "/");
-        showPage("home");
-        //reset
-        mailText?.classList.remove("highlight");
-    });
-
-    // #about page external links
-    document.querySelectorAll(".grid2x-item").forEach(item => {
-    item.addEventListener("click", event => {
-        const link = item.getAttribute("data-link");
-        if (link === "mail") return; // mail은 제외
-        window.open(link, "_blank");
-        });
-    });
-
-    // on clicking "works"
-    document.getElementById("go-to-works").addEventListener("click", () => {
-        history.pushState({}, "", "/works");
-        showPage("works");
-    });
+    }
 
     // ------------------------ Calculating scroll offset in #works-search page ------------------------ //
     function backToWorksScrollOffset() {
@@ -282,10 +273,52 @@ document.addEventListener("DOMContentLoaded", async() => {
             });
             history.pushState({}, "", "/");
             showPage("home");
-            //reset
-            //search.classList.remove("visible");
         }
     });
+      
+
+    // ------------------------ "about" + "works" navigation ------------------------ //
+    // #about page open/close handlers
+    document.querySelectorAll("#go-to-about, #close-links").forEach((el) => {
+        el.addEventListener("click", () => {
+            if (document.getElementById("about").classList.contains("active")) return;
+            history.pushState({}, "", "/about");
+            showPage("about");
+        });
+    });
+    
+    document.getElementById("go-to-home").addEventListener("click", (e) => {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
+        history.pushState({}, "", "/");
+        showPage("home");
+        //reset
+        mailText?.classList.remove("highlight");
+    });
+
+    // #grid2x-items external links
+    document.querySelectorAll(".external-link").forEach(item => {
+    item.addEventListener("click", event => {
+        const link = item.getAttribute("data-link");
+        window.open(link, "_blank");
+        });
+    });
+
+    // on clicking "links"
+    document.getElementById("go-to-links").addEventListener("click", () => {
+        history.pushState({}, "", "/links");
+        showPage("links");
+    });
+
+    // on clicking "works"
+    document.getElementById("go-to-works").addEventListener("click", () => {
+        history.pushState({}, "", "/works");
+        showPage("works");
+    });
+
     
     // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> FILTERING WORKS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< //
     // ------------------------ Dynamic Tag text size ------------------------ //
@@ -869,6 +902,8 @@ document.addEventListener("DOMContentLoaded", async() => {
 
     // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> MISC <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< //
     // ------------------------ Highlighting mail adress ------------------------ //
+    const mailLink = document.querySelector("[data-link='mail']");
+    const mailText = document.getElementById("mailtext");
     if (mailLink && mailText) {
         mailLink.addEventListener("click", () => {
             // 이미 애니메이션 클래스가 있다면 제거 후 재추가

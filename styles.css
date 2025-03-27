@@ -12,7 +12,7 @@
   --grid3x-paddingtop: calc((100dvh - var(--base-vw)) / 2);
   --header-height: clamp(2rem, 7dvh, 4rem);
   --grid5x-wrapper-vw: 80vw;
-  --items-gap: 0.3rem;
+  --items-gap: 0.2rem;
 
   /*light mode*/
   --color-text: rgba(184, 183, 187, 0.4);
@@ -60,7 +60,7 @@
 .one-mode .logo path {
   filter: none;
   stroke: black;
-  stroke-width: 3px;
+  stroke-width: 0.175rem;
 }
 .one-mode .grid3x-item,
 .one-mode .grid2x-item,
@@ -73,7 +73,7 @@
 .one-mode .header-design,
 .one-mode .grid5x-cell,
 .one-mode .grid5x-cell {
-  border: 1px solid black
+  border: 0.075vw solid black
 }
 
 .zero-mode {
@@ -107,7 +107,7 @@
 .zero-mode .header-design,
 .zero-mode .grid5x-cell,
 .zero-mode .grid5x-cell {
-  border: 1px solid white
+  border: 0.15vw solid white;
 }
 
 
@@ -222,6 +222,7 @@ header {
   text-shadow: var(--filter-deboss-text-active);
 }
 
+
 /* --------------------------------------------- HOME PAGE --------------------------------------------- */
 .infotext {
   display: flex;
@@ -231,6 +232,7 @@ header {
   font-size: calc(var(--base-vw)/50);
   word-spacing: 0.3rem;
   margin-left: 0.2rem;
+  white-space: nowrap;
 }
 
 .grid3x {
@@ -272,7 +274,6 @@ header {
 .utility {
   font-size: var(--font-h4);
   /* gap */
-  transform: scale(0.96);
 }
 
 /* --------------------------------------------- ABOUT PAGE --------------------------------------------- */
@@ -281,6 +282,7 @@ header {
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   gap: var(--items-gap);
+  transform: scale(0.96);
 }
 .grid2x-item {
   display: flex;
@@ -342,6 +344,18 @@ header {
   word-break: break-word;
 }
 
+#links .grid3x-item {
+  display: flex;
+  align-items: center;
+  grid-column: span 2;
+  aspect-ratio: 4/1;
+  border-radius: 4rem 4rem 4rem 4rem;
+}
+
+#close-links {
+  font-size: var(--font-h2);
+}
+
 /* --------------------------------------------- WORKS-SEARCH PAGE --------------------------------------------- */
 .header-design {
   display: flex;
@@ -355,6 +369,42 @@ header {
   background: var(--color-header);
   box-shadow: var(--filter-deboss);
   backdrop-filter: blur(4px);
+  
+}
+
+.header-text-wrapper {
+  max-width: 100%;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  position: relative;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    rgba(0,0,0,0) var(--mask-stop-left),
+    black calc(var(--mask-stop-left) + 3%),
+    black calc(var(--mask-stop-right) - 3%),
+    rgba(0,0,0,0) var(--mask-stop-right)
+  );
+  mask-image: linear-gradient(
+    to right,
+    rgba(0,0,0,0) var(--mask-stop-left),
+    black calc(var(--mask-stop-left) + 3%),
+    black calc(var(--mask-stop-right) - 3%),
+    rgba(0,0,0,0) var(--mask-stop-right)
+  );
+}
+
+.header-text-wrapper .scrolling {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scroll 30s linear infinite;
+}
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 /* search interface */
@@ -776,9 +826,9 @@ header {
 .play-pause-button,
 .fullscreen-button {
   position: relative;
-  font-size: 3rem;
+  font-size: calc(var(--base-vw)/25);
   text-align: center;
-  width: 3.5rem;
+  width: 2.5vw;
   color: white;
   cursor: pointer;
   display: none;
@@ -804,12 +854,14 @@ video:fullscreen {
 }
 
 /* --------------------------------------------- conditions --------------------------------------------- */
+
 #works.page.active {
   position: static;
 }
 
+#links .grid3x,
 #works .grid3x {
-  margin-bottom: 3vh;
+  margin-bottom: 5dvh;
 }
 
 #works-detail.page.active {
