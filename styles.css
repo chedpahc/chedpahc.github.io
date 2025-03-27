@@ -23,7 +23,7 @@
   --color-item-active: rgb(222, 220, 225); 
   --color-waveprogress: rgb(0, 0, 0);
 
-  --filter-deboss: inset 0rem 0rem 1rem rgba(255, 255, 255, 0.3), inset 0rem 0rem 0.4rem rgba(0, 0, 0, 0.65);
+  --filter-deboss: inset 0rem 0rem 0.6rem rgba(255, 255, 255, 0.3), inset 0rem 0rem 0.4rem rgba(0, 0, 0, 0.65);
   --filter-deboss-invert: inset 0rem 0.05rem 0.5rem rgba(0, 0, 0, 0.5);
   --filter-deboss-text: 1px 3px 6px var(--color-bg), 0 0 0 #000, 1px 3px 6px var(--color-bg), 1px 1px 1px var(--color-item-active);
   --filter-deboss-text-hover: 1px 3px 6px var(--color-item-hover), 0 0 0 #000, 1px 3px 6px var(--color-item-hover), 1px 1px 1px var(--color-item-active);
@@ -39,7 +39,7 @@
   --color-item-active: rgb(169, 168, 172); 
   --color-waveprogress: rgb(0, 0, 0);
 
-  --filter-deboss: inset 0rem 0rem 1rem rgba(255, 255, 255, 0.1), inset 0rem 0rem 0.4rem rgba(0, 0, 0, 0.75);
+  --filter-deboss: inset 0rem 0rem 0.6rem rgba(255, 255, 255, 0.1), inset 0rem 0rem 0.4rem rgba(0, 0, 0, 0.75);
 }
 
 .one-mode {
@@ -60,7 +60,7 @@
 .one-mode .logo path {
   filter: none;
   stroke: black;
-  stroke-width: 0.175rem;
+  stroke-width: 1.1px;
 }
 .one-mode .grid3x-item,
 .one-mode .grid2x-item,
@@ -73,7 +73,7 @@
 .one-mode .header-design,
 .one-mode .grid5x-cell,
 .one-mode .grid5x-cell {
-  border: 0.075vw solid black
+  border: 1.5px solid black;
 }
 
 .zero-mode {
@@ -94,7 +94,7 @@
 .zero-mode .logo path {
   filter: none;
   stroke: white;
-  stroke-width: 3px;
+  stroke-width: 1.1px;
 }
 .zero-mode .grid3x-item,
 .zero-mode .grid2x-item,
@@ -107,7 +107,7 @@
 .zero-mode .header-design,
 .zero-mode .grid5x-cell,
 .zero-mode .grid5x-cell {
-  border: 0.15vw solid white;
+  border: 1.5px solid white;
 }
 
 
@@ -396,7 +396,7 @@ header {
 .header-text-wrapper .scrolling {
   display: inline-block;
   white-space: nowrap;
-  animation: scroll 30s linear infinite;
+  animation: scroll 60s linear infinite;
 }
 @keyframes scroll {
   from {
@@ -554,11 +554,13 @@ header {
   flex: none;
   font-size: 1.75rem;
 }
+/*
 .math {
   font-family: STIX Math, Latin Modern Math;
   font-weight: 600;
-  
 }
+  */
+
 .year {
   aspect-ratio: 3/1;
   border-radius: 50%;
@@ -815,7 +817,7 @@ header {
 .controls-div {
   display: flex;
   flex-direction: row;
-  gap: 30px;
+  gap: 5vw;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -826,9 +828,9 @@ header {
 .play-pause-button,
 .fullscreen-button {
   position: relative;
-  font-size: calc(var(--base-vw)/25);
+  font-size: calc(var(--base-vw)/20);
   text-align: center;
-  width: 2.5vw;
+  width: calc(var(--base-vw)/30);
   color: white;
   cursor: pointer;
   display: none;
@@ -922,6 +924,22 @@ video:fullscreen {
 
   .header-design {
     font-size: 1rem;
+  }
+  .header-text-wrapper {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      rgba(0,0,0,0) 5%,
+      black 15%,
+      black 85%,
+      rgba(0,0,0,0) 95%
+    );
+    mask-image: linear-gradient(
+      to right,
+      rgba(0,0,0,0) 5%,
+      black 15%,
+      black 85%,
+      rgba(0,0,0,0) 95%
+    );
   }
   .search {
     position: relative;

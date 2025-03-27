@@ -5,14 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Redirecting...</title>
   <script>
-    document.addEventListener("DOMContentLoaded", async () => {
-      const userLang = navigator.language || navigator.languages[0]; 
-      let langCode = localStorage.getItem("lang") || (userLang.startsWith("ko") ? "ko" : "en");
-      document.documentElement.lang = langCode;
-      
-      window.location.replace(window.location.pathname);
-    });
-  </script>
+    if (!localStorage.getItem("redirected")) {
+      localStorage.setItem("redirected", "true");
+      window.location.replace("/");
+    } else {
+      localStorage.removeItem("redirected"); // 한 번 리디렉션한 후 초기화
+    }
+  </script>  
 </head>
 <body>
   <p>Redirecting...</p>

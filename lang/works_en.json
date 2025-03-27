@@ -1,75 +1,442 @@
 {
-    "work1": {
+    "samplework": {
         "layout": [
             ["txt-1", "txt-1", "txt-1", "img-1", "img-1"],
-            ["txt-4", "txt-4", "txt-4", "img-1", "img-1"],
-            ["txt-4", "txt-4", "txt-4", "txt-3", "txt-3"],
-            ["img-1", "img-1", "img-1", "txt-4", "txt-4"],
-            ["txt-2", "txt-2", "txt-2", "txt-3", "img-1"],
-            ["img-1", "img-2", "txt-2", "img-2", "txt-3"]
+            ["txt-2", "txt-2", "txt-2", "img-1", "img-1"]
         ],
         "content": {
-            "img-1": {
-                "src": "/media/test.jpg",
-                "caption": "this is a caption"
-            },
-            "img-2": {
-                "src": "/media/test2.png",
-                "caption": "a black banana"
-            },
-            "txt-1": "This is some Title lorem ipsum ..  ",
-            "txt-2": "main text .. main text ..main text ..main text .. ",
-            "txt-3": "subtxt subtxt subtxt subtxt subtxt",
-            "txt-4": "subtxt2 subtxt2 subtxt2 subtxt2 subtxt2 subtxt2 subtxt2 subtxt2 subtxt2 subtxt2subtxt2 subtxt2 subtxt2 subtxt2 subtxt2"
-        }
-    },
-
-    "work2": {
-        "layout": [
-            ["img-1", "img-1", "img-1", "img-1", "img-1"],
-            ["txt-1", "txt-1", "txt-1", "txt-1", "txt-1"],
-            ["txt-3", "txt-3", "txt-3", "txt-3", "txt-3"],
-            ["txt-2", "txt-2", "txt-2", "txt-4", "txt-4"],
-            ["vid-1", "vid-1", "vid-1", "txt-2", "txt-2"],
-            ["vid-2", "vid-2", "txt-3", "txt-3", "txt-3"],
-            ["aud-1", "aud-1", "txt-1", "txt-3", "txt-3"],
-            ["aud-2", "aud-2", "aud-2", "aud-2", "txt-2"]
-        ],
-        "content": {
-            "img-1": "/media/test16b09.jpg",
             "txt-1": {
-                "text": "This is a title of this work... testing longer text",
+                "text": "Sample Work",
                 "classes": "txt-L"
-            },
-            "txt-2": {
-                "text": "Another description",
-                "classes": "txt-M"
-            },
-            "txt-3": {
-                "text": "Another description222",
-                "classes": "txt-M"
-            },
-            "txt-4": {
-                "text": "Another description333",
-                "classes": "txt-S"
-            },
-            "vid-1": {
-                "src": "https://htmlchedpahc.b-cdn.net/!dsf_2048x2048.mp4",
-                "aspectRatio": "1/1",
-                "caption": "video caption for vid-1"
-            },
-            "vid-2": {
-                "src": "https://htmlchedpahc.b-cdn.net/!!e_frostpetrol.mp4",
-                "aspectRatio": "2/3",
-                "caption": "some sample caption"
             },
             "aud-1": {
                 "src": "/media/test.mp3",
-                "caption": "Audio example 1"
+                "caption": ""
             },
-            "aud-2": {
-                "src": "/media/test2.mp3",
-                "caption": "audio example 2.... longer example cation it is"
+            "img-": {
+                "src": "/media/test.jpg",
+                "caption": ""
+            },
+            "vid-2": {
+                "src": "{url}.mp4",
+                "aspectRatio": "1/1",
+                "caption": ""
+            }
+        }
+    },
+
+    "flyer-for-gossamer-everything": {
+        "layout": [
+            ["txt-1", "txt-1", "txt-1", "img-1", "img-1"],
+            ["txt-2", "txt-2", "txt-2", "img-1", "img-1"]
+        ],
+        "content": {
+            "txt-1": {
+                "text": "gossamer title",
+                "classes": "txt-L"
+            },
+            "aud-1": {
+                "src": "/media/test.mp3",
+                "caption": ""
+            },
+            "img-": {
+                "src": "/media/test.jpg",
+                "caption": ""
+            },
+            "vid-2": {
+                "src": "{url}.mp4",
+                "aspectRatio": "1/1",
+                "caption": ""
+            }
+        }
+    },
+
+    "gique": {
+        "layout": [
+            ["txt-1", "txt-1", "txt-1", "img-1", "img-1"],
+            ["txt-2", "txt-2", "txt-2", "img-1", "img-1"]
+        ],
+        "content": {
+            "txt-1": {
+                "text": "gique",
+                "classes": "txt-L"
+            },
+            "aud-1": {
+                "src": "/media/test.mp3",
+                "caption": ""
+            },
+            "img-": {
+                "src": "/media/test.jpg",
+                "caption": ""
+            },
+            "vid-2": {
+                "src": "{url}.mp4",
+                "aspectRatio": "1/1",
+                "caption": ""
+            }
+        }
+    },
+
+    "tropic": {
+        "layout": [
+            ["txt-1", "txt-1", "txt-1", "img-1", "img-1"],
+            ["txt-2", "txt-2", "txt-2", "img-1", "img-1"]
+        ],
+        "content": {
+            "txt-1": {
+                "text": "tropic",
+                "classes": "txt-L"
+            },
+            "aud-1": {
+                "src": "/media/test.mp3",
+                "caption": ""
+            },
+            "img-": {
+                "src": "/media/test.jpg",
+                "caption": ""
+            },
+            "vid-2": {
+                "src": "{url}.mp4",
+                "aspectRatio": "1/1",
+                "caption": ""
+            }
+        }
+    },
+
+    "eye-dont-know": {
+        "layout": [
+            ["txt-1", "txt-1", "txt-1", "img-1", "img-1"],
+            ["txt-2", "txt-2", "txt-2", "img-1", "img-1"]
+        ],
+        "content": {
+            "txt-1": {
+                "text": "edk title",
+                "classes": "txt-L"
+            },
+            "aud-1": {
+                "src": "/media/test.mp3",
+                "caption": ""
+            },
+            "img-": {
+                "src": "/media/test.jpg",
+                "caption": ""
+            },
+            "vid-2": {
+                "src": "{url}.mp4",
+                "aspectRatio": "1/1",
+                "caption": ""
+            }
+        }
+    },
+
+    "let": {
+        "layout": [
+            ["txt-1", "txt-1", "txt-1", "img-1", "img-1"],
+            ["txt-2", "txt-2", "txt-2", "img-1", "img-1"]
+        ],
+        "content": {
+            "txt-1": {
+                "text": "let title",
+                "classes": "txt-L"
+            },
+            "aud-1": {
+                "src": "/media/test.mp3",
+                "caption": ""
+            },
+            "img-": {
+                "src": "/media/test.jpg",
+                "caption": ""
+            },
+            "vid-2": {
+                "src": "{url}.mp4",
+                "aspectRatio": "1/1",
+                "caption": ""
+            }
+        }
+    },
+
+    "gagamsok": {
+        "layout": [
+            ["txt-1", "txt-1", "txt-1", "img-1", "img-1"],
+            ["txt-2", "txt-2", "txt-2", "img-1", "img-1"]
+        ],
+        "content": {
+            "txt-1": {
+                "text": "gagamsok title",
+                "classes": "txt-L"
+            },
+            "aud-1": {
+                "src": "/media/test.mp3",
+                "caption": ""
+            },
+            "img-": {
+                "src": "/media/test.jpg",
+                "caption": ""
+            },
+            "vid-2": {
+                "src": "{url}.mp4",
+                "aspectRatio": "1/1",
+                "caption": ""
+            }
+        }
+    },
+
+    "dots-stripes-furs": {
+        "layout": [
+            ["txt-1", "txt-1", "txt-1", "img-1", "img-1"],
+            ["txt-2", "txt-2", "txt-2", "img-1", "img-1"]
+        ],
+        "content": {
+            "txt-1": {
+                "text": "dsf title",
+                "classes": "txt-L"
+            },
+            "aud-1": {
+                "src": "/media/test.mp3",
+                "caption": ""
+            },
+            "img-": {
+                "src": "/media/test.jpg",
+                "caption": ""
+            },
+            "vid-2": {
+                "src": "{url}.mp4",
+                "aspectRatio": "1/1",
+                "caption": ""
+            }
+        }
+    },
+
+    "cat7": {
+        "layout": [
+            ["txt-1", "txt-1", "txt-1", "img-1", "img-1"],
+            ["txt-2", "txt-2", "txt-2", "img-1", "img-1"]
+        ],
+        "content": {
+            "txt-1": {
+                "text": "cat7 title",
+                "classes": "txt-L"
+            },
+            "aud-1": {
+                "src": "/media/test.mp3",
+                "caption": ""
+            },
+            "img-": {
+                "src": "/media/test.jpg",
+                "caption": ""
+            },
+            "vid-2": {
+                "src": "{url}.mp4",
+                "aspectRatio": "1/1",
+                "caption": ""
+            }
+        }
+    },
+
+    "visuals-for-boilerroom-seoul": {
+        "layout": [
+            ["txt-1", "txt-1", "txt-1", "img-1", "img-1"],
+            ["txt-2", "txt-2", "txt-2", "img-1", "img-1"]
+        ],
+        "content": {
+            "txt-1": {
+                "text": "brseoul title",
+                "classes": "txt-L"
+            },
+            "aud-1": {
+                "src": "/media/test.mp3",
+                "caption": ""
+            },
+            "img-": {
+                "src": "/media/test.jpg",
+                "caption": ""
+            },
+            "vid-2": {
+                "src": "{url}.mp4",
+                "aspectRatio": "1/1",
+                "caption": ""
+            }
+        }
+    },
+
+    "saccade": {
+        "layout": [
+            ["txt-1", "txt-1", "txt-1", "img-1", "img-1"],
+            ["txt-2", "txt-2", "txt-2", "img-1", "img-1"]
+        ],
+        "content": {
+            "txt-1": {
+                "text": "saccade title",
+                "classes": "txt-L"
+            },
+            "aud-1": {
+                "src": "/media/test.mp3",
+                "caption": ""
+            },
+            "img-": {
+                "src": "/media/test.jpg",
+                "caption": ""
+            },
+            "vid-2": {
+                "src": "{url}.mp4",
+                "aspectRatio": "1/1",
+                "caption": ""
+            }
+        }
+    },
+
+    "fish": {
+        "layout": [
+            ["txt-1", "txt-1", "txt-1", "img-1", "img-1"],
+            ["txt-2", "txt-2", "txt-2", "img-1", "img-1"]
+        ],
+        "content": {
+            "txt-1": {
+                "text": "fish title",
+                "classes": "txt-L"
+            },
+            "aud-1": {
+                "src": "/media/test.mp3",
+                "caption": ""
+            },
+            "img-": {
+                "src": "/media/test.jpg",
+                "caption": ""
+            },
+            "vid-2": {
+                "src": "{url}.mp4",
+                "aspectRatio": "1/1",
+                "caption": ""
+            }
+        }
+    },
+
+    "horsepower": {
+        "layout": [
+            ["txt-1", "txt-1", "txt-1", "img-1", "img-1"],
+            ["txt-2", "txt-2", "txt-2", "img-1", "img-1"]
+        ],
+        "content": {
+            "txt-1": {
+                "text": "horsepower title",
+                "classes": "txt-L"
+            },
+            "aud-1": {
+                "src": "/media/test.mp3",
+                "caption": ""
+            },
+            "img-": {
+                "src": "/media/test.jpg",
+                "caption": ""
+            },
+            "vid-2": {
+                "src": "{url}.mp4",
+                "aspectRatio": "1/1",
+                "caption": ""
+            }
+        }
+    },
+
+    "rest...rest": {
+        "layout": [
+            ["txt-1", "txt-1", "txt-1", "img-1", "img-1"],
+            ["txt-2", "txt-2", "txt-2", "img-1", "img-1"]
+        ],
+        "content": {
+            "txt-1": {
+                "text": "rest...rest title",
+                "classes": "txt-L"
+            },
+            "aud-1": {
+                "src": "/media/test.mp3",
+                "caption": ""
+            },
+            "img-": {
+                "src": "/media/test.jpg",
+                "caption": ""
+            },
+            "vid-2": {
+                "src": "{url}.mp4",
+                "aspectRatio": "1/1",
+                "caption": ""
+            }
+        }
+    },
+
+    "aaox4": {
+        "layout": [
+            ["txt-1", "txt-1", "txt-1", "img-1", "img-1"],
+            ["txt-2", "txt-2", "txt-2", "img-1", "img-1"]
+        ],
+        "content": {
+            "txt-1": {
+                "text": "aaox4 title",
+                "classes": "txt-L"
+            },
+            "aud-1": {
+                "src": "/media/test.mp3",
+                "caption": ""
+            },
+            "img-": {
+                "src": "/media/test.jpg",
+                "caption": ""
+            },
+            "vid-2": {
+                "src": "{url}.mp4",
+                "aspectRatio": "1/1",
+                "caption": ""
+            }
+        }
+    },
+
+    "babel": {
+        "layout": [
+            ["txt-1", "txt-1", "txt-1", "img-1", "img-1"],
+            ["txt-2", "txt-2", "txt-2", "img-1", "img-1"]
+        ],
+        "content": {
+            "txt-1": {
+                "text": "Babel title",
+                "classes": "txt-L"
+            },
+            "aud-1": {
+                "src": "/media/test.mp3",
+                "caption": ""
+            },
+            "img-1": {
+                "src": "/media/test.jpg",
+                "caption": ""
+            },
+            "vid-2": {
+                "src": "{url}.mp4",
+                "aspectRatio": "1/1",
+                "caption": ""
+            }
+        }
+    },
+
+    "echolocation": {
+        "layout": [
+            ["txt-1", "txt-1", "txt-1", "txt-1", "txt-1"],
+            ["txt-2", "txt-2", "txt-2", "img-1", "img-1"]
+        ],
+        "content": {
+            "txt-1": {
+                "text": "Echolocation",
+                "classes": "txt-L"
+            },
+            "aud-1": {
+                "src": "/media/test.mp3",
+                "caption": ""
+            },
+            "img-1": {
+                "src": "/media/test.jpg",
+                "caption": ""
+            },
+            "vid-2": {
+                "src": "{url}.mp4",
+                "aspectRatio": "1/1",
+                "caption": ""
             }
         }
     }

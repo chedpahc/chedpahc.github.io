@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", async() => {
     }
 
     // ------------------------ Theme detection, cycle ------------------------ //
-    const themes = ["light", "one", "dark", "zero"];
+    const themes = ["light", "dark","zero", "one"];
 
     const storedTheme = localStorage.getItem("theme");
     // get system preference
@@ -364,11 +364,11 @@ document.addEventListener("DOMContentLoaded", async() => {
         let tagString = Array.from(selectedTags)
         .map(tag => {
             const translationKey = (uiData.tagMappings && uiData.tagMappings[tag]) || tag;
-            let translatedTag = uiData.translations[translationKey] || (tag.charAt(0).toUpperCase() + tag.slice(1));
+            let translatedTag = uiData.translations[translationKey] || (tag.charAt(0).toUpperCase() + tag.slice(1)); // first letter capital
 
             // "co-work" 처리: "co-work" → "co"
             if (translatedTag.toLowerCase().includes("co-work")) {
-                translatedTag = translatedTag.replace(/work/i, ""); // "-work" 또는 "work" 제거
+                translatedTag = translatedTag.replace(/work/i, ""); // "work" 제거
             }
 
             return translatedTag;
