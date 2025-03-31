@@ -28,7 +28,9 @@
     "flyer-for-gossamer-everything": {
         "layout": [
             ["txt-1", "txt-1", "txt-1", "img-1", "img-1"],
-            ["txt-2", "txt-2", "txt-2", "img-1", "img-1"]
+            ["aud-1", "aud-1", "aud-1", "aud-2", "aud-2"],
+            ["txt-2", "txt-2", "txt-2", "img-1", "img-1"],
+            ["vid-2", "vid-2", "vid-2", "vid-2", "vid-2"]
         ],
         "content": {
             "txt-1": {
@@ -39,12 +41,16 @@
                 "src": "/media/test.mp3",
                 "caption": ""
             },
-            "img-": {
-                "src": "/media/test.jpg",
-                "caption": ""
+            "aud-2": {
+                "src": "/media/test.mp3",
+                "caption": "test audio from bcdn"
+            },
+            "img-1": {
+                "src": "https://htmlchedpahc.b-cdn.net/testfolder/test.jpg",
+                "caption": "test"
             },
             "vid-2": {
-                "src": "{url}.mp4",
+                "src": "/media/VID_20241215_222036_081.mp4",
                 "aspectRatio": "1/1",
                 "caption": ""
             }

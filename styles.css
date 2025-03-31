@@ -60,7 +60,7 @@
 .one-mode .logo path {
   filter: none;
   stroke: black;
-  stroke-width: 1.1px;
+  stroke-width: 0.09rem;
 }
 .one-mode .grid3x-item,
 .one-mode .grid2x-item,
@@ -73,7 +73,8 @@
 .one-mode .header-design,
 .one-mode .grid5x-cell,
 .one-mode .grid5x-cell {
-  border: 1.5px solid black;
+  border: 0.125rem solid black;
+  /*box-shadow: 0 0 0.1rem black;*/
 }
 
 .zero-mode {
@@ -94,7 +95,7 @@
 .zero-mode .logo path {
   filter: none;
   stroke: white;
-  stroke-width: 1.1px;
+  stroke-width: 0.09rem;
 }
 .zero-mode .grid3x-item,
 .zero-mode .grid2x-item,
@@ -107,7 +108,7 @@
 .zero-mode .header-design,
 .zero-mode .grid5x-cell,
 .zero-mode .grid5x-cell {
-  border: 1.5px solid white;
+  border: 0.125rem solid white;
 }
 
 
@@ -259,12 +260,11 @@ header {
 }
 
 .logo svg {
-  max-width: 100%; /* Ensures it doesn’t exceed its container */
-  height: auto; /* Maintains aspect ratio */
+  width: 100%;
+  height: 100%;
   transform: translate(-3%, -0%) scale(1.33);
   display: block; /* Removes unwanted extra space */
-  z-index: 0;
-  opacity: 1;
+
   filter: url(#deboss);
 }
 .logo path {
@@ -583,14 +583,10 @@ header {
   word-break: break-word;
   word-wrap: wrap;
   pointer-events: none;
-  
   background-color: var(--color-item);
-  box-shadow: var(--filter-deboss);
 
   opacity: 0;
-
   transform: translateY(15px);
-
 }
 .works-item .pressable-text {
   text-shadow: none;
@@ -607,7 +603,26 @@ header {
   transform: scale(0.96);
 }
 
+.works-item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit; /* 원래 둥근 모서리 유지 */
+  box-shadow: var(--filter-deboss);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.works-item img{
+  transform: scale(1);
+  
+}
 .works-tmb {
+  width: 100%;
+  height: 100%;
   position: fixed;
   border-radius: 50%;
   z-index: 0;

@@ -1,19 +1,328 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Redirecting...</title>
-  <script>
-    if (!localStorage.getItem("redirected")) {
-      localStorage.setItem("redirected", "true");
-      window.location.replace("/");
-    } else {
-      localStorage.removeItem("redirected"); // 한 번 리디렉션한 후 초기화
-    }
-  </script>  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Speed Spieler">
+    <title>web portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css"/>
+    <script src="https://unpkg.com/wavesurfer.js@7"></script>
+    <script type="text/javascript" src="//assets.mediadelivery.net/playerjs/player-0.1.0.min.js"></script>
+    <script defer src="script.js"></script>
 </head>
+
+<svg width="0" height="0" style="position:absolute">
+    <defs>
+        <filter id="deboss">
+            <!--black-->
+            <feOffset in="SourceAlpha" dx="0" dy="0" result="offset"/>
+            <feGaussianBlur in="offset" stdDeviation="3" result="blur"/>
+            <feComposite operator="out" in="SourceGraphic" in2="blur" result="inverse"/>
+            <feFlood flood-color="black" flood-opacity="1" result="color"/>
+            <feComposite in="color" in2="inverse" operator="in" result="shadow"/>
+            <!--white-->
+            <feOffset in="SourceAlpha" dx="0" dy="0" result="offset2"/>
+            <feGaussianBlur in="offset" stdDeviation="5" result="blur2"/>
+            <feComposite operator="out" in="SourceGraphic" in2="blur2" result="inverse2"/>
+            <feFlood flood-color="white" flood-opacity="0.5" result="color2"/>
+            <feComposite in="color2" in2="inverse2" operator="in" result="shadow2"/>
+            <!--slope-->
+            <feComponentTransfer in="shadow" result="shadow">
+            <feFuncA type="linear" slope="1" />
+            </feComponentTransfer>
+            <feComponentTransfer in="shadow2" result="shadow2">
+            <feFuncA type="linear" slope="0.75" />
+            </feComponentTransfer>
+            <!--comp-->
+            <feComposite operator="over" in="shadow" in2="shadow2" result="combinedShadow"/>
+            <feComposite operator="over" in="combinedShadow" in2="SourceGraphic"/>
+        </filter>
+    </defs>
+</svg>
+
 <body>
-  <p>Redirecting...</p>
+    <!-- header bar-->
+    <header id="site-header" class="hidden">
+        <div id="back-to" class="header-design nav-link">
+          <div class="header-text-wrapper">
+            <span class="scrolling">←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←still there?←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←</span>
+          </div>
+        </div>
+      </header>
+      
+    <main>
+        <!-- landing page --->
+        <section id="home" class="page active">
+            <div class="grid3x">
+                <!-- 1, 2, 3 -->
+                <span id="go-to-about" class="grid3x-item nav-link"><p class="pressable-text">⋯</p></span>
+                <span></span>
+                <div class="grid2x">
+                <span class="infotext">:: utilities ::</span>
+                <span id="theme-cycle" class="grid2x-item nav-link utility"></span>
+                <span><button class="hidden" id="reset">clear local storage</button></span>
+                <span id="lang-toggle" class="grid2x-item nav-link utility"></span>
+                </div>
+                <!-- 4, 5, 6 -->
+                <span></span>
+                <span class="logo">
+                    <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M191 138.617C182.143 158.503 166.718 174.748 147.306 184.634C127.894 194.52 105.673 197.449 84.3581 192.929C63.0436 188.41 43.929 176.717 30.2117 159.806C16.4944 142.895 9.0063 121.793 9 100.027C8.9937 78.2624 16.4696 57.1552 30.1771 40.2365C43.8846 23.3178 62.9924 11.6137 84.3043 7.08207C105.616 2.55043 127.84 5.46604 147.257 15.3412C166.675 25.2163 182.109 41.4521 190.978 61.3327L190.968 61.3276C184.637 50.0907 176.032 40.7436 165.164 33.7851L164.902 33.584C160.225 30.3885 154.533 27.9939 148.919 27.2301C143.304 26.4662 137.922 27.3542 132.56 29.1839C127.198 31.0137 122.337 34.0678 118.364 38.1033C114.391 42.1389 111.416 47.0446 109.674 52.4305C107.932 57.8164 107.472 63.5339 108.331 69.1285C109.19 74.7231 111.343 80.0404 114.62 84.6578C117.897 89.2751 122.207 93.0652 127.208 95.7266C132.087 98.3231 137.545 99.905 143.1 99.905L187.039 99.905C166.907 102.29 147.704 111.035 132.901 124.871C118.098 138.706 108.108 156.904 104.389 176.81C120.991 180.649 138.34 179.036 153.947 172.182C169.612 165.302 182.615 153.524 190.997 138.621L191 138.617ZM55.8873 143.035L56.1726 143.415C58.9199 147.055 62.2882 149.59 66.4491 151.444C70.6101 153.298 75.1722 154.064 79.7086 153.669C84.245 153.274 88.6074 151.732 92.3875 149.187C96.1676 146.643 99.2417 143.178 101.322 139.118C103.403 135.058 104.422 130.535 104.284 125.972C104.146 121.41 102.856 116.957 100.533 113.031C98.2113 109.105 94.9334 105.833 91.0065 103.522C87.0796 101.212 83.4549 100.024 78.903 99.905H77.3813L43.2382 99.905C43.2382 115.167 47.5363 130.226 55.8873 143.035ZM43.2433 99.0987C43.4437 81.5944 49.4699 64.6533 60.3735 50.9464C71.2916 37.2213 86.4772 27.5222 103.53 23.3814C103.33 40.9004 97.2937 57.8543 86.3741 71.5664C75.4573 85.2748 60.282 94.9614 43.2433 99.0987Z"/>
+                    </svg>
+                </span>
+                <span></span>
+                <!-- 7, 8, 9 -->
+                <span class="infotext">
+                    chedpahc
+                    <br>
+                    web db version 0.0.1
+                    <br>
+                    last updated on 2025.MAR.31
+                    <br>
+                    ::
+                    <br>
+                    under construction . . .
+                    <br>
+                    :: :: :: :: :: :: :: :: :: :: :: :: 
+                    <br>
+                    ...
+                </span>
+                <span></span>
+                <span class="grid3x-item nav-link" id="go-to-works"><p class="pressable-text">→</p></span>
+            </div>
+        </section>
+
+        <!-- about page -->
+        <section id="about" class="page">
+            <div class="grid3x">
+                <!-- 1, 2, 3 -->
+                <span id="go-to-home" class="grid3x-item nav-link"><p class="pressable-text">←</p></span>
+                <span></span>
+                <div class="grid2x">
+                    <span class="grid2x-item nav-link external-link" data-link="https://instagram.com">
+                        <p data-i18n="aboutlink1" class="pressable-text"></p>
+                    </span>
+                    <span id="go-to-links" class="grid2x-item nav-link" data-link="links">
+                        <p data-i18n="aboutlink2" class="pressable-text"></p>
+                    </span>
+                    <span class="grid2x-item nav-link" data-link="mail">
+                        <p data-i18n="aboutlink3" class="pressable-text"></p>
+                    </span>
+                    <span class="grid2x-item nav-link external-link" data-link="https://tr.ee/9MCBCCRKdv">
+                        <p data-i18n="aboutlink4" class="pressable-text"></p>
+                    </span>
+                    
+                </div>
+                <!-- 4 + (CV) -->
+                <div class="cv">
+                    <span class="cvtext">
+                    <p data-i18n="cv-title1" class="cvtitlebig"></p>
+                    <br>
+                    <span id="mailtext">contact : abcdefg(at)gmail.com</span>
+                    <p></p>
+                    <br>
+                    <p data-i18n="cv-text1"></p>
+                    <br><br>
+                    <p data-i18n="cv-title2" class="cvtitle"></p>
+                    <br>
+                    <p data-i18n="cv-text2"></p>
+                    <br><br>
+                    <p data-i18n="cv-title3" class="cvtitle"></p>
+                    <br>
+                    <p data-i18n="cv-text3"></p>
+                    <br><br>
+                    <p data-i18n="cv-title4" class="cvtitle"></p>
+                    <br>
+                    <p data-i18n="cv-text4"></p>
+                    <br><br>
+                    <p data-i18n="cv-title5" class="cvtitle"></p>
+                    <br>
+                    <p data-i18n="cv-text5"></p>
+                    <br>
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- links -->
+        <section id="links" class="page">
+            <div class="grid3x">
+                <!-- 1, 2, 3 -->
+                <span></span>
+                <span class="infotext">:: External ↓ Links ::</span>
+                <div class="grid2x">
+                    <span class="grid2x-item nav-link external-link" data-link="https://instagram.com">IG</span>
+                    <span id="close-links" class="grid2x-item nav-link" data-link="closelinks">←</span>
+                    <span></span>
+                    <span class="grid2x-item nav-link external-link" data-link="https://google.com">hear</span>
+                </div>
+                <span class="grid3x-item nav-link external-link" data-link="https://google.com">Linktree</span>
+                <span class="grid3x-item nav-link external-link" data-link="https://google.com">Bandcamp</span>
+                <span class="grid3x-item nav-link external-link" data-link="https://google.com">Spotify</span>
+                <span class="grid3x-item nav-link external-link" data-link="https://google.com">Soundcloud</span>
+                <div class="grid2x">
+                    <span class="grid2x-item nav-link external-link" data-link="https://en.wikipedia.org/wiki/Infinite_monkey_theorem">?..</span>
+                    <span class="grid2x-item nav-link external-link">??</span>
+                    <span></span>
+                    <span class="grid2x-item nav-link external-link">???</span>
+                </div>
+                <span></span>
+                <span class="grid3x-item nav-link external-link" data-link="https://google.com">example</span>
+                <span></span>
+                <span class="grid3x-item nav-link external-link" data-link="https://google.com">example</span>
+                
+                <!-- 4, 5, 6 -->
+                <!-- 7, 8, 9 -->
+            </div>
+        </section>
+
+        <!-- works search page -->
+        <section id="works" class="page">
+            <div class="grid3x">
+                <!-- 1, 2, 3 -->
+                <!-- upper interface area -->
+                <div id="serach-container" class="search">
+                    <div class="tag-area-main">
+                        <span class="tag-button active" data-tag="all"><p data-i18n="tag1" class="pressable-text"></p></span>
+                        <span class="tag-button" data-tag="interactive"><p data-i18n="tag2" class="pressable-text"></p></span>
+                        <span class="tag-button" data-tag="audio"><p data-i18n="tag3" class="pressable-text"></p></span>
+                        <span class="tag-button" data-tag="visual"><p data-i18n="tag4" class="pressable-text"></p></span>
+                        <span class="tag-button" data-tag="solo"><p data-i18n="tag5" class="pressable-text"></p></span>
+                        <span class="tag-button" data-tag="co-"><p data-i18n="tag6" class="pressable-text"></p></span>
+                        <span class="expand-collapse-button nav-link math">+</span>
+                    </div>
+                    <div class="expand-container">
+                        <div class="tag-area-more">
+                            <span class="tag-button" data-tag="performance"><p data-i18n="tag7" class="pressable-text"></p></span>
+                            <span class="tag-button" data-tag="exhibition"><p data-i18n="tag8" class="pressable-text"></p></span>
+                            <span class="tag-button" data-tag="music"><p data-i18n="tag9" class="pressable-text"></p></span>
+                            <span class="tag-button" data-tag="film"><p data-i18n="tag10" class="pressable-text"></p></span>
+                            <span class="tag-button" data-tag="collabo"><p data-i18n="tag11" class="pressable-text"></p></span>
+                            <span class="tag-button" data-tag="commission"><p data-i18n="tag12"class="pressable-text"></p></span>
+                        </div>
+                        <div class="tag-area-year">
+                            <span class="tag-button year" data-tag="older"><p data-i18n="tag13" class="pressable-text"></p></span>
+                            <span class="tag-button year" data-tag="2021" ><p class="pressable-text">2021</p></span>
+                            <span class="tag-button year" data-tag="2022"><p class="pressable-text">2022</p></span>
+                            <span class="tag-button year" data-tag="2023"><p class="pressable-text">2023</p></span>
+                            <span class="tag-button year" data-tag="2024"><p class="pressable-text">2024</p></span>
+                            <span class="tag-button year" data-tag="2025"><p class="pressable-text">2025</p></span>
+                        </div>
+                    </div>
+                    <div class="tag-area-text">
+                        <span class="tag-text"></span>
+                        <span class="bottom-left"></span>
+                        <span class="bottom-right"></span>
+                    </div>
+                </div>
+                <!-- 4, 5, 6, 7, . . . -->
+                <!-- works item / link area -->
+                 <!--#15-->
+                <div class="works-item" data-id="flyer-for-gossamer-everything" data-tags="performance co- commission visual 2025">
+                    <p class="pressable-text">Flyer for Gossamer-everything</p>
+                    <img class="works-tmb" src=".png">
+                </div>
+                <!--#15-->
+                <div class="works-item" data-id="gique" data-tags="music co- collabo visual 2024">
+                    <p class="pressable-text">Gique</p>
+                    <img class="works-tmb" src=".png">
+                </div>
+                <!--#14-->
+                <div class="works-item" data-id="tropic" data-tags="film music co- collabo commission audio 2024">
+                    <p class="pressable-text">TROPIC</p>
+                    <img class="works-tmb" src=".png">
+                </div>
+                <!--#13-->
+                <div class="works-item" data-id="eye-dont-know" data-tags="performance solo audio 2024">
+                    <p class="pressable-text">Eye don't know</p>
+                    <img class="works-tmb" src=".png">
+                </div>
+                <!--#12-->
+                <div class="works-item" data-id="let" data-tags="music solo audio visual 2024">
+                    <p class="pressable-text">LET</p>
+                    <img class="works-tmb" src=".png">
+                </div>
+                <!--#11-->
+                <div class="works-item" data-id="gagamsok" data-tags="performance solo audio 2024">
+                    <p class="pressable-text">Gagamsok</p>
+                    <img class="works-tmb" src=".png">
+                </div>
+                <!--#10-->
+                <div class="works-item" data-id="dots-stripes-furs" data-tags="exhibition solo visual 2024">
+                    <p class="pressable-text">Dots stripes furs</p>
+                    <img class="works-tmb" src=".png">
+                </div>
+                <!--#9-->
+                <div class="works-item" data-id="cat7" data-tags="fashion co- collabo commission visual 2024">
+                    <p class="pressable-text">Cat7</p>
+                    <img class="works-tmb" src=".png">
+                </div>
+                <!--#8-->
+                <div class="works-item" data-id="visuals-for-boilerroom-seoul" data-tags="performance co- commission visual 2024">
+                    <p class="pressable-text">Visuals for Boiler room - seoul</p>
+                    <img class="works-tmb" src=".png">
+                </div>
+                <!--#7-->
+                <div class="works-item" data-id="saccade" data-tags="music interactive solo audio visual 2024">
+                    <p class="pressable-text">Saccade</p>
+                    <img class="works-tmb" src=".png">
+                </div>
+                <!--#6-->
+                <div class="works-item" data-id="fish" data-tags="exhibition co- collabo audio 2024">
+                    <p class="pressable-text">Fish</p>
+                    <img class="works-tmb" src=".png">
+                </div>
+                <!--#5-->
+                <div class="works-item" data-id="horsepower" data-tags="exhibition co- collabo audio 2024">
+                    <p class="pressable-text">Horsepower</p>
+                    <img class="works-tmb" src=".png">
+                </div>
+                <!--#4-->
+                <div class="works-item" data-id="rest...rest" data-tags="performance interactive solo audio visual 2023">
+                    <p class="pressable-text">REST...REST</p>
+                    <img class="works-tmb" src=".png">
+                </div>
+                <!--#3-->
+                <div class="works-item" data-id="aaox4" data-tags="exhibition performance music film solo audio visual 2023">
+                    <p class="pressable-text">AAOX4</p>
+                    <img class="works-tmb" src=".png">
+                </div>
+                <!--#2-->
+                <div class="works-item" data-id="babel" data-tags="music film co- collabo audio 2020 older">
+                    <p class="pressable-text">BABEL</p>
+                    <img class="works-tmb" src="/media/babel/!tmb.jpg">
+                </div>
+                <!--#1-->
+                <div class="works-item" data-id="echolocation" data-tags="solo audio 2019 older">
+                    <p class="pressable-text">Echolocation</p>
+                    <img class="works-tmb" src="/media/echolocation/ws_footage2.png">
+                </div>
+            </div>
+        </section>
+
+        <!-- works detail page -->
+        <section id="works-detail" class="page works-detail">
+            <!-- for pullup animation -->
+            <div class="grid5x-container">
+                <!-- for box-shadow around edges
+                <span class="grid5x-shadow"></span> -->
+                <!-- for border radius(rounded corner) effect -->
+                <div class="grid5x-wrapper">
+                    <!-- modular grid generation -->
+                    <div id="grid5x" class="grid5x"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+<!-- modal -->
+<div id="modal" class="modal">
+    <span class="close close-tl">╳</span>
+    <span class="close close-tr">╳</span>
+    <span class="close close-bl">╳</span>
+    <span class="close close-br">╳</span>
+    <img id="modal-img" class="modal-content">
+</div>
 </body>
 </html>

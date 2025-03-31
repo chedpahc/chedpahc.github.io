@@ -15,30 +15,27 @@
 
 <svg width="0" height="0" style="position:absolute">
     <defs>
-        <filter id="deboss" x="-50%" y="-50%" width="200%" height="200%">
-            <!-- black -->
-            <feOffset in="SourceAlpha" dx="0" dy="0.5" result="offset"/>
+        <filter id="deboss">
+            <!--black-->
+            <feOffset in="SourceAlpha" dx="0" dy="0" result="offset"/>
             <feGaussianBlur in="offset" stdDeviation="3" result="blur"/>
             <feComposite operator="out" in="SourceGraphic" in2="blur" result="inverse"/>
             <feFlood flood-color="black" flood-opacity="1" result="color"/>
             <feComposite in="color" in2="inverse" operator="in" result="shadow"/>
-
-            <!-- white -->
-            <feOffset in="SourceAlpha" dx="0" dy="0.5" result="offset2"/>
-            <feGaussianBlur in="offse2t" stdDeviation="6" result="blur2"/>
+            <!--white-->
+            <feOffset in="SourceAlpha" dx="0" dy="0" result="offset2"/>
+            <feGaussianBlur in="offset" stdDeviation="5" result="blur2"/>
             <feComposite operator="out" in="SourceGraphic" in2="blur2" result="inverse2"/>
             <feFlood flood-color="white" flood-opacity="0.5" result="color2"/>
             <feComposite in="color2" in2="inverse2" operator="in" result="shadow2"/>
-            
-            <!-- slopes( controled in JS dynamically) -->
+            <!--slope-->
             <feComponentTransfer in="shadow" result="shadow">
             <feFuncA type="linear" slope="1" />
             </feComponentTransfer>
             <feComponentTransfer in="shadow2" result="shadow2">
             <feFuncA type="linear" slope="0.75" />
             </feComponentTransfer>
-            
-            <!-- comp -->
+            <!--comp-->
             <feComposite operator="over" in="shadow" in2="shadow2" result="combinedShadow"/>
             <feComposite operator="over" in="combinedShadow" in2="SourceGraphic"/>
         </filter>
@@ -50,7 +47,7 @@
     <header id="site-header" class="hidden">
         <div id="back-to" class="header-design nav-link">
           <div class="header-text-wrapper">
-            <span class="scrolling">←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←</span>
+            <span class="scrolling">←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←still there?←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←</span>
           </div>
         </div>
       </header>
@@ -71,8 +68,8 @@
                 <!-- 4, 5, 6 -->
                 <span></span>
                 <span class="logo">
-                    <svg width="1010" height="1010" viewBox="0 0 1010 1010" fill="none" xmlns="http://www.w3.org/2000/svg" filter="url(#deboss)">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M983.826 708.249C937.261 812.911 856.169 898.409 754.115 950.443C652.062 1002.48 535.236 1017.89 423.179 994.103C311.123 970.317 210.632 908.775 138.516 819.771C66.4002 730.766 27.0331 619.698 27 505.145C26.9669 390.592 66.2697 279.501 138.334 190.455C210.398 101.409 310.854 39.8091 422.896 15.9583C534.939 -7.89251 651.774 7.45282 753.858 59.4274C855.941 111.402 937.083 196.854 983.709 301.488L983.658 301.461C950.374 242.32 905.133 193.124 848 156.501L846.619 155.442C822.032 138.624 792.109 126.021 762.592 122.001C733.076 117.98 704.78 122.654 676.59 132.284C648.401 141.915 622.847 157.989 601.96 179.228C581.073 200.468 565.429 226.288 556.272 254.635C547.115 282.981 544.697 313.074 549.211 342.519C553.725 371.964 565.046 399.95 582.275 424.252C599.503 448.554 622.163 468.502 648.453 482.509C674.102 496.175 702.799 504.501 732 504.501L963 504.501C857.164 517.056 756.208 563.082 678.384 635.9C600.561 708.717 548.041 804.497 528.487 909.266C615.77 929.471 706.977 920.979 789.028 884.904C871.385 848.695 939.745 786.704 983.81 708.27L983.826 708.249ZM273.5 731.501L275 733.501C289.443 752.659 307.151 766.002 329.026 775.76C350.902 785.517 374.886 789.546 398.736 787.469C422.585 785.391 445.519 777.276 465.392 763.882C485.265 750.488 501.427 732.253 512.365 710.884C523.303 689.515 528.66 665.71 527.935 641.698C527.21 617.685 520.425 594.25 508.217 573.585C496.009 552.92 478.776 535.702 458.132 523.54C437.487 511.379 418.431 505.124 394.5 504.501H386.5L207 504.501C207 584.825 229.596 664.084 273.5 731.501ZM207.027 500.257C208.08 408.129 239.762 318.965 297.085 246.824C354.485 174.586 434.32 123.538 523.973 101.744C522.919 193.95 491.186 283.181 433.778 355.35C376.385 427.5 296.604 478.482 207.027 500.257Z" fill="black" vector-effect="non-scaling-stroke"/>
+                    <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M191 138.617C182.143 158.503 166.718 174.748 147.306 184.634C127.894 194.52 105.673 197.449 84.3581 192.929C63.0436 188.41 43.929 176.717 30.2117 159.806C16.4944 142.895 9.0063 121.793 9 100.027C8.9937 78.2624 16.4696 57.1552 30.1771 40.2365C43.8846 23.3178 62.9924 11.6137 84.3043 7.08207C105.616 2.55043 127.84 5.46604 147.257 15.3412C166.675 25.2163 182.109 41.4521 190.978 61.3327L190.968 61.3276C184.637 50.0907 176.032 40.7436 165.164 33.7851L164.902 33.584C160.225 30.3885 154.533 27.9939 148.919 27.2301C143.304 26.4662 137.922 27.3542 132.56 29.1839C127.198 31.0137 122.337 34.0678 118.364 38.1033C114.391 42.1389 111.416 47.0446 109.674 52.4305C107.932 57.8164 107.472 63.5339 108.331 69.1285C109.19 74.7231 111.343 80.0404 114.62 84.6578C117.897 89.2751 122.207 93.0652 127.208 95.7266C132.087 98.3231 137.545 99.905 143.1 99.905L187.039 99.905C166.907 102.29 147.704 111.035 132.901 124.871C118.098 138.706 108.108 156.904 104.389 176.81C120.991 180.649 138.34 179.036 153.947 172.182C169.612 165.302 182.615 153.524 190.997 138.621L191 138.617ZM55.8873 143.035L56.1726 143.415C58.9199 147.055 62.2882 149.59 66.4491 151.444C70.6101 153.298 75.1722 154.064 79.7086 153.669C84.245 153.274 88.6074 151.732 92.3875 149.187C96.1676 146.643 99.2417 143.178 101.322 139.118C103.403 135.058 104.422 130.535 104.284 125.972C104.146 121.41 102.856 116.957 100.533 113.031C98.2113 109.105 94.9334 105.833 91.0065 103.522C87.0796 101.212 83.4549 100.024 78.903 99.905H77.3813L43.2382 99.905C43.2382 115.167 47.5363 130.226 55.8873 143.035ZM43.2433 99.0987C43.4437 81.5944 49.4699 64.6533 60.3735 50.9464C71.2916 37.2213 86.4772 27.5222 103.53 23.3814C103.33 40.9004 97.2937 57.8543 86.3741 71.5664C75.4573 85.2748 60.282 94.9614 43.2433 99.0987Z"/>
                     </svg>
                 </span>
                 <span></span>
@@ -80,9 +77,9 @@
                 <span class="infotext">
                     chedpahc
                     <br>
-                    web db version 250327
+                    web db version 0.0.1
                     <br>
-                    last updated on 2025.03.26
+                    last updated on 2025.MAR.31
                     <br>
                     ::
                     <br>
@@ -254,7 +251,7 @@
                 </div>
                 <!--#10-->
                 <div class="works-item" data-id="dots-stripes-furs" data-tags="exhibition solo visual 2024">
-                    <p class="pressable-text">Dots-stripes-furs</p>
+                    <p class="pressable-text">Dots stripes furs</p>
                     <img class="works-tmb" src=".png">
                 </div>
                 <!--#9-->
@@ -295,12 +292,12 @@
                 <!--#2-->
                 <div class="works-item" data-id="babel" data-tags="music film co- collabo audio 2020 older">
                     <p class="pressable-text">BABEL</p>
-                    <img class="works-tmb" src=".png">
+                    <img class="works-tmb" src="/media/babel/!tmb.jpg">
                 </div>
                 <!--#1-->
                 <div class="works-item" data-id="echolocation" data-tags="solo audio 2019 older">
                     <p class="pressable-text">Echolocation</p>
-                    <img class="works-tmb" src=".png">
+                    <img class="works-tmb" src="/media/echolocation/ws_footage2.png">
                 </div>
             </div>
         </section>
