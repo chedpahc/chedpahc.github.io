@@ -11,6 +11,26 @@ document.addEventListener("DOMContentLoaded", async() => {
     const userLang = navigator.language || navigator.languages[0]; 
     let langCode = localStorage.getItem("lang") || (userLang.startsWith("ko") ? "ko" : "en");
 
+    // Build file paths based on language
+    const infoTextData = { file: `/lang/infotext.txt`, classes: "infotext"};
+    const cvTextData = { file: `/lang/cvtext_${langCode}.txt`, classes: "cvtext"};
+
+    // Get target elements
+    const infoTextContainer = document.querySelector(".infotext");
+    const cvTextContainer = document.querySelector(".cvtext");
+    
+    // Load and update cvtext using the async createTextContent function
+    if (cvTextContainer) {
+        const cvContentElem = await createTextContent(cvTextData, true);
+        cvTextContainer.innerHTML = cvContentElem.innerHTML;
+    }
+
+    // Load and update infotext similarly
+    if (infoTextContainer) {
+        const infoContentElem = await createTextContent(infoTextData);
+        infoTextContainer.innerHTML = infoContentElem.innerHTML;
+    }
+
     // load ui data from json
     try {
         const uiResponse = await fetch(`/lang/ui_${langCode}.json`);
@@ -145,7 +165,7 @@ document.addEventListener("DOMContentLoaded", async() => {
     const filterButtons = document.querySelectorAll(".tag-button");
     const textcontent = document.querySelector(".tag-text");
     const worksItem = document.querySelectorAll(".works-item");
-    const grid5xContainer = document.querySelector(".grid5x-container"); // it's not grid5x-wrapper nor grid5x itself.. stupid but works
+    const gridfreexContainer = document.querySelector(".gridfreex-container"); // it's not gridfreex-wrapper nor gridfreex itself.. stupid but works
 
     // ------------------------ Initializing #home page ------------------------ //
     const pages = document.querySelectorAll(".page");
@@ -215,7 +235,7 @@ document.addEventListener("DOMContentLoaded", async() => {
         
         if (page && page.id === "works-detail") {
           // Use alternative variables for works-detail page
-          varVW = parseFloat(rootStyles.getPropertyValue('--grid5x-wrapper-vw'));
+          varVW = parseFloat(rootStyles.getPropertyValue('--gridfreex-wrapper-vw'));
           console.log(varVW);
         } else {
           varVW = parseFloat(rootStyles.getPropertyValue('--base-vw'));
@@ -246,13 +266,13 @@ document.addEventListener("DOMContentLoaded", async() => {
     // ------------------------ Calculating scroll offset in #works-search page ------------------------ //
     function backToWorksScrollOffset() {
         savedScrollYinDetail = window.pageYOffset; // scroll value inside detail page
-        grid5xContainer.style.marginTop = (savedScrollY - savedScrollYinDetail) + "px"; //set final offset
+        gridfreexContainer.style.marginTop = (savedScrollY - savedScrollYinDetail) + "px"; //set final offset
 
         window.scrollTo(0, savedScrollY); // revert scroll position from previous #works page
-        grid5xContainer.classList.remove("visible");
+        gridfreexContainer.classList.remove("visible");
     
         setTimeout(() => {
-            grid5xContainer.style.marginTop = "0px"; // remove margin after transition
+            gridfreexContainer.style.marginTop = "0px"; // remove margin after transition
         }, 400); //css transition time
     }
 
@@ -508,48 +528,52 @@ document.addEventListener("DOMContentLoaded", async() => {
         });
     }
 
-    // ------------------------ Load work content and form Grid5x layout from json data ------------------------ //
-    function loadWorkDetail(workId) {
+    // ------------------------ Load work content and form gridfreex layout from json data ------------------------ //
+    async function loadWorkDetail(workId) {
         savedScrollY = window.pageYOffset; // save scroll point before loading detail
 
         const work = worksData[workId];
         if (!work) return;
 
-        const container = document.getElementById("grid5x");
+        const container = document.getElementById("gridfreex");
         container.innerHTML = ""; // Clear existing content
 
         const rowCount = work.layout.length;
         const colCount = work.layout[0].length;
+
+        // grid-template-columns 속성을 동적으로 colCount에 맞춰 업데이트
+        container.style.gridTemplateColumns = `repeat(${colCount}, 1fr)`;
+
         const visited = Array.from({ length: rowCount }, () => Array(colCount).fill(false));
 
-        work.layout.forEach((row, rowIndex) => {
-            row.forEach((item, colIndex) => {
-            if (visited[rowIndex][colIndex]) return;
+        for (let rowIndex = 0; rowIndex < rowCount; rowIndex++) {
+            for (let colIndex = 0; colIndex < colCount; colIndex++) {
+                const item = work.layout[rowIndex][colIndex];
+                if (visited[rowIndex][colIndex]) continue;
 
-            // Create the grid cell element
-            const cell = document.createElement("div");
-            cell.classList.add("grid5x-cell");
+                // Create the grid cell element
+                const cell = document.createElement("div");
+                cell.classList.add("gridfreex-cell");
 
-            // Calculate span sizes
-            const { colSpan, rowSpan } = calculateSpanSizes(work.layout, rowIndex, colIndex, colCount, rowCount, item);
-            if (colSpan > 1) cell.style.gridColumn = `span ${colSpan}`;
-            if (rowSpan > 1) cell.style.gridRow = `span ${rowSpan}`;
+                // Calculate span sizes
+                const { colSpan, rowSpan } = calculateSpanSizes(work.layout, rowIndex, colIndex, colCount, rowCount, item);
+                if (colSpan > 1) cell.style.gridColumn = `span ${colSpan}`;
+                if (rowSpan > 1) cell.style.gridRow = `span ${rowSpan}`;
 
-            markVisited(visited, rowIndex, colIndex, rowSpan, colSpan);
+                markVisited(visited, rowIndex, colIndex, rowSpan, colSpan);
 
-            // Create the cell content based on its type
-            const content = work.content[item];
-            if (content) {
-                cell.classList.add(item);
-                let contentElem = createContentElement(item, content);
-                if (contentElem) {
-                cell.appendChild(contentElem);
+                // Create the cell content based on its type
+                const content = work.content[item];
+                if (content) {
+                    cell.classList.add(item);
+                    let contentElem = await createContentElement(item, content); // ✅ Await it here
+                    if (contentElem) {
+                        cell.appendChild(contentElem);
+                    }
                 }
+                container.appendChild(cell);
             }
-
-            container.appendChild(cell);
-            });
-        });
+        }
 
         window.scrollTo(0, 0);
     }
@@ -586,18 +610,57 @@ document.addEventListener("DOMContentLoaded", async() => {
         }
 
     // ------------------------ Text ------------------------ //
-    function createTextContent(content) {
-        const elem = document.createElement("div");
+    async function createTextContent(content, iscvTextData = false) {
         let textContent = "";
-        if (typeof content === "object") {
-            textContent = content.text || "";
-            if (content.classes) {
-            content.classes.split(" ").forEach(cls => {
-                if (cls.trim()) elem.classList.add(cls.trim());
-            });
+
+        if (typeof content === "object" && content.file) {
+            try {
+            const response = await fetch(content.file);
+            if (!response.ok) throw new Error("Failed to fetch text file");
+            textContent = await response.text();
+
+            // Normalize newline characters to "\n"
+            textContent = textContent.replace(/\r\n/g, "\n");
+            // Replace each newline with <br>
+            textContent = textContent.replace(/\n/g, "<br>");
+            
+            } catch (error) {
+            console.error("Error loading TXT file:", error);
+            textContent = "Error loading content";
             }
+        } else if (typeof content === "object") {
+          textContent = content.text || "";
         } else {
-            textContent = content;
+          textContent = content;
+        }
+
+        // Hyperlink formatting (Regular Expression)
+        textContent = textContent.replace(/\[([^\]]+)\]\((https?:\/\/[^\s]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+
+        // CV formatting (Regular Expression)
+        if (iscvTextData) {
+            let isFirstTitle = true;
+            // Replace [ ] 
+            textContent = textContent.replace(/\[([^\]]+)\]/g, (match, p1) => {
+                // If it's the first [ ] content, apply 'cvtitlebig'
+                if (isFirstTitle) {
+                    isFirstTitle = false;
+                    return `<span class="cvtitlebig">${p1}</span>`;
+                } else {
+                    return `<span class="cvtitle">${p1}</span>`;
+                }
+            });
+            // Replace < > content with 'mailtext' id
+            textContent = textContent.replace(/-([^<]+)-/g, (match, p1) => {
+                return `<span id="mailtext">${p1}</span>`;
+            });
+        }
+    
+        const elem = document.createElement("div");
+        if (typeof content === "object" && content.classes) {
+          content.classes.split(" ").forEach(cls => {
+            if (cls.trim()) elem.classList.add(cls.trim());
+          });
         }
         elem.innerHTML = textContent;
         return elem;
@@ -856,7 +919,7 @@ document.addEventListener("DOMContentLoaded", async() => {
         const closeBtns = document.querySelectorAll(".close");
 
         // 그리드 셀 자체에 클릭 이벤트를 위임
-        const gridContainer = document.getElementById("grid5x");
+        const gridContainer = document.getElementById("gridfreex");
 
         gridContainer.addEventListener("click", (e) => {
             // 이미지가 클릭된 경우만 처리
@@ -894,9 +957,9 @@ document.addEventListener("DOMContentLoaded", async() => {
             loadWorkDetail(workId); // 상세 데이터 로드
             showPage("works-detail"); // works-detail 페이지 활성
 
-            grid5xContainer.classList.remove("visible");
-            void grid5x.offsetWidth;
-            grid5xContainer.classList.add("visible");
+            gridfreexContainer.classList.remove("visible");
+            void gridfreex.offsetWidth;
+            gridfreexContainer.classList.add("visible");
         });
     });
 

@@ -27,10 +27,11 @@
 
     "flyer-for-gossamer-everything": {
         "layout": [
-            ["txt-1", "txt-1", "txt-1", "img-1", "img-1"],
-            ["aud-1", "aud-1", "aud-1", "aud-2", "aud-2"],
-            ["txt-2", "txt-2", "txt-2", "img-1", "img-1"],
-            ["vid-2", "vid-2", "vid-2", "vid-2", "vid-2"]
+            ["txt-1", "txt-1", "txt-1", "img-1", "img-1", "img-1"],
+            ["aud-1", "aud-1", "aud-1", "aud-2", "aud-2", "aud-2"],
+            ["txt-2", "txt-2", "txt-2", "img-1", "img-1", "img-1"],
+            ["vid-1", "vid-1", "vid-2", "vid-2", "vid-1", "vid-1"],
+            ["txt-1", "txt-1", "vid-2", "txt-1", "txt-1", "txt-1"]
         ],
         "content": {
             "txt-1": {
@@ -49,9 +50,14 @@
                 "src": "https://htmlchedpahc.b-cdn.net/testfolder/test.jpg",
                 "caption": "test"
             },
+            "vid-1": {
+                "src": "https://htmlchedpahc.b-cdn.net/!!e_frostpetrol.mp4",
+                "aspectRatio": "9/16",
+                "caption": ""
+            },
             "vid-2": {
-                "src": "/media/VID_20241215_222036_081.mp4",
-                "aspectRatio": "1/1",
+                "src": "https://htmlchedpahc.b-cdn.net/!!e_frostpetrol.mp4",
+                "aspectRatio": "9/16",
                 "caption": ""
             }
         }
@@ -59,12 +65,16 @@
 
     "gique": {
         "layout": [
-            ["txt-1", "txt-1", "txt-1", "img-1", "img-1"],
-            ["txt-2", "txt-2", "txt-2", "img-1", "img-1"]
+            ["txt-1", "txt-2"],
+            ["txt-2", "txt-1"]
         ],
         "content": {
             "txt-1": {
-                "text": "gique",
+                "text": "text1",
+                "classes": "txt-L"
+            },
+            "txt-2": {
+                "text": "text2",
                 "classes": "txt-L"
             },
             "aud-1": {
@@ -428,8 +438,9 @@
         ],
         "content": {
             "txt-1": {
-                "text": "Echolocation",
-                "classes": "txt-L"
+                "file": "/media/test.txt",
+                "text": "",
+                "classes": "txt-S"
             },
             "aud-1": {
                 "src": "/media/test.mp3",

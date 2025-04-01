@@ -1,0 +1,20 @@
+this is plain text content,
+single line break  = this should be applied too.
+
+also innerHTML
+
+asdf
+
+
+asdfasdf
+
+
+asdfasdfasdfadsf
+
+
+[external link](https://www.google.com)
+[external link2](https://www.naver.com)
+[external link3](https://www.random.com)
+
+
+asdfasfd
