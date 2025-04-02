@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", async() => {
 
     // load ui data from json
     try {
-        const uiResponse = await fetch(`lang/ui_${langCode}.json`);
+        const uiResponse = await fetch(window.location.origin + `/lang/ui_${langCode}.json`);
         uiData = await uiResponse.json();
         //console.log("UI Data loaded:", uiData);
     } catch (error) {
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", async() => {
 
     // load works data from json
     try {
-        const worksResponse = await fetch(`lang/works_${langCode}.json`);
+        const worksResponse = await fetch(window.location.origin + `/lang/works_${langCode}.json`);
         worksData = await worksResponse.json();
         //console.log("Works Data loaded:", worksData);
     } catch (error) {
