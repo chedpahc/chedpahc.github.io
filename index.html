@@ -11,21 +11,20 @@
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css"/>
     <script src="https://unpkg.com/wavesurfer.js@7"></script>
     <script type="text/javascript" src="//assets.mediadelivery.net/playerjs/player-0.1.0.min.js"></script>
+    <script>
+        (function () {
+            var redirect = sessionStorage.redirect;
+            console.log("var-redirect" , redirect)
+            delete sessionStorage.redirect;
+    
+            if (redirect && redirect !== location.pathname) {
+                console.log("reirect && redirect!== location.pathname")
+                history.replaceState(null, null, redirect);
+            }
+        })();
+    </script>
     <script defer src="script.js"></script>
 </head>
-
-<script>
-    (function () {
-        var redirect = sessionStorage.redirect;
-        console.log("var-redirect" , redirect)
-        delete sessionStorage.redirect;
-
-        if (redirect && redirect !== location.pathname) {
-            console.log("reirect && redirect!== location.pathname")
-            history.replaceState(null, null, redirect);
-        }
-    })();
-</script>
 
 
 <svg width="0" height="0" style="position:absolute">
