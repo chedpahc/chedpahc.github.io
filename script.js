@@ -1000,4 +1000,17 @@ document.addEventListener("DOMContentLoaded", async() => {
     } else {
         showPage(currentPath[0] || "home");
     }
+
+    // 🔥 추가: URL 확인 후 자동으로 work 상세 페이지 로드
+    const pathParts = window.location.pathname.split("/").filter(Boolean);
+    if (pathParts[0] === "works" && pathParts[1]) {
+        if (typeof loadWorkDetail === "function") {
+            loadWorkDetail(pathParts[1]); // 새로고침 후에도 상세 페이지 불러옴
+        } else {
+            console.error("loadWorkDetail not defined.");
+            document.addEventListener("workScriptLoaded", function () {
+                loadWorkDetail(pathParts[1]);
+            });
+        }
+    }
 });
