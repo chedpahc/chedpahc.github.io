@@ -530,6 +530,11 @@ document.addEventListener("DOMContentLoaded", async() => {
 
     // ------------------------ Load work content and form gridfreex layout from json data ------------------------ //
     async function loadWorkDetail(workId) {
+
+        console.log("loadWorkDetail executed, checking visibility");
+        const worksDetailSection = document.querySelector("#works-detail");
+        console.log("works-detail display:", getComputedStyle(worksDetailSection).display);
+
         savedScrollY = window.pageYOffset; // save scroll point before loading detail
 
         const work = worksData[workId];
