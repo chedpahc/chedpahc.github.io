@@ -299,7 +299,17 @@
         if (redirect && redirect !== location.pathname) {
             history.replaceState(null, null, redirect);
         }
+
+        // 새로고침 시 URL 확인 후 페이지 로딩 실행
+        document.addEventListener("DOMContentLoaded", function () {
+            const pathParts = location.pathname.split("/").filter(Boolean);
+
+            if (pathParts[0] === "works" && pathParts[1]) {
+                loadWorkDetail(pathParts[1]); // 새로고침 후에도 상세 페이지 불러옴
+            }
+        });
     })();
 </script>
+
 
 </html>
