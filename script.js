@@ -979,29 +979,39 @@ document.addEventListener("DOMContentLoaded", async() => {
     
     // ------------------------ popstate ------------------------ //
     window.addEventListener("popstate", () => {
+        console.log("popstate event triggered", window.location.pathname);
+        
         const path = window.location.pathname.split("/").filter(Boolean);
+        
         if (path[0] === "works" && worksData[path[1]]) {
+            console.log("Loading work detail on popstate:", path[1]);
             loadWorkDetail(path[1]);
             showPage("works-detail");
         } else {
+            console.log("Showing page on popstate:", path[0] || "home");
             showPage(path[0] || "home");
         }
+        
         if (mailText) {
             mailText.classList.remove("highlight");
         }
         backToWorksScrollOffset();
-        stopMedia()
+        stopMedia();
     });
+    
 
     // ------------------------ check URL on page load ------------------------ //
-    const currentPath = window.location.pathname.split("/").filter(Boolean);
-    console.log("checking url on page load", window.location.pathname, window.location.pathname.split("/").filter(Boolean))
-    if (currentPath[0] === "works" && worksData[currentPath[1]]) {
-        console.log("current path is works", currentPath[0])
-        loadWorkDetail(currentPath[1]);
+    document.addEventListener("DOMContentLoaded", () => {
+        const currentPath = window.location.pathname.split("/").filter(Boolean);
         
-    } else {
-        showPage(currentPath[0] || "home");
-        console.log("current path is not works", currentPath[0])
-    }
+        console.log("checking url on page load", window.location.pathname);
+        
+        if (currentPath[0] === "works" && worksData[currentPath[1]]) {
+            console.log("current path is works", currentPath[1]);
+            setTimeout(() => loadWorkDetail(currentPath[1]), 0); // popstate보다 먼저 실행되도록 비동기 처리
+        } else {
+            console.log("current path is not works", currentPath[0] || "home");
+            showPage(currentPath[0] || "home");
+        }
+    });    
 });
