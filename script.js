@@ -997,7 +997,7 @@ document.addEventListener("DOMContentLoaded", async() => {
     window.addEventListener("popstate", () => {
         const path = window.location.pathname.split("/").filter(Boolean);
     
-        if (path[0] === "works" && path[1]) { // only if workId exists
+        if (path[0] === "works" && typeof path[1] === "string" && path[1].trim() !== "") { // only if workId exists
             console.log("Showing works-detail page first");
             // load works-data
             if (worksData[path[1]]) {
