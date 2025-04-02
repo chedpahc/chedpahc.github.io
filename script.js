@@ -530,41 +530,45 @@ document.addEventListener("DOMContentLoaded", async() => {
 
     // ------------------------ Load work content and form gridfreex layout from json data ------------------------ //
     async function loadWorkDetail(workId) {
-        savedScrollY = window.pageYOffset; // Save scroll position
-    
+        savedScrollY = window.pageYOffset; // save scroll point before loading detail
+
         const work = worksData[workId];
+        console.log("const work =", work)
         if (!work) return;
-    
+
         const container = document.getElementById("gridfreex");
+        console.log("container", container)
         container.innerHTML = ""; // Clear existing content
-    
+
         const rowCount = work.layout.length;
         const colCount = work.layout[0].length;
-    
+
+        // grid-template-columns 속성을 동적으로 colCount에 맞춰 업데이트
         container.style.gridTemplateColumns = `repeat(${colCount}, 1fr)`;
-    
+
         const visited = Array.from({ length: rowCount }, () => Array(colCount).fill(false));
-    
+
         for (let rowIndex = 0; rowIndex < rowCount; rowIndex++) {
             for (let colIndex = 0; colIndex < colCount; colIndex++) {
                 const item = work.layout[rowIndex][colIndex];
                 if (visited[rowIndex][colIndex]) continue;
-    
-                // Create grid cell
+
+                // Create the grid cell element
                 const cell = document.createElement("div");
                 cell.classList.add("gridfreex-cell");
-    
+
+                // Calculate span sizes
                 const { colSpan, rowSpan } = calculateSpanSizes(work.layout, rowIndex, colIndex, colCount, rowCount, item);
                 if (colSpan > 1) cell.style.gridColumn = `span ${colSpan}`;
                 if (rowSpan > 1) cell.style.gridRow = `span ${rowSpan}`;
-    
+
                 markVisited(visited, rowIndex, colIndex, rowSpan, colSpan);
-    
-                // Create content if available
+
+                // Create the cell content based on its type
                 const content = work.content[item];
                 if (content) {
                     cell.classList.add(item);
-                    let contentElem = await createContentElement(item, content); // ✅ Await for async content
+                    let contentElem = await createContentElement(item, content); // ✅ Await it here
                     if (contentElem) {
                         cell.appendChild(contentElem);
                     }
@@ -572,7 +576,7 @@ document.addEventListener("DOMContentLoaded", async() => {
                 container.appendChild(cell);
             }
         }
-    
+
         window.scrollTo(0, 0);
     }
 
@@ -980,25 +984,25 @@ document.addEventListener("DOMContentLoaded", async() => {
     setTimeout(() => {
         console.log("Manually triggering popstate event");
         window.dispatchEvent(new Event("popstate"));
-    }, 100);
+    }, 1000);
     
-    window.addEventListener("popstate", async () => {
+    window.addEventListener("popstate", () => {
         const path = window.location.pathname.split("/").filter(Boolean);
         
-        async function tryLoadWorkDetail() {
-            while (!worksData[path[1]]) {
+        function tryLoadWorkDetail() {
+            if (worksData[path[1]]) {
+                console.log("Loading work detail on popstate:", path[1]);
+                loadWorkDetail(path[1]);
+            } else {
                 console.log("worksData not available yet. Waiting...");
-                await new Promise(resolve => setTimeout(resolve, 100)); // ✅ 100ms 단위로 재시도
+                setTimeout(tryLoadWorkDetail, 100); // 100ms 간격으로 다시 실행
             }
-    
-            console.log("Loading work detail on popstate:", path[1]);
-            await loadWorkDetail(path[1]); // ✅ 작업 완료까지 대기
         }
     
         if (path[0] === "works") {
             console.log("Showing works-detail page first");
-            showPage("works-detail"); // ✅ 먼저 페이지를 표시
-            await tryLoadWorkDetail(); // ✅ 데이터 로드가 끝날 때까지 기다림
+            showPage("works-detail"); // 먼저 페이지를 표시한 후,
+            tryLoadWorkDetail(); // 데이터 로드를 시작
         } else {
             console.log("Showing page on popstate:", path[0] || "home");
             showPage(path[0] || "home");
