@@ -982,54 +982,29 @@ document.addEventListener("DOMContentLoaded", async() => {
     setTimeout(() => {
         console.log("Manually triggering popstate event");
         window.dispatchEvent(new Event("popstate"));
-    }, 3000);
+    }, 1000);
     
     window.addEventListener("popstate", () => {
-        console.log("popstate event triggered", window.location.pathname);
-        
         const path = window.location.pathname.split("/").filter(Boolean);
         
-        if (path[0] === "works" && worksData[path[1]]) {
-            console.log("Loading work detail on popstate:", path[1]);
-            loadWorkDetail(path[1]);
-            showPage("works-detail");
+        function tryLoadWorkDetail() {
+            if (worksData[path[1]]) {
+                console.log("Loading work detail on popstate:", path[1]);
+                loadWorkDetail(path[1]);
+            } else {
+                console.log("worksData not available yet. Waiting...");
+                setTimeout(tryLoadWorkDetail, 100); // 100ms 간격으로 다시 실행
+            }
+        }
+    
+        if (path[0] === "works") {
+            console.log("Showing works-detail page first");
+            showPage("works-detail"); // ✅ 먼저 페이지를 표시한 후,
+            tryLoadWorkDetail(); // ✅ 데이터 로드를 시작
         } else {
             console.log("Showing page on popstate:", path[0] || "home");
             showPage(path[0] || "home");
         }
-        
-        if (mailText) {
-            mailText.classList.remove("highlight");
-        }
-        backToWorksScrollOffset();
-        stopMedia();
     });
-    
 
-    // ------------------------ check URL on page load ------------------------ //
-    document.addEventListener("DOMContentLoaded", () => {
-        const currentPath = window.location.pathname.split("/").filter(Boolean);
-        
-        console.log("checking url on page load", window.location.pathname);
-        console.log("Extracted path:", currentPath);
-        console.log("worksData object:", worksData);
-        console.log("worksData[currentPath[1]]:", worksData[currentPath[1]]);
-        
-        function tryLoadWorkDetail() {
-            if (worksData[currentPath[1]]) {
-                console.log("current path is works", currentPath[1]);
-                loadWorkDetail(currentPath[1]);
-            } else {
-                console.log("worksData not available yet. Waiting...");
-                setTimeout(tryLoadWorkDetail, 100); // 100ms 간격으로 재시도
-            }
-        }
-    
-        if (currentPath[0] === "works") {
-            tryLoadWorkDetail();
-        } else {
-            console.log("current path is not works", currentPath[0] || "home");
-            showPage(currentPath[0] || "home");
-        }
-    });
 });
