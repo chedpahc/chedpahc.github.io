@@ -978,6 +978,12 @@ document.addEventListener("DOMContentLoaded", async() => {
     }
     
     // ------------------------ popstate ------------------------ //
+    console.log("popstate event listener added");
+    setTimeout(() => {
+        console.log("Manually triggering popstate event");
+        window.dispatchEvent(new Event("popstate"));
+    }, 3000);
+    
     window.addEventListener("popstate", () => {
         console.log("popstate event triggered", window.location.pathname);
         
@@ -1005,13 +1011,25 @@ document.addEventListener("DOMContentLoaded", async() => {
         const currentPath = window.location.pathname.split("/").filter(Boolean);
         
         console.log("checking url on page load", window.location.pathname);
+        console.log("Extracted path:", currentPath);
+        console.log("worksData object:", worksData);
+        console.log("worksData[currentPath[1]]:", worksData[currentPath[1]]);
         
-        if (currentPath[0] === "works" && worksData[currentPath[1]]) {
-            console.log("current path is works", currentPath[1]);
-            setTimeout(() => loadWorkDetail(currentPath[1]), 0); // popstate보다 먼저 실행되도록 비동기 처리
+        function tryLoadWorkDetail() {
+            if (worksData[currentPath[1]]) {
+                console.log("current path is works", currentPath[1]);
+                loadWorkDetail(currentPath[1]);
+            } else {
+                console.log("worksData not available yet. Waiting...");
+                setTimeout(tryLoadWorkDetail, 100); // 100ms 간격으로 재시도
+            }
+        }
+    
+        if (currentPath[0] === "works") {
+            tryLoadWorkDetail();
         } else {
             console.log("current path is not works", currentPath[0] || "home");
             showPage(currentPath[0] || "home");
         }
-    });    
+    });
 });
