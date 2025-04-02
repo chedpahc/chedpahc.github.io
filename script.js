@@ -236,10 +236,10 @@ document.addEventListener("DOMContentLoaded", async() => {
         if (page && page.id === "works-detail") {
           // Use alternative variables for works-detail page
           varVW = parseFloat(rootStyles.getPropertyValue('--gridfreex-wrapper-vw'));
-          console.log(varVW);
+          //console.log(varVW);
         } else {
           varVW = parseFloat(rootStyles.getPropertyValue('--base-vw'));
-          console.log(varVW);
+          //console.log(varVW);
         }
         
         // Calculate extra space and corresponding mask stops:
@@ -250,7 +250,7 @@ document.addEventListener("DOMContentLoaded", async() => {
         
         headerTextWrapper.style.setProperty('--mask-stop-left', `${leftStop}%`);
         headerTextWrapper.style.setProperty('--mask-stop-right', `${rightStop}%`);
-        console.log(leftStop, rightStop);
+        //console.log(leftStop, rightStop);
     }
       
       
@@ -998,6 +998,11 @@ document.addEventListener("DOMContentLoaded", async() => {
             if (worksData[path[1]]) {
                 console.log("Loading work detail on popstate:", path[1]);
                 loadWorkDetail(path[1]);
+
+                gridfreexContainer.classList.remove("visible");
+                void gridfreex.offsetWidth;
+                gridfreexContainer.classList.add("visible");
+                
             } else {
                 console.log("worksData not available yet. Waiting...");
                 setTimeout(tryLoadWorkDetail, 100); // 100ms 간격으로 다시 실행
