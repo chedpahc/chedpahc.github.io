@@ -989,34 +989,33 @@ document.addEventListener("DOMContentLoaded", async() => {
     setTimeout(() => {
         console.log("Manually triggering popstate event");
         window.dispatchEvent(new Event("popstate"));
-    }, 1000);
+    }, 100);
     
     window.addEventListener("popstate", () => {
         const path = window.location.pathname.split("/").filter(Boolean);
-        
-        function tryLoadWorkDetail() {
-            if (worksData[path[1]]) {
-                console.log("Loading work detail on popstate:", path[1]);
-                loadWorkDetail(path[1]);
-
-                gridfreexContainer.classList.remove("visible");
-                void gridfreex.offsetWidth;
-                gridfreexContainer.classList.add("visible");
-                
-            } else {
-                console.log("worksData not available yet. Waiting...");
-                setTimeout(tryLoadWorkDetail, 100); // 100ms 간격으로 다시 실행
-            }
-        }
     
         if (path[0] === "works") {
             console.log("Showing works-detail page first");
-            showPage("works-detail"); // 먼저 페이지를 표시한 후,
-            tryLoadWorkDetail(); // 데이터 로드를 시작
+            showPage("works-detail"); // ✅ works-detail 페이지 먼저 활성화
+    
+            // ✅ gridfreex 애니메이션 적용 (클릭 이벤트와 동일한 구조)
+            gridfreexContainer.classList.remove("visible");
+            void gridfreex.offsetWidth;
+            gridfreexContainer.classList.add("visible");
+    
+            // ✅ work 데이터 로드 (즉시 실행)
+            if (worksData[path[1]]) {
+                console.log("Loading work detail on popstate:", path[1]);
+                loadWorkDetail(path[1]);
+            } else {
+                console.log("worksData not available yet. Waiting...");
+                setTimeout(() => loadWorkDetail(path[1]), 100);
+            }
+    
         } else {
             console.log("Showing page on popstate:", path[0] || "home");
             showPage(path[0] || "home");
         }
     });
-
+    
 });
