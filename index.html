@@ -17,9 +17,11 @@
 <script>
     (function () {
         var redirect = sessionStorage.redirect;
+        console.log("var-redirect" , redirect)
         delete sessionStorage.redirect;
 
         if (redirect && redirect !== location.pathname) {
+            console.log("reirect && redirect!== location.pathname")
             history.replaceState(null, null, redirect);
         }
     })();

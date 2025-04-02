@@ -995,22 +995,13 @@ document.addEventListener("DOMContentLoaded", async() => {
 
     // ------------------------ check URL on page load ------------------------ //
     const currentPath = window.location.pathname.split("/").filter(Boolean);
+    console.log("checking url on page load", window.location.pathname, window.location.pathname.split("/").filter(Boolean))
     if (currentPath[0] === "works" && worksData[currentPath[1]]) {
+        console.log("current path is works", currentPath[0])
         loadWorkDetail(currentPath[1]);
+        
     } else {
         showPage(currentPath[0] || "home");
-    }
-
-    // 🔥 추가: URL 확인 후 자동으로 work 상세 페이지 로드
-    const pathParts = window.location.pathname.split("/").filter(Boolean);
-    if (pathParts[0] === "works" && pathParts[1]) {
-        if (typeof loadWorkDetail === "function") {
-            loadWorkDetail(pathParts[1]); // 새로고침 후에도 상세 페이지 불러옴
-        } else {
-            console.error("loadWorkDetail not defined.");
-            document.addEventListener("workScriptLoaded", function () {
-                loadWorkDetail(pathParts[1]);
-            });
-        }
+        console.log("current path is not works", currentPath[0])
     }
 });

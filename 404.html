@@ -2,8 +2,9 @@
 <html>
 <head>
     <script>
-        // 현재 URL 전체(경로 + 쿼리 + 해시) 저장
-        sessionStorage.redirect = location.pathname + location.search + location.hash;
+        // 현재 URL 전체(경로) 저장
+        sessionStorage.redirect = location.pathname;
+        console.log("redirection,", location.pathname)
         location.replace("/"); // 홈(index.html)으로 이동하여 라우팅 처리
     </script>
 </head>
