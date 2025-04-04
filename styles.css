@@ -244,11 +244,13 @@ a:active {
 .decotext {
   display: flex;
   align-items: center;
-  text-align: left;
+
   padding-left: 1vw;
   font-size: calc(var(--base-vw)/50);
   word-spacing: 0.3rem;
   margin-left: 0.2rem;
+  white-space: nowrap;
+  min-width: 0;
 }
 
 .grid3x {
@@ -335,7 +337,7 @@ a:active {
   aspect-ratio: 3/2;
 
   text-align: left;
-  padding: 2vw 3.8vw;
+  padding: 2vw 3.6vw;
   margin-top: 1dvh;
   margin-bottom: 1.75vw;
   border-radius: 4rem 4rem 3rem 3rem;
@@ -824,44 +826,42 @@ a:active {
   align-items: center;
   width: 100%;
 }
-
 .video-container {
   max-width: 100%;
   position: relative;
   overflow: hidden;
   border-radius: 0.15vw;
-  filter: url(#deboss);
+  filter: var(--filter-deboss);
 }
-
+.video-container.hide-cursor {
+  cursor: none;
+}
 .video-container.video-overlay video {
-  filter: brightness(0.6);
+  filter: brightness(0.3) blur(5px);
 }
-
 .video-container video {
   width: 100%;
   height: 100%;
   border: 0;
   transition: filter 0.15s linear;
-  
 }
 
 .controls-div {
   display: flex;
   flex-direction: row;
-  gap: 5vw;
+  gap: 2vw;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: scale(1) translate(-50%, -50%);
 }
-
 .sound-button,
 .play-pause-button,
 .fullscreen-button {
   position: relative;
-  font-size: calc(var(--base-vw)/20);
+  font-size: 2vw;
   text-align: center;
-  width: calc(var(--base-vw)/30);
+  width: 3vw;
   color: white;
   cursor: pointer;
   display: none;
@@ -871,6 +871,32 @@ a:active {
 .video-container:hover .play-pause-button,
 .video-container:hover .fullscreen-button {
   display: block;
+}
+
+/* 볼륨 슬라이더 스타일 */
+.volume-slider {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 3vw;
+  height: 500%;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: none; /* 기본에는 숨김 */
+  overflow: hidden;
+}
+
+/* 슬라이더 내 볼륨 채움 효과 */
+.volume-slider .volume-fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 75%; /* 초기 볼륨 75% 반영 */
+  background: white;
+  border-radius: 0.5rem;
 }
 
 .video-caption {
@@ -928,6 +954,9 @@ video:fullscreen {
   :root {
     --base-vw: 66vw; 
     --gridfreex-wrapper-vw: 90vw;
+  }
+  .cv {
+    padding: 3.5vw 6.7vw;
   }
   #works.page {
     padding-top: calc(var(--grid3x-paddingtop) - var(--base-vw)/3);
@@ -994,12 +1023,34 @@ video:fullscreen {
   .gridfreex-cell {
     padding: 0.5rem 1rem 0.5rem 1rem;
   }
+
+  /* video player changes */
+  .controls-div {
+    flex-direction: column;
+  }
+  .sound-button,
+  .play-pause-button,
+  .fullscreen-button {
+    width: 15vw;
+  }
+  .sound-button,
+  .play-pause-button {
+    position: absolute;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .video-container:fullscreen .sound-button,
+  .video-container:fullscreen .play-pause-button{
+    position: relative;
+    visibility: visible;
+    pointer-events: all;
+  }
 }
 
 /*smaller mobile device*/
 @media (max-width: 480px) {
   .tag-button {
-    font-size: calc(1rem - 1vw);
+    font-size: calc(1rem - 1.1vw);
     padding: 0.5rem;
   }
   

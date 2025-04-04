@@ -6,7 +6,7 @@
         ],
         "content": {
             "txt-1": {
-                "text": "Sample Work",
+                "text": "",
                 "classes": "txt-L"
             },
             "aud-1": {
@@ -25,17 +25,18 @@
         }
     },
 
-    "flyer-for-gossamer-everything": {
+    "gossamer-everything": {
         "layout": [
+            ["vid-1", "vid-1", "vid-2", "vid-2", "vid-1", "vid-1"],
+            ["vid-3", "vid-3", "vid-3", "vid-3", "vid-3", "vid-3"],
+            ["txt-1", "txt-1", "vid-2", "txt-1", "txt-1", "txt-1"],
             ["txt-1", "txt-1", "txt-1", "img-1", "img-1", "img-1"],
             ["aud-1", "aud-1", "aud-1", "aud-2", "aud-2", "aud-2"],
-            ["txt-2", "txt-2", "txt-2", "img-1", "img-1", "img-1"],
-            ["vid-1", "vid-1", "vid-2", "vid-2", "vid-1", "vid-1"],
-            ["txt-1", "txt-1", "vid-2", "txt-1", "txt-1", "txt-1"]
+            ["txt-2", "txt-2", "txt-2", "img-1", "img-1", "img-1"]
         ],
         "content": {
             "txt-1": {
-                "text": "gossamer title",
+                "text": "gossamer  <br> linebreak",
                 "classes": "txt-L"
             },
             "aud-1": {
@@ -58,6 +59,11 @@
             "vid-2": {
                 "src": "https://htmlchedpahc.b-cdn.net/!!e_frostpetrol.mp4",
                 "aspectRatio": "9/16",
+                "caption": ""
+            },
+            "vid-3": {
+                "src": "https://htmlchedpahc.b-cdn.net/WESA%20UNDER%20highlight%20pt.2.mp4",
+                "aspectRatio": "16/9",
                 "caption": ""
             }
         }
@@ -249,7 +255,7 @@
         }
     },
 
-    "visuals-for-boilerroom-seoul": {
+    "boiler-room-seoul": {
         "layout": [
             ["txt-1", "txt-1", "txt-1", "img-1", "img-1"],
             ["txt-2", "txt-2", "txt-2", "img-1", "img-1"]
@@ -327,7 +333,7 @@
         }
     },
 
-    "horsepower": {
+    "horsepower-midissage": {
         "layout": [
             ["txt-1", "txt-1", "txt-1", "img-1", "img-1"],
             ["txt-2", "txt-2", "txt-2", "img-1", "img-1"]
@@ -387,6 +393,32 @@
         "content": {
             "txt-1": {
                 "text": "aaox4 title",
+                "classes": "txt-L"
+            },
+            "aud-1": {
+                "src": "/media/test.mp3",
+                "caption": ""
+            },
+            "img-": {
+                "src": "/media/test.jpg",
+                "caption": ""
+            },
+            "vid-2": {
+                "src": "{url}.mp4",
+                "aspectRatio": "1/1",
+                "caption": ""
+            }
+        }
+    },
+    
+    "distorted": {
+        "layout": [
+            ["txt-1", "txt-1", "txt-1", "img-1", "img-1"],
+            ["txt-2", "txt-2", "txt-2", "img-1", "img-1"]
+        ],
+        "content": {
+            "txt-1": {
+                "text": "Distorted",
                 "classes": "txt-L"
             },
             "aud-1": {

@@ -626,6 +626,7 @@ document.addEventListener("DOMContentLoaded", async() => {
             if (!response.ok) throw new Error("Failed to fetch text file");
             textContent = await response.text();
 
+            // !I should use <pre> instead of this
             // Normalize newline characters to "\n"
             textContent = textContent.replace(/\r\n/g, "\n");
             // Replace each newline with <br>
@@ -747,112 +748,205 @@ document.addEventListener("DOMContentLoaded", async() => {
 
     // ------------------------ Video ------------------------ //
     function createVideoContent(content) {
-        // video-wrapper 생성
+        // Create video wrapper
         const videoWrapper = document.createElement("div");
         videoWrapper.classList.add("video-wrapper");
       
-        // 비디오를 감쌀 컨테이너 생성 (position: relative)
+        // Create video container (for relative positioning)
         const videoContainer = document.createElement("div");
         videoContainer.classList.add("video-container");
       
-        // video 요소 생성 (HTML5 video 태그)
+        // Create video element
         const videoElem = document.createElement("video");
-        videoElem.controls = false; // 네이티브 컨트롤 제거
+        videoElem.controls = false; // Remove native controls
         videoElem.setAttribute("preload", "auto");
+        videoElem.volume = 1; // Default volume 100%
       
-        // source 설정 (mp4 URL로 가정)
+        // Append video source
         const sourceElem = document.createElement("source");
         sourceElem.src = content.src;
         sourceElem.type = "video/mp4";
         videoElem.appendChild(sourceElem);
       
-        // poster 이미지 설정 (있다면)
+        // Set poster if provided
         if (content.poster) {
           videoElem.setAttribute("poster", content.poster);
         }
       
-        // aspectRatio 처리
-        let ratio = "16/9"; // 기본값
-        if (content.aspectRatio) {
-          ratio = content.aspectRatio;
-        }
+        // Set aspect ratio (default 16/9)
+        const ratio = content.aspectRatio || "16/9";
         videoContainer.style.aspectRatio = ratio.replace("/", " / ");
       
-        // video 요소를 컨테이너에 추가
+        // Append video element to container
         videoContainer.appendChild(videoElem);
-        videoWrapper.appendChild(videoContainer);
       
-        // controls-div 생성 (비디오 컨테이너 내부에 위치)
+        // Create controls container
         const controlsDiv = document.createElement("div");
         controlsDiv.classList.add("controls-div");
       
-        // 사운드 버튼 (mute/unmute)
+        // --- Sound Button ---
         const soundButton = document.createElement("div");
         soundButton.classList.add("sound-button");
-        soundButton.innerHTML = "&#128266;&#65038;"; // unmuted 상태
+      
+        // Sound icon element (default unmuted icon)
+        const soundIcon = document.createElement("span");
+        soundIcon.innerHTML = `
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="3,9 7,9 11,5 11,19 7,15 3,15" fill="currentColor"/>
+            <path d="M14.5 9.5c1.2 1.2 1.2 3.8 0 5" />
+            <path d="M16.8 7.2c2 2 2 7.6 0 9.6" />
+            <path d="M19 5c2.8 2.8 2.8 11.2 0 14" />
+          </svg>
+        `;
+        soundButton.appendChild(soundIcon);
+      
+        // Volume slider
+        const volumeSlider = document.createElement("div");
+        volumeSlider.classList.add("volume-slider");
+        const volumeFill = document.createElement("div");
+        volumeFill.classList.add("volume-fill");
+        volumeSlider.appendChild(volumeFill);
+        soundButton.appendChild(volumeSlider);
+      
+        let isDraggingVolume = false;
+      
+        // Show volume slider on mouse enter
+        soundButton.addEventListener("mouseenter", () => {
+          volumeSlider.style.display = "block";
+        });
+      
+        // Hide slider and restore icon on mouse leave
+        soundButton.addEventListener("mouseleave", () => {
+          setTimeout(() => {
+            if (!isDraggingVolume) {
+              volumeSlider.style.display = "none";
+              // Restore icon based on mute state
+              soundIcon.innerHTML =
+                videoElem.volume === 0
+                  ? `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <polygon points="3,9 7,9 11,5 11,19 7,15 3,15" fill="currentColor"/>
+                      <line x1="16" y1="8" x2="22" y2="14"/>
+                      <line x1="22" y1="8" x2="16" y2="14"/>
+                    </svg>`
+                  : `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <polygon points="3,9 7,9 11,5 11,19 7,15 3,15" fill="currentColor"/>
+                      <path d="M14.5 9.5c1.2 1.2 1.2 3.8 0 5" />
+                      <path d="M16.8 7.2c2 2 2 7.6 0 9.6" />
+                      <path d="M19 5c2.8 2.8 2.8 11.2 0 14" />
+                    </svg>`;
+            }
+          }, 750);
+        });
+      
+        // Volume slider drag events
+        volumeSlider.addEventListener("mousedown", (e) => {
+          e.stopPropagation();
+          isDraggingVolume = true;
+          updateVolume(e);
+          document.addEventListener("mousemove", updateVolume);
+          document.addEventListener("mouseup", stopDragging);
+        });
+      
+        function updateVolume(e) {
+          const sliderRect = volumeSlider.getBoundingClientRect();
+          const offsetY = e.clientY - sliderRect.top;
+          let newVolume = 1 - offsetY / sliderRect.height;
+          newVolume = Math.min(Math.max(newVolume, 0), 1);
+          videoElem.volume = newVolume;
+          volumeFill.style.height = newVolume * 100 + "%";
+          // Update icon to show volume number (avoiding overflow)
+          soundIcon.innerHTML = Math.round(newVolume * 99);
+        }
+      
+        function stopDragging() {
+          isDraggingVolume = false;
+          document.removeEventListener("mousemove", updateVolume);
+          document.removeEventListener("mouseup", stopDragging);
+        }
+      
         controlsDiv.appendChild(soundButton);
       
-        // Play/Pause 버튼
+        // --- Play/Pause Button ---
         const playPauseButton = document.createElement("div");
         playPauseButton.classList.add("play-pause-button");
-        playPauseButton.innerHTML = "&#9654;"; // ▶ 모양
+        playPauseButton.innerHTML = `
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="6,4 20,12 6,20" />
+          </svg>
+        `;
         controlsDiv.appendChild(playPauseButton);
       
-        // 전체 화면 버튼
+        // --- Fullscreen Button ---
         const fullscreenButton = document.createElement("div");
         fullscreenButton.classList.add("fullscreen-button");
-        fullscreenButton.innerHTML = "⛶"; // ⛶ 모양
+        fullscreenButton.innerHTML = `
+          <svg viewBox="0 0 24 24" fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 13h2v5h-5v-2h3v-3zm-8 0v3h3v2H6v-5h2zm0-2H6V6h5v2H8v3zm8 0V8h-3V6h5v5h-2z"/>
+          </svg>
+        `;
         controlsDiv.appendChild(fullscreenButton);
       
-        // controlsDiv를 videoContainer 내부에 추가
+        // Append controls to video container and container to wrapper
         videoContainer.appendChild(controlsDiv);
+        videoWrapper.appendChild(videoContainer);
       
         let hideControlsTimeout;
       
-        // 컨트롤 보이기 함수: 모든 컨트롤 즉시 표시
+        // Show controls and cursor
         function showControls() {
           clearTimeout(hideControlsTimeout);
-          playPauseButton.style.display = 'block';
-          soundButton.style.display = 'block';
-          fullscreenButton.style.display = 'block';
+          playPauseButton.style.display = "block";
+          soundButton.style.display = "block";
+          fullscreenButton.style.display = "block";
           videoContainer.classList.add("video-overlay");
+          videoContainer.classList.remove("hide-cursor");
         }
       
-        // 컨트롤 숨김 함수: 1초 후에 모든 컨트롤 숨김
+        // Hide controls and cursor after delay
         function hideControlsDelayed() {
           clearTimeout(hideControlsTimeout);
           hideControlsTimeout = setTimeout(() => {
-            playPauseButton.style.display = 'none';
-            soundButton.style.display = 'none';
-            fullscreenButton.style.display = 'none';
+            playPauseButton.style.display = "none";
+            soundButton.style.display = "none";
+            fullscreenButton.style.display = "none";
             videoContainer.classList.remove("video-overlay");
-          }, 1000);
+            videoContainer.classList.add("hide-cursor");
+          }, 1500);
         }
       
-        // 플레이/일시정지 토글 함수
+        // Toggle play/pause
         function togglePlayPause() {
           if (videoElem.paused) {
             videoElem.play();
-            playPauseButton.innerHTML = "&#10074;&#10074;"; // Pause 아이콘 (||)
+            // When playing, show pause icon
+            playPauseButton.innerHTML = `
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <rect x="6" y="4" width="4" height="16" />
+                <rect x="14" y="4" width="4" height="16" />
+              </svg>
+            `;
           } else {
             videoElem.pause();
-            playPauseButton.innerHTML = "&#9654;"; // Play 아이콘 (▶)
+            // When paused, show play icon
+            playPauseButton.innerHTML = `
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="6,4 20,12 6,20" />
+              </svg>
+            `;
           }
           showControls();
           hideControlsDelayed();
         }
       
-        // 사운드 토글 함수 (mute/unmute)
-        function toggleSound() {
-          videoElem.muted = !videoElem.muted;
-          soundButton.innerHTML = videoElem.muted 
-            ? "&#128263;&#65038;"  // Muted: 🔇 (텍스트 스타일)
-            : "&#128266;&#65038;"; // Unmuted: 🔊︎ (텍스트 스타일)
-          showControls();
-          hideControlsDelayed();
-        }
-      
-        // 전체 화면 토글 함수
+        // Toggle fullscreen
         function toggleFullscreen() {
           if (document.fullscreenElement) {
             document.exitFullscreen();
@@ -863,61 +957,32 @@ document.addEventListener("DOMContentLoaded", async() => {
           hideControlsDelayed();
         }
       
-        // 이벤트 핸들러 등록
-        // 버튼 클릭 시: 이벤트 전파 차단
+        // Event listeners for buttons and container
         playPauseButton.addEventListener("click", (e) => {
           e.stopPropagation();
           togglePlayPause();
         });
-        soundButton.addEventListener("click", (e) => {
-          e.stopPropagation();
-          toggleSound();
-        });
+      
         fullscreenButton.addEventListener("click", (e) => {
           e.stopPropagation();
           toggleFullscreen();
         });
       
-        // videoContainer 내부에서 마우스 움직임이 있으면 즉시 보이고 hide 타이머 재설정
         videoContainer.addEventListener("mousemove", () => {
           showControls();
           hideControlsDelayed();
         });
       
-        // videoContainer 클릭(컨트롤 영역 외) 시 플레이/일시정지 토글
-        videoContainer.addEventListener("click", (e) => {
-          // 만약 클릭 대상이 controlsDiv 내부의 요소라면 이벤트를 이미 처리했으므로 건너뛰기
-          if (e.target.closest(".controls-div")) return;
-          togglePlayPause();
-        });
-      
-        // 더블 클릭 시 전체 화면 토글
-        videoContainer.addEventListener("dblclick", (e) => {
-          e.stopPropagation();
-          toggleFullscreen();
-        });
-      
-        // 비디오 이벤트: 재생 또는 일시정지 시 컨트롤 보이기와 숨김 타이머 실행
-        videoElem.addEventListener('play', () => {
-          playPauseButton.innerHTML = "&#10074;&#10074;";
-          showControls();
-          hideControlsDelayed();
-        });
-        videoElem.addEventListener('pause', () => {
-          playPauseButton.innerHTML = "&#9654;";
-          showControls();
-          hideControlsDelayed();
-        });
-
-          // 캡션 추가 (옵션)
+        // Optional: add caption if provided
         if (content.caption) {
-            const caption = document.createElement("figcaption");
-            caption.classList.add("video-caption");
-            caption.textContent = content.caption;
-            videoWrapper.appendChild(caption);
+          const caption = document.createElement("figcaption");
+          caption.classList.add("video-caption");
+          caption.textContent = content.caption;
+          videoWrapper.appendChild(caption);
         }
+      
         return videoWrapper;
-    }
+      }      
       
     // ------------------------ modal for img content ------------------------ //
     function initializeModal() {
