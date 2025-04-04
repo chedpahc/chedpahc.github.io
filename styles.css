@@ -1048,7 +1048,12 @@ video:fullscreen {
     visibility: hidden;
     pointer-events: none;
   }
-  .video-container:fullscreen .play-pause-button{
+  .video-container:fullscreen .sound-button {
+    position: absolute;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .video-container:fullscreen .play-pause-button {
     position: relative;
     visibility: visible;
     pointer-events: all;
