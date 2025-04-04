@@ -982,7 +982,7 @@ document.addEventListener("DOMContentLoaded", async() => {
         }
       
         return videoWrapper;
-      }      
+    }      
       
     // ------------------------ modal for img content ------------------------ //
     function initializeModal() {

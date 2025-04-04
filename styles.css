@@ -833,11 +833,11 @@ a:active {
   border-radius: 0.15vw;
   filter: var(--filter-deboss);
 }
-.video-container.hide-cursor {
-  cursor: none;
-}
 .video-container.video-overlay video {
   filter: brightness(0.3) blur(5px);
+}
+.video-container.hide-cursor {
+  cursor: none;
 }
 .video-container video {
   width: 100%;
@@ -855,12 +855,16 @@ a:active {
   left: 50%;
   transform: scale(1) translate(-50%, -50%);
 }
+.video-container:fullscreen .controls-div {
+  gap: 5vw;
+}
+
 .sound-button,
 .play-pause-button,
 .fullscreen-button {
   position: relative;
-  font-size: 2vw;
   text-align: center;
+  font-size: 2vw;
   width: 3vw;
   color: white;
   cursor: pointer;
@@ -871,6 +875,13 @@ a:active {
 .video-container:hover .play-pause-button,
 .video-container:hover .fullscreen-button {
   display: block;
+}
+.video-container:fullscreen .sound-button,
+.video-container:fullscreen .play-pause-button,
+.video-container:fullscreen .fullscreen-button,
+.video-container:fullscreen .volume-slider {
+  font-size: 3vw;
+  width: 5vw;
 }
 
 /* 볼륨 슬라이더 스타일 */
@@ -1028,6 +1039,7 @@ video:fullscreen {
   .sound-button,
   .play-pause-button,
   .fullscreen-button {
+    font-size: 13vw;
     width: 15vw;
   }
   .sound-button,
@@ -1036,7 +1048,6 @@ video:fullscreen {
     visibility: hidden;
     pointer-events: none;
   }
-  .video-container:fullscreen .sound-button,
   .video-container:fullscreen .play-pause-button{
     position: relative;
     visibility: visible;
