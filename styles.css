@@ -1025,9 +1025,6 @@ video:fullscreen {
   }
 
   /* video player changes */
-  .controls-div {
-    flex-direction: column;
-  }
   .sound-button,
   .play-pause-button,
   .fullscreen-button {
