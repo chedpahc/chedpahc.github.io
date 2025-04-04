@@ -1,6 +1,6 @@
 chedpahc
 web db version	 v0.9.0
-last updated	 2025-04-05 00:43 KST. 
+last updated	 2025-04-05 00:51 KST. 
 ::
 :: :: :: :: :: :: :: :: :: :: :: :: 
 ...

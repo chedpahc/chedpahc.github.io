@@ -1036,27 +1036,30 @@ video:fullscreen {
   }
 
   /* video player changes */
-  .sound-button,
-  .play-pause-button,
+  /* button scale */
   .fullscreen-button {
-    font-size: 13vw;
     width: 15vw;
   }
+  /* hide 2 buttons */
   .sound-button,
   .play-pause-button {
     position: absolute;
     visibility: hidden;
     pointer-events: none;
   }
+  /* when fullscreen, hide sound */
   .video-container:fullscreen .sound-button {
     position: absolute;
     visibility: hidden;
     pointer-events: none;
   }
-  .video-container:fullscreen .play-pause-button {
+  /* when fullscreen, show rest 2 buttons */
+  .video-container:fullscreen .play-pause-button,
+  .video-container:fullscreen .fullscreen-button {
     position: relative;
     visibility: visible;
     pointer-events: all;
+    width: 15vw;
   }
 }
 
