@@ -1,8 +1,8 @@
 [CV]
 
--contact : abcdefg(at)gmail.com-
+-contact : chedudehc(at)gmail.com-
 
-Based in Korea, chedpahc is an artist who keenly explores the evolving modalities that shape the relationship between individuals and machines in a technologically accelerated environment. In his role as an operator, he has internalized a simultaneous expansion of possibility and impossibility, the depoliticization of speed, and the expansion and transformation of the body as it interacts with media interfaces—coupled with an unsettling attitude of a player. Drawing on these experiences, he weaves his work by interlacing computer codes. The resulting fabric can be a combination of independent generative systems, real-time or pre-rendered moving images and MIDI sound, as well as custom hardware devices. These typically emerge as performances, installations, and recordings.
+Based in Korea, chedpahc is an artist who keenly explores the evolving modalities that shape the relationship between individuals and machines in a technologically accelerated environment. In his role as an operator, he has internalized a simultaneous expansion of possibility and impossibility, the depoliticization of speed, and the expansion of the body as it interacts with media interfaces—coupled with an unsettling attitude of a player. Drawing on these experiences, he weaves his work by interlacing computer codes. The resulting fabric can be a combination of independent generative systems, real-time or pre-rendered moving images and MIDI sound, as well as custom hardware devices. These typically emerge as performances, installations, and recordings.
 
 
 [Education]

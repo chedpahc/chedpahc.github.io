@@ -531,9 +531,9 @@ document.addEventListener("DOMContentLoaded", async() => {
     // ------------------------ Load work content and form gridfreex layout from json data ------------------------ //
     async function loadWorkDetail(workId) {
 
-        console.log("loadWorkDetail executed, checking visibility");
+        //console.log("loadWorkDetail executed, checking visibility");
         const worksDetailSection = document.querySelector(".page.active");
-        console.log("works-detail display:", getComputedStyle(worksDetailSection).opacity);
+        //console.log("works-detail display:", getComputedStyle(worksDetailSection).opacity);
 
         savedScrollY = window.pageYOffset; // save scroll point before loading detail
 
@@ -670,6 +670,8 @@ document.addEventListener("DOMContentLoaded", async() => {
             if (cls.trim()) elem.classList.add(cls.trim());
           });
         }
+        // add break word class to new div
+        elem.classList.add("break-words");
         elem.innerHTML = textContent;
         return elem;
     }
@@ -696,7 +698,7 @@ document.addEventListener("DOMContentLoaded", async() => {
             container: waveContainer,
             waveColor: waveColor, 
             progressColor: progressColor,
-            barWidth: 2,
+            barWidth: 3,
             cursorColor: progressColor,
             cursorWidth: 1,
             responsive: true,
@@ -727,24 +729,57 @@ document.addEventListener("DOMContentLoaded", async() => {
 
     // ------------------------ Image ------------------------ //
     function createImageContent(content) {
+        const imageWrapper = document.createElement("div");
+        imageWrapper.classList.add("image-wrapper");
+    
         const figure = document.createElement("figure");
         const img = document.createElement("img");
+        let src, caption, scale;
+    
         if (typeof content === "object") {
-            img.src = content.src;
-            if (content.caption) {
-            const figcaption = document.createElement("figcaption");
-            figcaption.textContent = content.caption;
+            src = content.src;
+            caption = content.caption;
+            scale = content.scale;
+        } else {
+            src = content;
+        }
+    
+        img.src = src;
+    
+        // 확장자 추출 (소문자로 변환해서 비교)
+        const isPNG = src.toLowerCase().endsWith(".png");
+    
+        if (scale) {
+            imageWrapper.style.width = scale + "%";
+        }
+    
+        if (isPNG) {
+            // PNG인 경우: img를 직접 figure에 넣음
             figure.appendChild(img);
-            figure.appendChild(figcaption);
-            } else {
-            figure.appendChild(img);
+            if (caption) {
+                const figcaption = document.createElement("figcaption");
+                figcaption.textContent = caption;
+                figure.appendChild(figcaption);
             }
         } else {
-            img.src = content;
-            figure.appendChild(img);
+            // PNG가 아닌 경우: imgContainer 사용
+            const imgContainer = document.createElement("div");
+            imgContainer.classList.add("img-container");
+            imgContainer.style.position = "relative";
+            imgContainer.appendChild(img);
+    
+            figure.appendChild(imgContainer);
+            if (caption) {
+                const figcaption = document.createElement("figcaption");
+                figcaption.textContent = caption;
+                figure.appendChild(figcaption);
+            }
         }
-        return figure;
+    
+        imageWrapper.appendChild(figure);
+        return imageWrapper;
     }
+    
 
     // ------------------------ Video ------------------------ //
     function createVideoContent(content) {
@@ -755,12 +790,18 @@ document.addEventListener("DOMContentLoaded", async() => {
         // Create video container (for relative positioning)
         const videoContainer = document.createElement("div");
         videoContainer.classList.add("video-container");
-      
+
+        // content에 scale 값이 있다면 width를 해당 값으로 지정 (예: 50 => 50%)
+        if (content.scale) {
+            videoContainer.style.maxWidth = content.scale + "%";
+        }
+        
         // Create video element
         const videoElem = document.createElement("video");
         videoElem.controls = false; // Remove native controls
         videoElem.setAttribute("preload", "auto");
         videoElem.volume = 1; // Default volume 100%
+        videoElem.loop = true;
       
         // Append video source
         const sourceElem = document.createElement("source");
@@ -921,6 +962,16 @@ document.addEventListener("DOMContentLoaded", async() => {
             videoContainer.classList.add("hide-cursor");
           }, 1500);
         }
+
+        // 즉시 컨트롤 숨기기 (마우스가 비디오 박스 밖으로 나갈 때 사용)
+        function hideControlsImmediately() {
+            clearTimeout(hideControlsTimeout);
+            playPauseButton.style.display = "none";
+            soundButton.style.display = "none";
+            fullscreenButton.style.display = "none";
+            videoContainer.classList.remove("video-overlay");
+            videoContainer.classList.add("hide-cursor");
+        }
       
         // Toggle play/pause
         function togglePlayPause() {
@@ -972,6 +1023,9 @@ document.addEventListener("DOMContentLoaded", async() => {
           showControls();
           hideControlsDelayed();
         });
+
+        // 추가: 마우스가 비디오 박스 밖으로 나가면 즉시 컨트롤 숨김
+        videoContainer.addEventListener("mouseleave", hideControlsImmediately);
       
         // Optional: add caption if provided
         if (content.caption) {
@@ -996,7 +1050,7 @@ document.addEventListener("DOMContentLoaded", async() => {
         gridContainer.addEventListener("click", (e) => {
             // 이미지가 클릭된 경우만 처리
             if (e.target && e.target.tagName === "IMG") {
-                console.log("Image clicked");
+                //console.log("Image clicked");
                 modal.style.display = "block";
                 modalImg.src = e.target.src;
             }
@@ -1053,9 +1107,9 @@ document.addEventListener("DOMContentLoaded", async() => {
     }
     
     // ------------------------ popstate ------------------------ //
-    console.log("popstate event listener added");
+    //console.log("popstate event listener added");
     setTimeout(() => {
-        console.log("Manually triggering popstate event");
+        //console.log("Manually triggering popstate event");
         window.dispatchEvent(new Event("popstate"));
     }, 10);
     
@@ -1063,10 +1117,10 @@ document.addEventListener("DOMContentLoaded", async() => {
         const path = window.location.pathname.split("/").filter(Boolean);
     
         if (path[0] === "works" && typeof path[1] === "string" && path[1].trim() !== "") { // only if workId exists
-            console.log("Showing works-detail page first");
+            //console.log("Showing works-detail page first");
             // load works-data
             if (worksData[path[1]]) {
-                console.log("Loading work detail on popstate:", path[1]);
+                //console.log("Loading work detail on popstate:", path[1]);
                 loadWorkDetail(path[1]);
             } else {
                 console.log("worksData not available yet. Waiting...");
@@ -1081,7 +1135,7 @@ document.addEventListener("DOMContentLoaded", async() => {
             gridfreexContainer.classList.add("visible");
         
         } else if (path[0] === "works") { // works-detail에서 works로 돌아가는 경우
-            console.log("Returning to works page from works-detail");
+            //console.log("Returning to works page from works-detail");
             showPage("works");
     
             // backTo 클릭 시 수행하는 동작 추가
@@ -1089,7 +1143,7 @@ document.addEventListener("DOMContentLoaded", async() => {
             stopMedia();
 
         } else {
-            console.log("Showing page on popstate:", path[0] || "home");
+            //console.log("Showing page on popstate:", path[0] || "home");
             showPage(path[0] || "home");
         }
     });
