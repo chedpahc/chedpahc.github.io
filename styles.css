@@ -802,7 +802,7 @@ a:active {
 .gridfreex-cell figcaption {
   position: relative;
   bottom: 0;
-  margin-top: 1rem;
+  margin-top: 0.75vw;
   margin-bottom: 0.3rem;
   width: 100%;
   padding: 0.15rem;
@@ -1025,7 +1025,7 @@ video:fullscreen {
     --font-h3: 1.45rem;
     --font-h4: 1rem;
     --font-h5: 0.85rem;
-    --font-h6: 0.75rem;
+    --font-h6: 0.7rem;
 
     --base-vw: 93vw; 
     --gridfreex-wrapper-vw: 100vw;
@@ -1075,7 +1075,7 @@ video:fullscreen {
   }
 
   .gridfreex-cell {
-    padding: 0.5rem 1rem 0.5rem 1rem;
+    padding: 0.66rem 1rem 0.66rem 1rem;
   }
 
   /* video player changes */
@@ -1109,7 +1109,7 @@ video:fullscreen {
 /*smaller mobile device*/
 @media (max-width: 480px) {
   .tag-button {
-    font-size: calc(1rem - 1.1vw);
+    font-size: calc(1rem - 1.2vw);
     padding: 0.5rem;
   }
   
