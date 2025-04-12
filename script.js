@@ -99,8 +99,8 @@ document.addEventListener("DOMContentLoaded", async() => {
         if (feFuncAList.length < 2) return;
         switch (theme) {
         case "dark":
-            feFuncAList[0].setAttribute('slope', "1.25");
-            feFuncAList[1].setAttribute('slope', "0.25");
+            feFuncAList[0].setAttribute('slope', "1.05");
+            feFuncAList[1].setAttribute('slope', "0.15");
             break;
         case "zero":
             feFuncAList[0].setAttribute('slope', "0");
