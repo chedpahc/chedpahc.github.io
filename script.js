@@ -965,7 +965,6 @@ document.addEventListener("DOMContentLoaded", async() => {
             videoContainer.classList.add("hide-cursor");
         }
 
-        
         // **추가: 토글 함수 분리**
         function toggleControls() {
             if (videoContainer.classList.contains("hide-cursor")) {
@@ -1061,7 +1060,15 @@ document.addEventListener("DOMContentLoaded", async() => {
             ) return;
             toggleControls();
         });
-        
+
+        // hide controldiv if user click/touches empty space when controldivs are visible
+        videoContainer.addEventListener("pointerdown", (e) => {
+            if (e.pointerType === "touch") {
+              e.preventDefault(); // 터치에서 click 생성 방지
+              toggleControls();
+            }
+        });
+          
         // 마우스가 비디오 밖으로 나가면 컨트롤 바로 숨김
         videoContainer.addEventListener("mouseleave", hideControlsImmediately);
        
