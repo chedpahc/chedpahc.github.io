@@ -21,7 +21,8 @@
             "vid-2": {
                 "src": "{url}.mp4",
                 "aspectRatio": "1/1",
-                "caption": ""
+                "caption": "",
+                "poster": ""
             }
         }
     },
@@ -38,7 +39,8 @@
             },
             "vid-1": {
                 "src": "https://htmlchedpahc.b-cdn.net/gossamer-everything/!20250302_gossamer_poster2_motion_conv.mp4",
-                "aspectRatio": "1/1"
+                "aspectRatio": "1/1",
+                "poster": ""
             }
         }
     },
@@ -130,27 +132,32 @@
             "vid-1": {
                 "src": "https://htmlchedpahc.b-cdn.net/tropic/tda_snippet1_conv.mp4",
                 "aspectRatio": "16/9",
-                "caption": ""
+                "caption": "",
+                "poster": ""
             },
             "vid-2": {
                 "src": "https://htmlchedpahc.b-cdn.net/tropic/tda_snippet2_conv.mp4",
                 "aspectRatio": "16/9",
-                "caption": ""
+                "caption": "",
+                "poster": ""
             },
             "vid-3": {
                 "src": "https://htmlchedpahc.b-cdn.net/tropic/tda_snippet4_conv.mp4",
                 "aspectRatio": "999/1",
-                "caption": "To be released"
+                "caption": "To be released",
+                "poster": ""
             },
             "vid-4": {
                 "src": "https://htmlchedpahc.b-cdn.net/tropic/tda_snippet5_conv.mp4",
                 "aspectRatio": "16/9",
-                "caption": ""
+                "caption": "",
+                "poster": ""
             },
             "vid-5": {
                 "src": "https://htmlchedpahc.b-cdn.net/tropic/tda_snippet6_conv.mp4",
                 "aspectRatio": "16/9",
-                "caption": ""
+                "caption": "",
+                "poster": ""
             },
             "aud-1": {
                 "src": "https://htmlchedpahc.b-cdn.net/tropic/audiosnippet1.mp3",
@@ -177,17 +184,20 @@
             "vid-1": {
                 "src": "https://htmlchedpahc.b-cdn.net/eye-dont-know/eyedontknow_footage1.mp4",
                 "aspectRatio": "9/16",
-                "caption": ""
+                "caption": "",
+                "poster": ""
             },
             "vid-2": {
                 "src": "https://htmlchedpahc.b-cdn.net/eye-dont-know/eyedontknow_footage3.mp4",
                 "aspectRatio": "9/16",
-                "caption": ""
+                "caption": "",
+                "poster": ""
             },
             "vid-3": {
                 "src": "https://htmlchedpahc.b-cdn.net/eye-dont-know/eyedontknow_footage4.mp4",
                 "aspectRatio": "9/16",
-                "caption": ""
+                "caption": "",
+                "poster": ""
             },
             "txt-1": {
                 "file": "https://htmlchedpahc.b-cdn.net/eye-dont-know/!about_eyedontknow_en.txt",
@@ -322,7 +332,8 @@
             "vid-1": {
                 "src": "https://htmlchedpahc.b-cdn.net/dots-stripes-furs/!dsf_6194x1548.mp4",
                 "aspectRatio": "21/9",
-                "caption": "Dots Stripes Furs (2024)"
+                "caption": "Dots Stripes Furs (2024)",
+                "poster": ""
             },
             "txt-1": {
                 "file": "https://htmlchedpahc.b-cdn.net/dots-stripes-furs/!about_dots-stripes-furs_en.txt",
@@ -391,17 +402,20 @@
             "vid-3": {
                 "src": "https://htmlchedpahc.b-cdn.net/cat7/!evol_a.mp4",
                 "aspectRatio": "9/16",
-                "caption": "Evolution concept A"
+                "caption": "Evolution concept A",
+                "poster": ""
             },
             "vid-4": {
                 "src": "https://htmlchedpahc.b-cdn.net/cat7/!evol_b.mp4",
                 "aspectRatio": "9/16",
-                "caption": "Evolution concept B"
+                "caption": "Evolution concept B",
+                "poster": ""
             },
             "vid-5": {
                 "src": "https://htmlchedpahc.b-cdn.net/cat7/!evol_c.mp4",
                 "aspectRatio": "9/16",
-                "caption": "Evolution concept C"
+                "caption": "Evolution concept C",
+                "poster": ""
             }
         }
     },
@@ -621,7 +635,8 @@
             "vid-trk1": {
                 "src": "https://htmlchedpahc.b-cdn.net/saccade/trkprg3_shorts2.mp4",
                 "aspectRatio": "9/16",
-                "caption": "Tracker showcase"
+                "caption": "Tracker showcase",
+                "poster": ""
             },
             "vid-trk2": {
                 "src": "https://htmlchedpahc.b-cdn.net/saccade/trkprg4.mp4",
@@ -747,27 +762,32 @@
                 "src": "https://htmlchedpahc.b-cdn.net/rest...rest/09b16_angel_kurz1.mp4",
                 "aspectRatio": "9/16",
                 "caption": "",
-                "scale": ""
+                "scale": "",
+                "poster": ""
             },
             "vid-f2": {
                 "src": "https://htmlchedpahc.b-cdn.net/rest...rest/09b16_fly_kurz1.mp4",
                 "aspectRatio": "9/16",
-                "caption": ""
+                "caption": "",
+                "poster": ""
             },
             "vid-n2": {
                 "src": "https://htmlchedpahc.b-cdn.net/rest...rest/09b16_nap_kurz2.mp4",
                 "aspectRatio": "9/16",
-                "caption": "Liveset captures of Vertical Layouts."
+                "caption": "Liveset captures of Vertical Layouts.",
+                "poster": ""
             },
             "vid-r2": {
                 "src": "https://htmlchedpahc.b-cdn.net/rest...rest/09b16_run_kurz1.mp4",
                 "aspectRatio": "9/16",
-                "caption": ""
+                "caption": "",
+                "poster": ""
             },
             "vid-t2": {
                 "src": "https://htmlchedpahc.b-cdn.net/rest...rest/09b16_think_kurz1.mp4",
                 "aspectRatio": "9/16",
-                "caption": ""
+                "caption": "",
+                "poster": ""
             },
             "txt-1": {
                 "text": "RESTRESTRESTRESTRESTRESTRESTRESTREST (2023)",
@@ -870,7 +890,8 @@
             "vid-1": {
                 "src": "https://htmlchedpahc.b-cdn.net/aaox4/performance_kurz_3.mp4",
                 "aspectRatio": "16/9",
-                "caption": "Documentary Footage"
+                "caption": "Documentary Footage",
+                "poster": ""
             },
             "img-oew": {
                 "src": "https://htmlchedpahc.b-cdn.net/aaox4/perforamnce_oew_10.jpg",
@@ -1047,7 +1068,8 @@
             "vid-1": {
                 "src": "https://htmlchedpahc.b-cdn.net/wild-speakers-echolocation/ws_footage3.mp4",
                 "aspectRatio": "1/1",
-                "scale": "70"
+                "scale": "70",
+                "poster": ""
             },
             "txt-3": {
                 "text": "Echolocation",
@@ -1056,7 +1078,8 @@
             "vid-2": {
                 "src": "https://htmlchedpahc.b-cdn.net/wild-speakers-echolocation/ech1_edit.mp4",
                 "aspectRatio": "16/9",
-                "caption": "Echolocation (2020)"
+                "caption": "Echolocation (2020)",
+                "poster": ""
             },
             "txt-4": {
                 "file": "https://htmlchedpahc.b-cdn.net/wild-speakers-echolocation/!about_echolocation_en.txt",

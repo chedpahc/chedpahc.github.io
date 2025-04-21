@@ -74,16 +74,11 @@ document.addEventListener("DOMContentLoaded", async() => {
     }
 
     // ------------------------ Theme detection, cycle ------------------------ //
-    const themes = ["light", "dark","zero", "one"];
-
+    const themes = ["dark", "zero", "one"];
     const storedTheme = localStorage.getItem("theme");
-    // get system preference
-    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-    let initialTheme = storedTheme ? storedTheme : (prefersDark ? "dark" : "light");
-    if (!themes.includes(initialTheme)) {
-        initialTheme = "light";
-    }
+    /*const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;*/
+    let initialTheme = themes.includes(storedTheme) ? storedTheme : "dark";
     let currentThemeIndex = themes.indexOf(initialTheme);
 
     // setting theme in css
@@ -98,10 +93,6 @@ document.addEventListener("DOMContentLoaded", async() => {
         const feFuncAList = document.querySelectorAll('#deboss feFuncA');
         if (feFuncAList.length < 2) return;
         switch (theme) {
-        case "dark":
-            feFuncAList[0].setAttribute('slope', "1.05");
-            feFuncAList[1].setAttribute('slope', "0.15");
-            break;
         case "zero":
             feFuncAList[0].setAttribute('slope', "0");
             feFuncAList[1].setAttribute('slope', "0");
@@ -110,9 +101,12 @@ document.addEventListener("DOMContentLoaded", async() => {
             feFuncAList[0].setAttribute('slope', "0");
             feFuncAList[1].setAttribute('slope', "0");
             break;
-        default: // "light"
-            feFuncAList[0].setAttribute('slope', "1");
-            feFuncAList[1].setAttribute('slope', "0.75");
+        case "dark": // "gray"
+            feFuncAList[0].setAttribute('slope', "1.05");
+            feFuncAList[1].setAttribute('slope', "0.15");
+            break;
+        default:
+            console.warn("unknown theme", theme);
         }
     }
     setTheme(initialTheme);
@@ -123,9 +117,6 @@ document.addEventListener("DOMContentLoaded", async() => {
         if (themeCycleButton) {
         let text;
         switch (theme) {
-            case "light":
-            text = "0.72";
-            break;
             case "one":
             text = "1.00";
             break;
@@ -999,15 +990,25 @@ document.addEventListener("DOMContentLoaded", async() => {
       
         // Toggle fullscreen
         function toggleFullscreen() {
-          if (document.fullscreenElement) {
-            document.exitFullscreen();
-          } else {
-            videoContainer.requestFullscreen();
-          }
-          showControls();
-          hideControlsDelayed();
+            if (document.fullscreenElement || document.webkitFullscreenElement) {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                }
+            } else {
+                if (videoContainer.requestFullscreen) {
+                    videoContainer.requestFullscreen();
+                } else if (videoContainer.webkitRequestFullscreen) {
+                    videoContainer.webkitRequestFullscreen();
+                } else {
+                    alert("Fullscreen is not supported on this browser or device.\nBest viewed on PC.");
+                }
+            }
+            showControls();
+            hideControlsDelayed();
         }
-      
+          
         // Event listeners for buttons and container
         playPauseButton.addEventListener("click", (e) => {
           e.stopPropagation();
@@ -1024,9 +1025,18 @@ document.addEventListener("DOMContentLoaded", async() => {
           hideControlsDelayed();
         });
 
+        // 추가: 컨트롤이 보이는 상태에서 빈 공간 클릭 시 숨김
+        videoContainer.addEventListener("click", (e) => {
+            // 버튼 클릭은 stopPropagation 처리되어 여기로 안 오고,
+            // 오직 비어 있는 공간 클릭일 때만 실행됨
+            if (!videoContainer.classList.contains("hide-cursor")) {
+            hideControlsImmediately();
+            }
+        });
+  
         // 추가: 마우스가 비디오 박스 밖으로 나가면 즉시 컨트롤 숨김
         videoContainer.addEventListener("mouseleave", hideControlsImmediately);
-      
+       
         // Optional: add caption if provided
         if (content.caption) {
           const caption = document.createElement("figcaption");
