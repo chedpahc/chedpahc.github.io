@@ -931,7 +931,6 @@ document.addEventListener("DOMContentLoaded", async() => {
         videoWrapper.appendChild(videoContainer);
       
         let hideControlsTimeout;
-        let touched = false;  // **추가: 터치 이벤트 중복 방지용 플래그**
       
         // Show controls and cursor
         function showControls() {
@@ -1036,37 +1035,16 @@ document.addEventListener("DOMContentLoaded", async() => {
           hideControlsDelayed();
         });
 
-        // **모바일용: 터치 시 토글 + 중복 방지 플래그**
-        videoContainer.addEventListener("touchstart", (e) => {
-            touched = true;
-            if (
-            e.target.closest(".play-pause-button") ||
-            e.target.closest(".sound-button") ||
-            e.target.closest(".fullscreen-button")
-            ) return;
-            toggleControls();
-        }, { passive: true });  // passive: 스크롤 막지 않음
-        
-        // **click 이벤트 중복 방지 적용**
-        videoContainer.addEventListener("click", (e) => {
-            if (touched) {
-            touched = false;
-            return;  // 터치로 인한 click이면 무시
-            }
-            if (
-            e.target.closest(".play-pause-button") ||
-            e.target.closest(".sound-button") ||
-            e.target.closest(".fullscreen-button")
-            ) return;
-            toggleControls();
-        });
-
-        // hide controldiv if user click/touches empty space when controldivs are visible
+        // clicking empty space when controldiv is visible
         videoContainer.addEventListener("pointerdown", (e) => {
-            if (e.pointerType === "touch") {
-              e.preventDefault(); // 터치에서 click 생성 방지
-              toggleControls();
-            }
+            // 오직 빈 공간 터치/클릭만 처리
+            if (
+              e.target.closest(".play-pause-button") ||
+              e.target.closest(".sound-button") ||
+              e.target.closest(".fullscreen-button")
+            ) return;
+          
+            toggleControls();
         });
           
         // 마우스가 비디오 밖으로 나가면 컨트롤 바로 숨김
