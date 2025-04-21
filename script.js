@@ -931,6 +931,7 @@ document.addEventListener("DOMContentLoaded", async() => {
         videoWrapper.appendChild(videoContainer);
       
         let hideControlsTimeout;
+        let touched = false;  // **추가: 터치 이벤트 중복 방지용 플래그**
       
         // Show controls and cursor
         function showControls() {
@@ -962,6 +963,17 @@ document.addEventListener("DOMContentLoaded", async() => {
             fullscreenButton.style.display = "none";
             videoContainer.classList.remove("video-overlay");
             videoContainer.classList.add("hide-cursor");
+        }
+
+        
+        // **추가: 토글 함수 분리**
+        function toggleControls() {
+            if (videoContainer.classList.contains("hide-cursor")) {
+            showControls();
+            hideControlsDelayed();
+            } else {
+            hideControlsImmediately();
+            }
         }
       
         // Toggle play/pause
@@ -1025,16 +1037,32 @@ document.addEventListener("DOMContentLoaded", async() => {
           hideControlsDelayed();
         });
 
-        // 추가: 컨트롤이 보이는 상태에서 빈 공간 클릭 시 숨김
+        // **모바일용: 터치 시 토글 + 중복 방지 플래그**
+        videoContainer.addEventListener("touchstart", (e) => {
+            touched = true;
+            if (
+            e.target.closest(".play-pause-button") ||
+            e.target.closest(".sound-button") ||
+            e.target.closest(".fullscreen-button")
+            ) return;
+            toggleControls();
+        }, { passive: true });  // passive: 스크롤 막지 않음
+        
+        // **click 이벤트 중복 방지 적용**
         videoContainer.addEventListener("click", (e) => {
-            // 버튼 클릭은 stopPropagation 처리되어 여기로 안 오고,
-            // 오직 비어 있는 공간 클릭일 때만 실행됨
-            if (!videoContainer.classList.contains("hide-cursor")) {
-            hideControlsImmediately();
+            if (touched) {
+            touched = false;
+            return;  // 터치로 인한 click이면 무시
             }
+            if (
+            e.target.closest(".play-pause-button") ||
+            e.target.closest(".sound-button") ||
+            e.target.closest(".fullscreen-button")
+            ) return;
+            toggleControls();
         });
-  
-        // 추가: 마우스가 비디오 박스 밖으로 나가면 즉시 컨트롤 숨김
+        
+        // 마우스가 비디오 밖으로 나가면 컨트롤 바로 숨김
         videoContainer.addEventListener("mouseleave", hideControlsImmediately);
        
         // Optional: add caption if provided
@@ -1046,7 +1074,7 @@ document.addEventListener("DOMContentLoaded", async() => {
         }
       
         return videoWrapper;
-    }      
+    }
       
     // ------------------------ modal for img content ------------------------ //
     function initializeModal() {
