@@ -9,11 +9,15 @@
                 "text": "",
                 "classes": "txt-L"
             },
+            "txt-2": {
+                "file": "",
+                "classes": "txt-L"
+            },
             "aud-1": {
                 "src": "https://htmlchedpahc.b-cdn.net/test.mp3",
                 "caption": ""
             },
-            "img-": {
+            "img-1": {
                 "src": "https://htmlchedpahc.b-cdn.net/test.jpg",
                 "scale": "",
                 "caption": ""
@@ -21,7 +25,8 @@
             "vid-2": {
                 "src": "{url}.mp4",
                 "aspectRatio": "1/1",
-                "caption": ""
+                "caption": "",
+                "poster": ""
             }
         }
     },
@@ -38,7 +43,8 @@
             },
             "vid-1": {
                 "src": "https://htmlchedpahc.b-cdn.net/gossamer-everything/!20250302_gossamer_poster2_motion_conv.mp4",
-                "aspectRatio": "1/1"
+                "aspectRatio": "1/1",
+                "poster": "https://htmlchedpahc.b-cdn.net/gossamer-everything/!20250302_gossamer_poster2.jpg"
             }
         }
     },
@@ -130,27 +136,32 @@
             "vid-1": {
                 "src": "https://htmlchedpahc.b-cdn.net/tropic/tda_snippet1_conv.mp4",
                 "aspectRatio": "16/9",
-                "caption": ""
+                "caption": "",
+                "poster": "https://htmlchedpahc.b-cdn.net/tropic/tda_snippet1_conv_still.jpg"
             },
             "vid-2": {
                 "src": "https://htmlchedpahc.b-cdn.net/tropic/tda_snippet2_conv.mp4",
                 "aspectRatio": "16/9",
-                "caption": ""
+                "caption": "",
+                "poster": "https://htmlchedpahc.b-cdn.net/tropic/tda_snippet2_conv_still.jpg"
             },
             "vid-3": {
                 "src": "https://htmlchedpahc.b-cdn.net/tropic/tda_snippet4_conv.mp4",
                 "aspectRatio": "999/1",
-                "caption": "To be released"
+                "caption": "To be released",
+                "poster": "https://htmlchedpahc.b-cdn.net/tropic/tda_snippet4_conv_still.jpg"
             },
             "vid-4": {
                 "src": "https://htmlchedpahc.b-cdn.net/tropic/tda_snippet5_conv.mp4",
                 "aspectRatio": "16/9",
-                "caption": ""
+                "caption": "",
+                "poster": "https://htmlchedpahc.b-cdn.net/tropic/tda_snippet5_conv_still.jpg"
             },
             "vid-5": {
                 "src": "https://htmlchedpahc.b-cdn.net/tropic/tda_snippet6_conv.mp4",
                 "aspectRatio": "16/9",
-                "caption": ""
+                "caption": "",
+                "poster": "https://htmlchedpahc.b-cdn.net/tropic/tda_snippet6_conv_still.jpg"
             },
             "aud-1": {
                 "src": "https://htmlchedpahc.b-cdn.net/tropic/audiosnippet1.mp3",
@@ -177,17 +188,20 @@
             "vid-1": {
                 "src": "https://htmlchedpahc.b-cdn.net/eye-dont-know/eyedontknow_footage1.mp4",
                 "aspectRatio": "9/16",
-                "caption": ""
+                "caption": "",
+                "poster": "https://htmlchedpahc.b-cdn.net/eye-dont-know/eyedontknow_footage1_still.jpg"
             },
             "vid-2": {
                 "src": "https://htmlchedpahc.b-cdn.net/eye-dont-know/eyedontknow_footage3.mp4",
                 "aspectRatio": "9/16",
-                "caption": ""
+                "caption": "",
+                "poster": "https://htmlchedpahc.b-cdn.net/eye-dont-know/eyedontknow_footage3_still.jpg"
             },
             "vid-3": {
                 "src": "https://htmlchedpahc.b-cdn.net/eye-dont-know/eyedontknow_footage4.mp4",
                 "aspectRatio": "9/16",
-                "caption": ""
+                "caption": "",
+                "poster": "https://htmlchedpahc.b-cdn.net/eye-dont-know/eyedontknow_footage4_still.jpg"
             },
             "txt-1": {
                 "file": "https://htmlchedpahc.b-cdn.net/eye-dont-know/!about_eyedontknow_ko.txt",
@@ -322,7 +336,8 @@
             "vid-1": {
                 "src": "https://htmlchedpahc.b-cdn.net/dots-stripes-furs/!dsf_6194x1548.mp4",
                 "aspectRatio": "21/9",
-                "caption": "점 줄무늬와 털들 (2024)"
+                "caption": "점 줄무늬와 털들 (2024)",
+                "poster": "https://htmlchedpahc.b-cdn.net/dots-stripes-furs/cap_dsf_6194x1548_conv_still.jpg"
             },
             "txt-1": {
                 "file": "https://htmlchedpahc.b-cdn.net/dots-stripes-furs/!about_dots-stripes-furs_ko.txt",
@@ -391,17 +406,20 @@
             "vid-3": {
                 "src": "https://htmlchedpahc.b-cdn.net/cat7/!evol_a.mp4",
                 "aspectRatio": "9/16",
-                "caption": "진화 컨셉 모션그래픽 A"
+                "caption": "진화 컨셉 모션그래픽 A",
+                "poster": "https://htmlchedpahc.b-cdn.net/cat7/evolution_tmb1.jpg"
             },
             "vid-4": {
                 "src": "https://htmlchedpahc.b-cdn.net/cat7/!evol_b.mp4",
                 "aspectRatio": "9/16",
-                "caption": "진화 컨셉 모션그래픽 B"
+                "caption": "진화 컨셉 모션그래픽 B",
+                "poster": "https://htmlchedpahc.b-cdn.net/cat7/evolution_tmb2.jpg"
             },
             "vid-5": {
                 "src": "https://htmlchedpahc.b-cdn.net/cat7/!evol_c.mp4",
                 "aspectRatio": "9/16",
-                "caption": "진화 컨셉 모션그래픽 C"
+                "caption": "진화 컨셉 모션그래픽 C",
+                "poster": "https://htmlchedpahc.b-cdn.net/cat7/evolution_tmb3.jpg"
             }
         }
     },
@@ -566,7 +584,8 @@
             "vid-c1": {
                 "src": "https://htmlchedpahc.b-cdn.net/saccade/c_stare_conv.mp4",
                 "aspectRatio": "9/16",
-                "caption": "Stare"
+                "caption": "Stare",
+                "poster": "https://htmlchedpahc.b-cdn.net/saccade/c_stare_conv_still.jpg"
             },
             "vid-c2": {
                 "src": "https://htmlchedpahc.b-cdn.net/saccade/c_passage_conv.mp4",
@@ -621,7 +640,8 @@
             "vid-trk1": {
                 "src": "https://htmlchedpahc.b-cdn.net/saccade/trkprg3_shorts2.mp4",
                 "aspectRatio": "9/16",
-                "caption": "작동 쇼케이스"
+                "caption": "작동 쇼케이스",
+                "poster": "https://htmlchedpahc.b-cdn.net/saccade/trkprg3_shorts2_still.jpg"
             },
             "vid-trk2": {
                 "src": "https://htmlchedpahc.b-cdn.net/saccade/trkprg4.mp4",
@@ -747,27 +767,32 @@
                 "src": "https://htmlchedpahc.b-cdn.net/rest...rest/09b16_angel_kurz1.mp4",
                 "aspectRatio": "9/16",
                 "caption": "",
-                "scale": ""
+                "scale": "",
+                "poster": "https://htmlchedpahc.b-cdn.net/rest...rest/09b16still_angel.png"
             },
             "vid-f2": {
                 "src": "https://htmlchedpahc.b-cdn.net/rest...rest/09b16_fly_kurz1.mp4",
                 "aspectRatio": "9/16",
-                "caption": ""
+                "caption": "",
+                "poster": "https://htmlchedpahc.b-cdn.net/rest...rest/09b16still_fly.png"
             },
             "vid-n2": {
                 "src": "https://htmlchedpahc.b-cdn.net/rest...rest/09b16_nap_kurz2.mp4",
                 "aspectRatio": "9/16",
-                "caption": "세로 레이아웃, 라이브셋 캡처들"
+                "caption": "세로 레이아웃, 라이브셋 캡처",
+                "poster": "https://htmlchedpahc.b-cdn.net/rest...rest/09b16still_nap.png"
             },
             "vid-r2": {
                 "src": "https://htmlchedpahc.b-cdn.net/rest...rest/09b16_run_kurz1.mp4",
                 "aspectRatio": "9/16",
-                "caption": ""
+                "caption": "",
+                "poster": "https://htmlchedpahc.b-cdn.net/rest...rest/09b16still_run.png"
             },
             "vid-t2": {
                 "src": "https://htmlchedpahc.b-cdn.net/rest...rest/09b16_think_kurz1.mp4",
                 "aspectRatio": "9/16",
-                "caption": ""
+                "caption": "",
+                "poster": "https://htmlchedpahc.b-cdn.net/rest...rest/09b16still_think.png"
             },
             "txt-1": {
                 "text": "RESTRESTRESTRESTRESTRESTRESTRESTREST (2023)",
@@ -870,7 +895,8 @@
             "vid-1": {
                 "src": "https://htmlchedpahc.b-cdn.net/aaox4/performance_kurz_3.mp4",
                 "aspectRatio": "16/9",
-                "caption": "다큐멘터리 영상 일부"
+                "caption": "다큐멘터리 영상 일부",
+                "poster": "https://htmlchedpahc.b-cdn.net/aaox4/performance_kurz_3_still.jpg"
             },
             "img-oew": {
                 "src": "https://htmlchedpahc.b-cdn.net/aaox4/perforamnce_oew_10.jpg",
@@ -1047,7 +1073,8 @@
             "vid-1": {
                 "src": "https://htmlchedpahc.b-cdn.net/wild-speakers-echolocation/ws_footage3.mp4",
                 "aspectRatio": "1/1",
-                "scale": "70"
+                "scale": "70",
+                "poster": "https://htmlchedpahc.b-cdn.net/wild-speakers-echolocation/ws_footage3_still.jpg"
             },
             "txt-3": {
                 "text": "반향정위",
@@ -1056,7 +1083,8 @@
             "vid-2": {
                 "src": "https://htmlchedpahc.b-cdn.net/wild-speakers-echolocation/ech1_edit.mp4",
                 "aspectRatio": "16/9",
-                "caption": "반향정위 (2020)"
+                "caption": "반향정위 (2020)",
+                "poster": "https://htmlchedpahc.b-cdn.net/wild-speakers-echolocation/ech1_edit_still.jpg"
             },
             "txt-4": {
                 "file": "https://htmlchedpahc.b-cdn.net/wild-speakers-echolocation/!about_echolocation_ko.txt",

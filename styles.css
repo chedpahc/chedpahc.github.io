@@ -823,7 +823,9 @@ a:active {
   height: 100%;
   overflow: auto;
   background-color: var(--color-header);
-  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(30px); /* Safari 우선 */  
+  backdrop-filter: blur(30px);
+  background-clip: padding-box; 
 }
 
 .modal-content {
@@ -841,8 +843,9 @@ a:active {
 .close {
   position: absolute;
   color: var(--color-item-active);
-  font-size: var(--font-h2);
+  font-size: var(--font-h1);
   cursor: pointer;
+  text-shadow: none;
 }
 .close-tl {
   top: 2rem;
