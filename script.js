@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", async() => {
     // ------------------------ Caching ------------------------ //
     const header = document.getElementById("site-header");
     const backTo = document.getElementById("back-to");
-    const backToText = document.getElementById("back-to-text");
+    //const backToText = document.getElementById("back-to-text");
     const filterButtons = document.querySelectorAll(".tag-button");
     const textcontent = document.querySelector(".tag-text");
     const worksItem = document.querySelectorAll(".works-item");
@@ -790,7 +790,7 @@ document.addEventListener("DOMContentLoaded", async() => {
         // Create video element
         const videoElem = document.createElement("video");
         videoElem.controls = false; // Remove native controls
-        videoElem.setAttribute("preload", "auto");
+        videoElem.setAttribute("preload", "none");
         videoElem.volume = 1; // Default volume 100%
         videoElem.loop = true;
       
@@ -844,12 +844,12 @@ document.addEventListener("DOMContentLoaded", async() => {
         let isDraggingVolume = false;
       
         // Show volume slider on mouse enter
-        soundButton.addEventListener("mouseenter", () => {
+        soundButton.addEventListener("pointermove", () => {
           volumeSlider.style.display = "block";
         });
       
         // Hide slider and restore icon on mouse leave
-        soundButton.addEventListener("mouseleave", () => {
+        soundButton.addEventListener("pointerleave", () => {
           setTimeout(() => {
             if (!isDraggingVolume) {
               volumeSlider.style.display = "none";
@@ -878,7 +878,7 @@ document.addEventListener("DOMContentLoaded", async() => {
         });
       
         // Volume slider drag events
-        volumeSlider.addEventListener("mousedown", (e) => {
+        volumeSlider.addEventListener("pointerdown", (e) => {
           e.stopPropagation();
           isDraggingVolume = true;
           updateVolume(e);
@@ -929,75 +929,31 @@ document.addEventListener("DOMContentLoaded", async() => {
         // Append controls to video container and container to wrapper
         videoContainer.appendChild(controlsDiv);
         videoWrapper.appendChild(videoContainer);
-      
-        let hideControlsTimeout;
-      
-        // Show controls and cursor
-        function showControls() {
-          clearTimeout(hideControlsTimeout);
-          playPauseButton.style.display = "block";
-          soundButton.style.display = "block";
-          fullscreenButton.style.display = "block";
-          videoContainer.classList.add("video-overlay");
-          videoContainer.classList.remove("hide-cursor");
-        }
-      
-        // Hide controls and cursor after delay
-        function hideControlsDelayed() {
-          clearTimeout(hideControlsTimeout);
-          hideControlsTimeout = setTimeout(() => {
-            playPauseButton.style.display = "none";
-            soundButton.style.display = "none";
-            fullscreenButton.style.display = "none";
-            videoContainer.classList.remove("video-overlay");
-            videoContainer.classList.add("hide-cursor");
-          }, 1500);
-        }
 
-        // 즉시 컨트롤 숨기기 (마우스가 비디오 박스 밖으로 나갈 때 사용)
-        function hideControlsImmediately() {
-            clearTimeout(hideControlsTimeout);
-            playPauseButton.style.display = "none";
-            soundButton.style.display = "none";
-            fullscreenButton.style.display = "none";
-            videoContainer.classList.remove("video-overlay");
-            videoContainer.classList.add("hide-cursor");
-        }
-
-        // **추가: 토글 함수 분리**
-        function toggleControls() {
-            if (videoContainer.classList.contains("hide-cursor")) {
-            showControls();
-            hideControlsDelayed();
-            } else {
-            hideControlsImmediately();
-            }
-        }
-      
         // Toggle play/pause
         function togglePlayPause() {
-          if (videoElem.paused) {
-            videoElem.play();
-            // When playing, show pause icon
-            playPauseButton.innerHTML = `
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <rect x="6" y="4" width="4" height="16" />
-                <rect x="14" y="4" width="4" height="16" />
-              </svg>
-            `;
-          } else {
-            videoElem.pause();
-            // When paused, show play icon
-            playPauseButton.innerHTML = `
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="6,4 20,12 6,20" />
-              </svg>
-            `;
-          }
-          showControls();
-          hideControlsDelayed();
+            if (videoElem.paused) {
+                videoElem.play();
+                // When playing, show pause icon
+                playPauseButton.innerHTML = `
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <rect x="6" y="4" width="4" height="16" />
+                    <rect x="14" y="4" width="4" height="16" />
+                </svg>
+                `;
+            } else {
+                videoElem.pause();
+                // When paused, show play icon
+                playPauseButton.innerHTML = `
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="6,4 20,12 6,20" />
+                </svg>
+                `;
+            }
+            showControls();
+            hideControlsDelayed();
         }
-      
+        
         // Toggle fullscreen
         function toggleFullscreen() {
             if (document.fullscreenElement || document.webkitFullscreenElement) {
@@ -1018,21 +974,66 @@ document.addEventListener("DOMContentLoaded", async() => {
             showControls();
             hideControlsDelayed();
         }
-          
+            
         // Event listeners for buttons and container
         playPauseButton.addEventListener("click", (e) => {
-          e.stopPropagation();
-          togglePlayPause();
+        e.stopPropagation();
+        togglePlayPause();
         });
-      
+    
         fullscreenButton.addEventListener("click", (e) => {
-          e.stopPropagation();
-          toggleFullscreen();
+        e.stopPropagation();
+        toggleFullscreen();
         });
       
-        videoContainer.addEventListener("mousemove", () => {
-          showControls();
-          hideControlsDelayed();
+        let hideControlsTimeout;
+      
+        // Show controls and cursor
+        function showControls() {
+          clearTimeout(hideControlsTimeout);
+          playPauseButton.style.display = "block";
+          soundButton.style.display = "block";
+          fullscreenButton.style.display = "block";
+          videoContainer.classList.add("video-overlay");
+          videoContainer.classList.remove("hide-cursor");
+        }
+
+        // 즉시 컨트롤 숨기기 (마우스가 비디오 박스 밖으로 나갈 때 사용)
+        function hideControlsImmediately() {
+            clearTimeout(hideControlsTimeout);
+            playPauseButton.style.display = "none";
+            soundButton.style.display = "none";
+            fullscreenButton.style.display = "none";
+            videoContainer.classList.remove("video-overlay");
+            videoContainer.classList.add("hide-cursor");
+        }
+      
+        // Hide controls and cursor after delay
+        function hideControlsDelayed() {
+          clearTimeout(hideControlsTimeout);
+          hideControlsTimeout = setTimeout(() => {
+            playPauseButton.style.display = "none";
+            soundButton.style.display = "none";
+            fullscreenButton.style.display = "none";
+            videoContainer.classList.remove("video-overlay");
+            videoContainer.classList.add("hide-cursor");
+          }, 1500);
+        }
+
+        // **추가: 토글 함수 분리**
+        function toggleControls() {
+            if (videoContainer.classList.contains("hide-cursor")) {
+            showControls();
+            hideControlsDelayed();
+            } else {
+            hideControlsImmediately();
+            }
+        }
+        
+        videoContainer.addEventListener("pointermove", (e) => {
+            if (e.pointerType !== "mouse") return;  // 오직 마우스 이동일 때만
+            showControls();
+            hideControlsDelayed();
         });
 
         // clicking empty space when controldiv is visible
@@ -1048,7 +1049,10 @@ document.addEventListener("DOMContentLoaded", async() => {
         });
           
         // 마우스가 비디오 밖으로 나가면 컨트롤 바로 숨김
-        videoContainer.addEventListener("mouseleave", hideControlsImmediately);
+        videoContainer.addEventListener("pointerleave", (e) => {
+            if (e.pointerType !== "mouse") return;  // 오직 마우스 이동일 때만
+            hideControlsImmediately();
+        });
        
         // Optional: add caption if provided
         if (content.caption) {
@@ -1057,6 +1061,8 @@ document.addEventListener("DOMContentLoaded", async() => {
           caption.textContent = content.caption;
           videoWrapper.appendChild(caption);
         }
+
+        hideControlsImmediately();
       
         return videoWrapper;
     }
