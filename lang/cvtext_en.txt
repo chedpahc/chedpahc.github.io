@@ -2,8 +2,8 @@
 
 -contact : chedudehc(at)gmail.com-
 
-Based in Korea, chedpahc is an artist who explores the relationship between individuals and machines in a technologically accelerated environment. In his role as an operator, he has internalized a simultaneous expansion of possibility and impossibility, the depoliticization of speed, and the expansion of the body as it interacts with media—coupled with an attitude of a player. Drawing on these experiences, he weaves his work by coding and physical computing. The resulting fabric can be a combination of generative systems, real-time or pre-rendered moving images and sound, as well as custom built hardware devices. These typically emerge as performances, installations, and recordings.
-
+Weaving wires and computer code, I create moving images, sound, generative systems, and custom hardware.
+I explore the technological environment, interfaces, and playful attitudes, presenting primarily through performances or rendered works.
 
 [Education]
 
@@ -17,6 +17,7 @@ Based in Korea, chedpahc is an artist who explores the relationship between indi
 2024 Do androids dream of electronic sheep?, Senggi studio, Seoul.
 2024 Artificial Sun, Candid Arts, London.
 2024 Goodbye, good morning, Poolmujil, Seoul.
+2025 Trippy Log △2: Hypnagogia, Senggi studio, Seoul.
 
 
 [Collaboration & Commission]
