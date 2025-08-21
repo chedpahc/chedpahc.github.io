@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", async() => {
             feFuncAList[1].setAttribute('slope', "0");
             break;
         case "dark": // "gray"
-            feFuncAList[0].setAttribute('slope', "1.05");
+            feFuncAList[0].setAttribute('slope', "1.0");
             feFuncAList[1].setAttribute('slope', "0.15");
             break;
         default:
@@ -337,7 +337,7 @@ document.addEventListener("DOMContentLoaded", async() => {
         const container = document.querySelector(".tag-area-text");
         if (!container || !textcontent) return;
         
-        let currentFontSize = window.innerWidth <= 768 ? 45 : 50;
+        let currentFontSize = window.innerWidth <= 768 ? 35 : 45;
         textcontent.style.fontSize = currentFontSize + "px";
         
         // Decrease font size until text fits within its container

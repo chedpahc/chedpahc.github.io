@@ -1,18 +1,27 @@
 :root {
   color-scheme: light dark;
 
+  /*
   --font-h1: 3rem;
   --font-h2: 2.2rem;
   --font-h3: 1.55rem;
   --font-h4: 1.35rem;
   --font-h5: 1.15rem;
   --font-h6: 1rem;
+*/
+  --font-h1: 2.7rem;
+  --font-h2: 2rem;
+  --font-h3: 1.35rem;
+  --font-h4: 1.22rem;
+  --font-h5: 1.0rem;
+  --font-h6: 0.9rem;
+
 
   --base-vw: 39vw;
   --grid3x-paddingtop: calc((100dvh - var(--base-vw)) / 2);
   --header-height: clamp(2rem, 7dvh, 4rem);
   --gridfreex-wrapper-vw: 68vw;
-  --items-gap: 0.2rem;
+  --items-gap: 0.15rem;
 
   /* 2025-04-21 : deleted light mode
   light mode
@@ -25,14 +34,14 @@
   --color-waveprogress: rgb(0, 0, 0);
 
   --filter-deboss: inset 0rem 0rem 0.6rem rgba(255, 255, 255, 0.3), inset 0rem 0rem 0.4rem rgba(0, 0, 0, 0.65);*/
-  --filter-deboss-invert: inset 0rem 0rem 0.5rem rgba(1, 0, 3, 0.5);
+  --filter-deboss-invert: inset 0rem 0rem 0.2rem rgba(1, 0, 3, 0.5);
   --filter-deboss-text: 1px 3px 6px var(--color-bg), 0 0 0 #000, 1px 3px 6px var(--color-bg), 1px 1px 1px var(--color-item-active);
   --filter-deboss-text-hover: 1px 3px 6px var(--color-item-hover), 0 0 0 #000, 1px 3px 6px var(--color-item-hover), 1px 1px 1px var(--color-item-active);
   --filter-deboss-text-active: 1px 3px 6px var(--color-item-active), 0 0 0 #000, 1px 3px 6px var(--color-item-active), 1px 1px 1px var(--color-item-active);
 }
 
 .dark-mode {
-  --color-text: rgba(144, 143, 147, 0.23); 
+  --color-text: rgba(144, 143, 147, 0.33); 
   --color-bg: rgb(144, 143, 147); 
   --color-item: rgb(144, 143, 147); 
   --color-header: rgba(146, 145, 149, 0.5);
@@ -40,7 +49,7 @@
   --color-item-active: rgb(169, 168, 172); 
   --color-waveprogress: rgb(0, 0, 0);
 
-  --filter-deboss: inset 0rem 0rem 0.6rem rgba(255, 255, 255, 0.1), inset 0rem 0rem 0.4rem rgba(0, 0, 0, 0.75);
+  --filter-deboss: inset 0rem 0rem 0.5rem rgba(255, 255, 255, 0.2), inset 0rem 0rem 0.3rem rgba(0, 0, 0, 0.75);
 }
 
 .one-mode {
@@ -247,9 +256,8 @@ a:active {
 .decotext {
   display: flex;
   align-items: center;
-
   padding-left: 1vw;
-  font-size: calc(var(--base-vw)/50);
+  font-size: calc(var(--base-vw)/55);
   word-spacing: 0.3rem;
   margin-left: 0.2rem;
   white-space: nowrap;
@@ -340,10 +348,10 @@ a:active {
   aspect-ratio: 3/2;
 
   text-align: left;
-  padding: 2vw 3.6vw;
+  padding: 2.5vw 3.6vw;
   margin-top: 1dvh;
   margin-bottom: 1.75vw;
-  border-radius: 4rem 4rem 3rem 3rem;
+  border-radius: 5rem 5rem 2rem 2rem;
 
   background-color: var(--color-item);
   box-shadow: var(--filter-deboss);
@@ -573,7 +581,7 @@ a:active {
 
 .expand-collapse-button {
   flex: none;
-  font-size: 1.75rem;
+  font-size: 1.35rem;
 }
 /*
 .math {
@@ -599,7 +607,7 @@ a:active {
   aspect-ratio: 1;
   border-radius: 50%;
 
-  font-size: var(--font-h3);
+  font-size: var(--font-h4);
   text-align: center;
   word-break: break-word;
   word-wrap: wrap;
@@ -626,7 +634,7 @@ a:active {
   overflow: hidden;
 
   /* gap */
-  transform: scale(0.97);
+  transform: scale(0.985);
 }
 
 .works-item::after {
@@ -651,7 +659,7 @@ a:active {
   border-radius: 50%;
   z-index: 0;
   opacity: 0.33;
-  filter: blur(10px) opacity(33%);
+  filter: blur(3px) opacity(33%);
   transition: opacity 0.5s ease, filter 0.2s ease, transform 0.2s ease;
 }
 .works-tmb:hover {
@@ -705,7 +713,7 @@ a:active {
   display: grid;
   width: 100%;
   grid-template-columns: repeat(6, 1fr);
-  gap: 0.42rem;
+  gap: 0.2rem;
   
   pointer-events: auto;
 }
@@ -823,8 +831,8 @@ a:active {
   height: 100%;
   overflow: auto;
   background-color: var(--color-header);
-  -webkit-backdrop-filter: blur(30px); /* Safari 우선 */  
-  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(50px); /* Safari 우선 */  
+  backdrop-filter: blur(50px);
   background-clip: padding-box; 
 }
 
@@ -897,7 +905,7 @@ a:active {
 .controls-div {
   display: flex;
   flex-direction: row;
-  gap: 1vw;
+  gap: 1.5vw;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -912,9 +920,9 @@ a:active {
 .fullscreen-button {
   position: relative;
   text-align: center;
-  font-size: 2vw;
-  width: 2.5vw;
-  color: white;
+  font-size: 1.5vw;
+  width: 2vw;
+  color: rgba(255, 255, 255, 0.9);
   cursor: pointer;
   display: none;
   text-shadow: none;
@@ -939,9 +947,9 @@ a:active {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 3vw;
-  height: 500%;
+  height: 800%;
   background: rgba(255, 255, 255, 0.3);
-  border-radius: 0.5rem;
+  border-radius: 0.1rem;
   cursor: pointer;
   display: none; /* 기본에는 숨김 */
   overflow: hidden;
@@ -1025,12 +1033,12 @@ video:fullscreen {
 /* mobile devices */
 @media (max-width: 768px) {
   :root {
-    --font-h1: 2.2rem;
-    --font-h2: 1.65rem;
-    --font-h3: 1.45rem;
-    --font-h4: 1rem;
-    --font-h5: 0.85rem;
-    --font-h6: 0.7rem;
+    --font-h1: 1.8rem;
+    --font-h2: 1.4rem;
+    --font-h3: 1.25rem;
+    --font-h4: 0.9rem;
+    --font-h5: 0.65rem;
+    --font-h6: 0.4rem;
 
     --base-vw: 93vw; 
     --gridfreex-wrapper-vw: 100vw;
@@ -1042,7 +1050,7 @@ video:fullscreen {
   }
 
   .header-design {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
   .header-text-wrapper {
     -webkit-mask-image: linear-gradient(
@@ -1076,7 +1084,7 @@ video:fullscreen {
     );
   }
   .works-item {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
   }
 
   .gridfreex-cell {
@@ -1087,7 +1095,7 @@ video:fullscreen {
   /* button scale */
   .fullscreen-button,
   .play-pause-button {
-    width: 10vw;
+    width: 8vw;
   }
   /* hide 2 buttons */
   .sound-button {
@@ -1114,8 +1122,8 @@ video:fullscreen {
 /*smaller mobile device*/
 @media (max-width: 480px) {
   .tag-button {
-    font-size: calc(1rem - 1.2vw);
-    padding: 0.5rem;
+    font-size: calc(1rem - 1.8vw);
+    padding: 0.4rem;
   }
   
 }
