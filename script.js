@@ -337,7 +337,7 @@ document.addEventListener("DOMContentLoaded", async() => {
         const container = document.querySelector(".tag-area-text");
         if (!container || !textcontent) return;
         
-        let currentFontSize = window.innerWidth <= 768 ? 35 : 45;
+        let currentFontSize = window.innerWidth <= 768 ? 32 : 45;
         textcontent.style.fontSize = currentFontSize + "px";
         
         // Decrease font size until text fits within its container
