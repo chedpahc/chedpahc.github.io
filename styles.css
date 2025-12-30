@@ -12,12 +12,12 @@
   --font-h1: 2.7rem;
   --font-h2: 1.9rem;
   --font-h3: 1.35rem;
-  --font-h4: 1.22rem;
-  --font-h5: 1.0rem;
+  --font-h4: 1.24rem;
+  --font-h5: 1.1rem;
   --font-h6: 0.9rem;
 
 
-  --base-vw: 39vw;
+  --base-vw: 42vw;
   --grid3x-paddingtop: calc((100dvh - var(--base-vw)) / 2);
   --header-height: clamp(2rem, 7dvh, 4rem);
   --gridfreex-wrapper-vw: 68vw;
@@ -70,7 +70,7 @@
 .one-mode .logo path {
   filter: none;
   stroke: black;
-  stroke-width: 0.09rem;
+  stroke-width: 0.1rem;
 }
 .one-mode .grid3x-item,
 .one-mode .grid2x-item,
@@ -105,7 +105,7 @@
 .zero-mode .logo path {
   filter: none;
   stroke: white;
-  stroke-width: 0.09rem;
+  stroke-width: 0.1rem;
 }
 .zero-mode .grid3x-item,
 .zero-mode .grid2x-item,
@@ -257,7 +257,7 @@ a:active {
   display: flex;
   align-items: center;
   padding-left: 1vw;
-  font-size: calc(var(--base-vw)/55);
+  font-size: calc(var(--base-vw)/65);
   word-spacing: 0.3rem;
   margin-left: 0.2rem;
   white-space: nowrap;
@@ -290,7 +290,7 @@ a:active {
 .logo svg {
   width: 100%;
   height: 100%;
-  transform: translate(1%, -0%) scale(1.3);
+  transform: translate(1%, -0%) scale(1.18);
   display: block; /* Removes unwanted extra space */
 
   filter: url(#deboss);
