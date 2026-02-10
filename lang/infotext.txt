@@ -1,3 +1,2 @@
-chedpahc
-web db version	 v1.0.3a
-last updated	 2025-08-22 17:22 KST. 
+chedpahc web portfolio
+last update: 	 2026-02-10T12:03Z

@@ -74,11 +74,11 @@ document.addEventListener("DOMContentLoaded", async() => {
     }
 
     // ------------------------ Theme detection, cycle ------------------------ //
-    const themes = ["dark", "zero", "one"];
+    const themes = ["zero", "one"]; // removed "dark" on 2026 //
     const storedTheme = localStorage.getItem("theme");
 
     /*const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;*/
-    let initialTheme = themes.includes(storedTheme) ? storedTheme : "dark";
+    let initialTheme = themes.includes(storedTheme) ? storedTheme : "one";
     let currentThemeIndex = themes.indexOf(initialTheme);
 
     // setting theme in css
@@ -118,13 +118,13 @@ document.addEventListener("DOMContentLoaded", async() => {
         let text;
         switch (theme) {
             case "one":
-            text = "1.00";
+            text = "1.0";
             break;
             case "dark":
             text = "0.56";
             break;
             case "zero":
-            text = "0.00";
+            text = "0.0";
             break;
             default:
             text = theme;
@@ -381,7 +381,7 @@ document.addEventListener("DOMContentLoaded", async() => {
             if (translatedTag.toLowerCase().includes("co-work")) {
                 translatedTag = translatedTag.replace(/work/i, ""); // "work" 제거
             }
-
+            
             return translatedTag;
         })
         .join(", ");
@@ -618,6 +618,7 @@ document.addEventListener("DOMContentLoaded", async() => {
             textContent = await response.text();
 
             // !I should use <pre> instead of this
+            textContent = textContent.replace(/\[([^\]]+)\]\((https?:\/\/[^\s]+)\)/g, '<a href="$2" target="_blank">$1</a>');
             // Normalize newline characters to "\n"
             textContent = textContent.replace(/\r\n/g, "\n");
             // Replace each newline with <br>
@@ -634,7 +635,7 @@ document.addEventListener("DOMContentLoaded", async() => {
         }
 
         // Hyperlink formatting (Regular Expression)
-        textContent = textContent.replace(/\[([^\]]+)\]\((https?:\/\/[^\s]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+        
 
         // CV formatting (Regular Expression)
         if (iscvTextData) {
@@ -650,7 +651,7 @@ document.addEventListener("DOMContentLoaded", async() => {
                 }
             });
             // Replace < > content with 'mailtext' id
-            textContent = textContent.replace(/-([^<]+)-/g, (match, p1) => {
+            textContent = textContent.replace(/--([^<]+)--/g, (match, p1) => {
                 return `<span id="mailtext">${p1}</span>`;
             });
         }
@@ -664,6 +665,14 @@ document.addEventListener("DOMContentLoaded", async() => {
         // add break word class to new div
         elem.classList.add("break-words");
         elem.innerHTML = textContent;
+
+        // open in current tab if user clicks from CVtext
+        if (elem.classList.contains("cvtext")) {
+        elem.querySelectorAll("a").forEach(a => {
+            a.removeAttribute("target");
+        });
+        }
+
         return elem;
     }
 

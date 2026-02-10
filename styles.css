@@ -12,7 +12,7 @@
   --font-h1: 2.7rem;
   --font-h2: 1.9rem;
   --font-h3: 1.35rem;
-  --font-h4: 1.24rem;
+  --font-h4: 1.22rem;
   --font-h5: 1.1rem;
   --font-h6: 0.9rem;
 
@@ -70,7 +70,7 @@
 .one-mode .logo path {
   filter: none;
   stroke: black;
-  stroke-width: 0.1rem;
+  stroke-width: 0.65rem;
 }
 .one-mode .grid3x-item,
 .one-mode .grid2x-item,
@@ -105,7 +105,7 @@
 .zero-mode .logo path {
   filter: none;
   stroke: white;
-  stroke-width: 0.1rem;
+  stroke-width: 0.8rem;
 }
 .zero-mode .grid3x-item,
 .zero-mode .grid2x-item,
@@ -175,6 +175,13 @@ a:active {
   color: darkred;
 }
 
+.cvtext a {
+  all: unset;
+}
+.cvtext a:hover {
+  color: blue; /* 원하는 hover 색 */
+  text-decoration: underline; /* 필요 시 */
+}
 
 /* --------------------------------------------- general --------------------------------------------- */
 .hidden {
@@ -256,7 +263,9 @@ a:active {
 .decotext {
   display: flex;
   align-items: center;
-  padding-left: 1vw;
+  aspect-ratio: 1;
+  position: relative;
+  left: 28%;
   font-size: calc(var(--base-vw)/65);
   word-spacing: 0.3rem;
   margin-left: 0.2rem;
@@ -290,9 +299,8 @@ a:active {
 .logo svg {
   width: 100%;
   height: 100%;
-  transform: translate(1%, -0%) scale(1.18);
+  transform: translate(68%, -0%) scale(0.11);
   display: block; /* Removes unwanted extra space */
-
   filter: url(#deboss);
 }
 .logo path {
@@ -378,7 +386,7 @@ a:active {
   align-items: center;
   grid-column: span 2;
   aspect-ratio: 4/1;
-  border-radius: 4rem 4rem 4rem 4rem;
+  border-radius: 8rem 8rem 8rem 8rem;
 }
 
 #close-links {
@@ -425,7 +433,7 @@ a:active {
 .header-text-wrapper .scrolling {
   display: inline-block;
   white-space: nowrap;
-  animation: scroll 90s linear infinite;
+  animation: scroll 110s linear infinite;
 }
 @keyframes scroll {
   from {

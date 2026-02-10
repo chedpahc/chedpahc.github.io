@@ -1,38 +1,38 @@
 {
     "translations": {
-        "aboutlink1": "인스타",
+        "aboutlink1": "IG",
         "aboutlink2": "더보기",
         "aboutlink3": "메일",
         "aboutlink4": "듣기",
 
         "works": "작업",
         "tag1": "전체", 
-        "tag2": "인터랙티브",
+        "tag2": "공연",
         "tag3": "청각",
         "tag4": "시각",
         "tag5": "개인",
         "tag6": "협동",
-        "tag7": "공연",
+        "tag7": "인터랙티브",
         "tag8": "전시",
         "tag9": "음악",
         "tag10": "영화",
-        "tag11": "협업",
+        "tag11": "컴퓨팅",
         "tag12": "외주",
         "tag13": "이전"
     },
 
     "tagMappings": {
         "all": "tag1",
-        "interactive": "tag2",
+        "performance": "tag2",
         "audio": "tag3",
         "visual": "tag4",
         "solo": "tag5",
-        "co-": "tag6",
-        "performance": "tag7",
+        "team": "tag6",
+        "interactive": "tag7",
         "exhibition": "tag8",
         "music": "tag9",
         "film": "tag10",
-        "collabo": "tag11",
+        "computing": "tag11",
         "commission": "tag12",
         "older": "tag13"
     }
