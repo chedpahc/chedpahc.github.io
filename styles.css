@@ -62,7 +62,7 @@
 .one-mode .logo path {
   filter: none;
   stroke: black;
-  stroke-width: 0.2rem;
+  stroke-width: 0.1rem;
 }
 .one-mode .grid3x-item,
 .one-mode .grid2x-item,
@@ -97,7 +97,7 @@
 .zero-mode .logo path {
   filter: none;
   stroke: white;
-  stroke-width: 0.25rem;
+  stroke-width: 0.11rem;
 }
 .zero-mode .grid3x-item,
 .zero-mode .grid2x-item,
@@ -255,8 +255,8 @@ a:active {
 .decotext {
   display: flex;
   align-items: center;
-  position: relative;
-  font-size: var(--font-h6);
+  justify-content: left;
+  font-size: calc(var(--base-vw) / 65);
   word-spacing: 0.1rem;
   white-space: nowrap;
   min-width: 0;
@@ -286,9 +286,15 @@ a:active {
   z-index: 99;
 }
 
+.logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .logo svg {
-  width: 100%;
-  transform: translate(5%, -0%) scale(0.38);
+  width: 36%;
+  transform: translate(0%, -0%);
   display: block; /* Removes unwanted extra space */
   filter: url(#deboss);
 }
@@ -298,10 +304,11 @@ a:active {
 
 .info_logo_wrap{
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   aspect-ratio: 1;
-  transform: translate(3%,-3%);
+  transform: translate(0%,-3%);
+
 }
 
 .utility {
@@ -1015,6 +1022,10 @@ video:fullscreen {
   .cv {
     padding: 3.5vw 6.7vw;
   }
+  
+  .logo {
+    width: 38%;
+  }
 }
 
 /* pc small */
@@ -1024,12 +1035,7 @@ video:fullscreen {
     --gridfreex-wrapper-vw: 90vw;
     --font-h6: 0.75rem;
   }
-  .logo svg {
-  transform: translate(5%, -0%) scale(0.4);
-  }
-  .info_logo_wrap{
-  transform: translate(-8%,-3%);
-  }
+  
 }
 
 /* tablet , 4by 5~ */
@@ -1053,23 +1059,8 @@ video:fullscreen {
     --gridfreex-wrapper-vw: 100vw;
   }
 
-  .logo svg {
-  transform: translate(20%, -0%) scale(0.25);
-  }
-
-  .one-mode .logo path {
-  filter: none;
-  stroke: black;
-  stroke-width: 0.175rem;
-  }
-  .zero-mode .logo path {
-  filter: none;
-  stroke: rgb(255, 255, 255);
-  stroke-width: 0.19rem;
-  }
-
-  .info_logo_wrap{
-    transform: translate(-15%,-2%);
+  .logo {
+    width: 28%;
   }
 
   .cv {
