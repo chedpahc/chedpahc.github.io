@@ -1054,7 +1054,7 @@ video:fullscreen {
   }
 
   .logo svg {
-  transform: translate(5%, -0%) scale(0.3);
+  transform: translate(20%, -0%) scale(0.25);
   }
 
   .one-mode .logo path {
@@ -1068,26 +1068,15 @@ video:fullscreen {
   stroke-width: 0.19rem;
   }
 
-  .decotext,
-  .infotext{
-    transform: scale(1.2);
-  }
-
   .info_logo_wrap{
-    transform: translate(-25%,-2%);
+    transform: translate(-15%,-2%);
   }
 
   .cv {
     border-radius: 2.5rem 2.5rem 2.5rem 2.5rem;
     padding: 3.8vw 9.2vw;
   }
-  .cvtitle {
-    font-size: var(--font-h3);
-  }
-  .cvtext {
-    font-size: var(--font-h);
-  }
-
+  
   .header-design {
     font-size: 0.9rem;
   }
