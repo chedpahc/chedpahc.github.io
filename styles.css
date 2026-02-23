@@ -40,7 +40,7 @@
   --border-color: #000;
   --logo-fill: #000;
   --logo-stroke: #000;
-  --logo-stroke-width: 1px;
+  --logo-stroke-width: 0.1px;
 }
 
 /* ZERO mode */
@@ -62,7 +62,7 @@
   --border-color: #fff;
   --logo-fill: #fff;
   --logo-stroke: #fff;
-  --logo-stroke-width: 1px;
+  --logo-stroke-width: 0.1px;
 }
 
 /* Logo path rules (shared) */
@@ -1007,6 +1007,7 @@ video:fullscreen {
   .cv { padding: 3.5vw 6.7vw; }
   .cvtext { font-size: var(--font-h5); }
   .logo { width: 38%; }
+  .logo path { stroke-width: 0; }
 }
 
 /* <= 1024px (pc small) */
@@ -1040,7 +1041,7 @@ video:fullscreen {
   }
 
   .logo { width: 28%; }
-  .logo path { stroke-width: 0; }
+
 
   .cv{
     border-radius: 2.5rem;
