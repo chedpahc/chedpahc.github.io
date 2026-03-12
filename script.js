@@ -665,15 +665,13 @@ document.addEventListener("DOMContentLoaded", async() => {
     // ------------------------ Text (line range 지원 포함) ------------------------ //
     async function createTextContent(content, iscvTextData = false) {
         function parseLineRange(rangeStr, totalLines) {
-            if (!rangeStr) return [0, totalLines - 1];
-            const s = rangeStr.trim();
-            if (s === "all") return [0, totalLines - 1];
-            // single number
+            if (rangeStr === undefined || rangeStr === null) return [0, totalLines - 1];
+            const s = String(rangeStr).trim();
+            if (!s || s === "all") return [0, totalLines - 1];
             if (/^\d+$/.test(s)) {
-            const idx = parseInt(s, 10);
-            return [Math.max(0, idx), Math.min(totalLines - 1, idx)];
+                const idx = parseInt(s, 10);
+                return [Math.max(0, idx), Math.min(totalLines - 1, idx)];
             }
-            // range like "start-end", "start-", "-end"
             const m = s.match(/^(\d*)-(\d*)$/);
             if (!m) return [0, totalLines - 1];
             const start = m[1] === "" ? 0 : parseInt(m[1], 10);
@@ -685,8 +683,9 @@ document.addEventListener("DOMContentLoaded", async() => {
 
         if (typeof content === "object" && content.file) {
             try {
-            const response = await fetch(content.file);
-            if (!response.ok) throw new Error("Failed to fetch text file");
+            const response = await fetch(content.file, { mode: 'cors' });
+            console.log('fetch', response.status, response.headers.get('content-type'));
+            if (!response.ok) throw new Error('Failed to fetch text file: ' + response.status);
             rawText = await response.text();
             } catch (error) {
             console.error("Error loading TXT file:", error);
