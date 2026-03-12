@@ -1,10 +1,10 @@
 :root{
   color-scheme: light dark;
 
-  --font-h1: 2.7rem;
+  --font-h1: 2.5rem;
   --font-h2: 1.9rem;
   --font-h3: 1.35rem;
-  --font-h4: 1.22rem;
+  --font-h4: 1.185rem;
   --font-h5: 1.1rem;
   --font-h6: 1rem;
 
@@ -16,52 +16,41 @@
 
   --items-border-width: 0.125rem;
 
-  /* generic filters (override in modes if needed) */
+  /* generic filters (override in modes if needed) 
   --filter-deboss-invert: inset 0 0 0.2rem rgba(1,0,3,0.5);
   --filter-deboss-text: 1px 3px 6px var(--color-bg), 0 0 0 #000, 1px 3px 6px var(--color-bg), 1px 1px 1px var(--color-item-active);
+  */
 }
 
 /* ONE mode */
 .one-mode{
-  --color-text: #000;
-  --color-bg: #fff;
-  --color-item: #fff;
-  --color-header: rgba(255,255,255,0.5);
+  --color-text: rgba(0,0,0,0.85);
+  --color-bg: rgba(255,255,255,0.975);
+  --color-item: rgba(255,255,255,0);
+  --color-header: rgba(255,255,255,.5);
   --color-item-hover: #e7e7e7;
   --color-item-active: #919191;
-  --color-waveprogress: #000;
+  --color-waveprogress: rgba(0,0,0,.85);
 
-  --filter-deboss: none;
-  --filter-deboss-invert: none;
-  --filter-deboss-text: none;
-  --filter-deboss-text-hover: none;
-  --filter-deboss-text-active: none;
-
-  --border-color: #000;
-  --logo-fill: #000;
-  --logo-stroke: #000;
+  --border-color: rgba(0,0,0,0.75);
+  --logo-fill: rgba(0,0,0,0.75);
+  --logo-stroke: rgba(0,0,0,0.85);
   --logo-stroke-width: 0.1px;
 }
 
 /* ZERO mode */
 .zero-mode{
-  --color-text: #fff;
-  --color-bg: #000;
-  --color-item: #000;
+  --color-text: (255,255,255,0.975);
+  --color-bg: rgba(0,0,0,.75);
+  --color-item: rgba(0,0,0,.75);
   --color-header: rgba(0,0,0,0.5);
   --color-item-hover: #1a1a1a;
   --color-item-active: #6d6d6d;
-  --color-waveprogress: #fff;
+  --color-waveprogress: rgba(255,255,255,0.975);
 
-  --filter-deboss: none;
-  --filter-deboss-invert: none;
-  --filter-deboss-text: none;
-  --filter-deboss-text-hover: none;
-  --filter-deboss-text-active: none;
-
-  --border-color: #fff;
-  --logo-fill: #fff;
-  --logo-stroke: #fff;
+  --border-color: rgba(255,255,255,0.925);
+  --logo-fill: rgba(255,255,255,0.975);
+  --logo-stroke: rgba(255,255,255,0.975);
   --logo-stroke-width: 0.1px;
 }
 
@@ -155,6 +144,7 @@ a:active {
 .cvtext a:hover {
   color: blue; /* 원하는 hover 색 */
   text-decoration: underline; /* 필요 시 */
+  cursor: pointer;
 }
 
 /* --------------------------------------------- general --------------------------------------------- */
@@ -737,6 +727,10 @@ a:active {
   padding: 1rem 0rem 1rem 0rem;
 }
 
+.txt-XL {
+  font-size: var(--font-h1);
+}
+
 .txt-L {
   font-size: var(--font-h2);
 }
@@ -764,7 +758,7 @@ a:active {
   filter: url(#deboss);
 }
 .waveform:hover {
-  filter: url(#deboss) brightness(1.4);
+  filter: brightness(1.2);
 }
 
 /* still image */
@@ -900,14 +894,14 @@ a:active {
 .controls-div {
   display: flex;
   flex-direction: row;
-  gap: 1.5vw;
+  gap: 1.75vw;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: scale(1) translate(-50%, -50%);
 }
 .video-container:fullscreen .controls-div {
-  gap: 5vw;
+  gap: 5.25vw;
 }
 
 .sound-button,
@@ -915,8 +909,8 @@ a:active {
 .fullscreen-button {
   position: relative;
   text-align: center;
-  font-size: 1.5vw;
-  width: 2vw;
+  font-size: 1.2vw;
+  width: 1.75vw;
   color: rgba(255, 255, 255, 0.9);
   cursor: pointer;
   display: none;
@@ -929,10 +923,14 @@ a:active {
 }
 .video-container:fullscreen .sound-button,
 .video-container:fullscreen .play-pause-button,
-.video-container:fullscreen .fullscreen-button,
+.video-container:fullscreen .fullscreen-button {
+  font-size: 1.5vw;
+  width: 2.5vw;
+}
 .video-container:fullscreen .volume-slider {
-  font-size: 2.5vw;
+  font-size: 1rem;
   width: 4vw;
+  height: 1250%;
 }
 
 /* 볼륨 슬라이더 스타일 */
@@ -941,10 +939,10 @@ a:active {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 3vw;
-  height: 800%;
+  width: 2vw;
+  height: 750%;
   background: rgba(255, 255, 255, 0.3);
-  border-radius: 0.1rem;
+  border-radius: 1vw 10vw;
   cursor: pointer;
   display: none; /* 기본에는 숨김 */
   overflow: hidden;
@@ -956,10 +954,10 @@ a:active {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 75%; /* 초기 볼륨 75% 반영 */
+  height: 50%; /* 초기 볼륨 25% 반영 */
   background: white;
-
 }
+
 
 .video-caption {
   margin-top: 0.5rem;
@@ -972,6 +970,34 @@ video:fullscreen {
   width: 100vw;
   height: 100vh;
   object-fit: cover;
+}
+
+/* 오디오 파일 로딩중 CSS */
+.audio-wrapper { position: relative; width: 100%; }
+.waveform { width: 100%; }
+
+.loading-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+.loading-overlay.hidden { display: none; }
+
+.loading-spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid rgba(255,255,255,0.95);
+  border-top: 3px solid #000;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 /* --------------------------------------------- conditions --------------------------------------------- */
@@ -1032,7 +1058,7 @@ video:fullscreen {
     --font-h1: 1.8rem;
     --font-h2: 1.4rem;
     --font-h3: 1.25rem;
-    --font-h4: 0.9rem;
+    --font-h4: 0.8rem;
     --font-h5: 0.65rem;
     --font-h6: 0.4rem;
 
@@ -1080,7 +1106,7 @@ video:fullscreen {
     position: relative;
     visibility: visible;
     pointer-events: all;
-    width: 15vw;
+    width: 20vw;
   }
 }
 

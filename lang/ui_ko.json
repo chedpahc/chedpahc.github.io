@@ -6,34 +6,39 @@
         "aboutlink4": "듣기",
 
         "works": "작업",
-        "tag1": "전체", 
-        "tag2": "공연",
-        "tag3": "청각",
-        "tag4": "시각",
-        "tag5": "개인",
-        "tag6": "협동",
+
+        "tag1": "전체",
+        "tag2": "청각",
+        "tag3": "시각",
+        "tag4": "개인",
+        "tag5": "협동",
+        "tag6": "외주",
+
         "tag7": "인터랙티브",
         "tag8": "전시",
-        "tag9": "음악",
-        "tag10": "영화",
-        "tag11": "컴퓨팅",
-        "tag12": "외주",
+        "tag9": "공연",
+        "tag10": "음악",
+        "tag11": "영화",
+        "tag12": "컴퓨팅",
+
         "tag13": "이전"
     },
 
     "tagMappings": {
         "all": "tag1",
-        "performance": "tag2",
-        "audio": "tag3",
-        "visual": "tag4",
-        "solo": "tag5",
-        "team": "tag6",
+        "audio": "tag2",
+        "visual": "tag3",
+        "solo": "tag4",
+        "team": "tag5",
+        "commission": "tag6",
+
         "interactive": "tag7",
         "exhibition": "tag8",
-        "music": "tag9",
-        "film": "tag10",
-        "computing": "tag11",
-        "commission": "tag12",
+        "performance": "tag9",
+        "music": "tag10",
+        "film": "tag11",
+        "computing": "tag12",
+
         "older": "tag13"
     }
 }

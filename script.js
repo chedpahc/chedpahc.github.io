@@ -431,6 +431,8 @@ document.addEventListener("DOMContentLoaded", async() => {
     }
 
     /// ------------------------ Tag buttons toggle behaviour ------------------------ //
+    const ROLE_RADIO = ["solo", "team", "commission"];
+
     filterButtons.forEach(button => {
         button.addEventListener("click", () => {
             const filterTag = button.dataset.tag;
@@ -464,11 +466,64 @@ document.addEventListener("DOMContentLoaded", async() => {
                 return;
             }
         
-            // 1) If this is a year (except "older") and "older" is active, remove "older"
+            // year tag behaviour (selective radio)
+            /*
             if (button.classList.contains("year") && filterTag !== "older" && selectedTags.has("older")) {
                 selectedTags.delete("older");
                 document.querySelector(".tag-button[data-tag='older']").classList.remove("active");
+            }*/
+            // year tag behaviour (radio)
+            if (button.classList.contains("year")) {
+
+                // older 제거
+                if (selectedTags.has("older")) {
+                    selectedTags.delete("older");
+                    document.querySelector(".tag-button[data-tag='older']").classList.remove("active");
+                }
+
+                // 기존 year 전부 해제
+                filterButtons.forEach(btn => {
+                    if (btn.classList.contains("year")) {
+                        selectedTags.delete(btn.dataset.tag);
+                        btn.classList.remove("active");
+                    }
+                });
+
+                // 클릭한 year만 선택
+                selectedTags.add(filterTag);
+                button.classList.add("active");
+
+                updateAllButton();
+                filterWorks();
+                return;
             }
+
+            // role radio (solo / team / commission) - mutual exclusive + toggle
+            if (ROLE_RADIO.includes(filterTag)) {
+
+                if (selectedTags.has(filterTag)) {
+                    // 다시 누르면 해제
+                    selectedTags.delete(filterTag);
+                    button.classList.remove("active");
+
+                } else {
+                    // 다른 role 전부 해제
+                    ROLE_RADIO.forEach(tag => {
+                        selectedTags.delete(tag);
+                        const btn = document.querySelector(`.tag-button[data-tag='${tag}']`);
+                        if (btn) btn.classList.remove("active");
+                    });
+
+                    // 클릭한 role 선택
+                    selectedTags.add(filterTag);
+                    button.classList.add("active");
+                }
+
+                updateAllButton();
+                filterWorks();
+                return;
+            }
+            
             // Normal toggle logic for other tags
             if (selectedTags.has(filterTag)) {
             selectedTags.delete(filterTag);
@@ -607,82 +662,97 @@ document.addEventListener("DOMContentLoaded", async() => {
         return null;
         }
 
-    // ------------------------ Text ------------------------ //
+    // ------------------------ Text (line range 지원 포함) ------------------------ //
     async function createTextContent(content, iscvTextData = false) {
-        let textContent = "";
+        function parseLineRange(rangeStr, totalLines) {
+            if (!rangeStr) return [0, totalLines - 1];
+            const s = rangeStr.trim();
+            if (s === "all") return [0, totalLines - 1];
+            // single number
+            if (/^\d+$/.test(s)) {
+            const idx = parseInt(s, 10);
+            return [Math.max(0, idx), Math.min(totalLines - 1, idx)];
+            }
+            // range like "start-end", "start-", "-end"
+            const m = s.match(/^(\d*)-(\d*)$/);
+            if (!m) return [0, totalLines - 1];
+            const start = m[1] === "" ? 0 : parseInt(m[1], 10);
+            const end = m[2] === "" ? totalLines - 1 : parseInt(m[2], 10);
+            return [Math.max(0, start), Math.min(totalLines - 1, end)];
+        }
+
+        let rawText = "";
 
         if (typeof content === "object" && content.file) {
             try {
             const response = await fetch(content.file);
             if (!response.ok) throw new Error("Failed to fetch text file");
-            textContent = await response.text();
-
-            // !I should use <pre> instead of this
-            textContent = textContent.replace(/\[([^\]]+)\]\((https?:\/\/[^\s]+)\)/g, '<a href="$2" target="_blank">$1</a>');
-            // Normalize newline characters to "\n"
-            textContent = textContent.replace(/\r\n/g, "\n");
-            // Replace each newline with <br>
-            textContent = textContent.replace(/\n/g, "<br>");
-            
+            rawText = await response.text();
             } catch (error) {
             console.error("Error loading TXT file:", error);
-            textContent = "Error loading content";
+            rawText = "Error loading content";
             }
         } else if (typeof content === "object") {
-          textContent = content.text || "";
+            rawText = content.text || "";
         } else {
-          textContent = content;
+            rawText = content || "";
         }
 
-        // Hyperlink formatting (Regular Expression)
-        
+        // Normalize newlines
+        rawText = rawText.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
 
-        // CV formatting (Regular Expression)
+        // If content.line specified, slice lines before further processing
+        if (typeof content === "object" && content.line) {
+            const lines = rawText.split("\n");
+            const [start, end] = parseLineRange(content.line, lines.length);
+            // if start > end => empty
+            rawText = start <= end ? lines.slice(start, end + 1).join("\n") : "";
+        }
+
+        // Hyperlink formatting (Markdown-style links) on raw text
+        rawText = rawText.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, (m, p1, p2) => {
+            return `<a href="${p2}" target="_blank">${p1}</a>`;
+        });
+
+        // CV formatting
         if (iscvTextData) {
             let isFirstTitle = true;
-            // Replace [ ] 
-            textContent = textContent.replace(/\[([^\]]+)\]/g, (match, p1) => {
-                // If it's the first [ ] content, apply 'cvtitlebig'
-                if (isFirstTitle) {
-                    isFirstTitle = false;
-                    return `<span class="cvtitlebig">${p1}</span>`;
-                } else {
-                    return `<span class="cvtitle">${p1}</span>`;
-                }
+            rawText = rawText.replace(/\[([^\]]+)\]/g, (match, p1) => {
+            if (isFirstTitle) {
+                isFirstTitle = false;
+                return `<span class="cvtitlebig">${p1}</span>`;
+            } else {
+                return `<span class="cvtitle">${p1}</span>`;
+            }
             });
-            // Replace < > content with 'mailtext' id
-            textContent = textContent.replace(/--([^<]+)--/g, (match, p1) => {
-                return `<span id="mailtext">${p1}</span>`;
-            });
+            rawText = rawText.replace(/--([^<]+)--/g, (match, p1) => `<span id="mailtext">${p1}</span>`);
         }
-    
+
+        // Convert newlines to <br>
+        let textContent = rawText.replace(/\n/g, "<br>");
+
         const elem = document.createElement("div");
         if (typeof content === "object" && content.classes) {
-          content.classes.split(" ").forEach(cls => {
+            content.classes.split(" ").forEach(cls => {
             if (cls.trim()) elem.classList.add(cls.trim());
-          });
+            });
         }
-        // add break word class to new div
         elem.classList.add("break-words");
         elem.innerHTML = textContent;
 
         // open in current tab if user clicks from CVtext
         if (elem.classList.contains("cvtext")) {
-        elem.querySelectorAll("a").forEach(a => {
-            a.removeAttribute("target");
-        });
+            elem.querySelectorAll("a").forEach(a => a.removeAttribute("target"));
         }
 
         return elem;
     }
+    // ------------------------ Audio (loading indicator 포함) ------------------------ //
+        const waveInstances = [];
+        const waveColor = getComputedStyle(document.documentElement).getPropertyValue('--color-item-active').trim();
+        const progressColor = getComputedStyle(document.documentElement).getPropertyValue('--color-waveprogress').trim();
 
-    // ------------------------ Audio ------------------------ //
-    const waveInstances = [];
-    const waveColor = getComputedStyle(document.documentElement).getPropertyValue('--color-item-active').trim();
-    const progressColor = getComputedStyle(document.documentElement).getPropertyValue('--color-waveprogress').trim();
-
-    function createAudioContent(item, content) {
-        // Create a wrapper for the audio content
+        function createAudioContent(item, content) {
         const audioWrapper = document.createElement("div");
         audioWrapper.classList.add("audio-wrapper");
 
@@ -690,13 +760,22 @@ document.addEventListener("DOMContentLoaded", async() => {
         waveContainer.classList.add("waveform");
         waveContainer.id = `waveform-${item}`;
 
-        // Append container to wrapper
-        audioWrapper.appendChild(waveContainer);
+        // 로딩 오버레이
+        const loadingOverlay = document.createElement("div");
+        loadingOverlay.className = "loading-overlay";
 
-        // Initialize WaveSurfer instance using the container element
+        const spinner = document.createElement("div");
+        spinner.className = "loading-spinner";
+
+        loadingOverlay.appendChild(spinner);
+
+        audioWrapper.appendChild(waveContainer);
+        audioWrapper.appendChild(loadingOverlay);
+
+        // WaveSurfer 인스턴스 생성
         const waveSurfer = WaveSurfer.create({
             container: waveContainer,
-            waveColor: waveColor, 
+            waveColor: waveColor,
             progressColor: progressColor,
             barWidth: 3,
             cursorColor: progressColor,
@@ -705,20 +784,33 @@ document.addEventListener("DOMContentLoaded", async() => {
             backend: 'WebAudio',
             normalize: true,
         });
-        waveSurfer.load(content.src);
-        waveInstances.push(waveSurfer);
         
-
-        // Toggle play on waveform click
-        waveContainer.addEventListener("click", () => {
-            if (waveSurfer.isPlaying()) {
-            waveSurfer.pause();
-            } else {
-            waveSurfer.play();
-            }
+        // 로딩 표시
+        waveSurfer.on('loading', () => {
+            loadingOverlay.classList.remove('hidden');
         });
 
-        // Optionally add caption if provided
+        // 로딩 완료
+        waveSurfer.on('ready', () => {
+            loadingOverlay.classList.add('hidden');
+        });
+
+        // 에러 시에도 숨김
+        waveSurfer.on('error', (err) => {
+            console.error('WaveSurfer load error', err);
+            loadingOverlay.classList.add('hidden');
+        });
+
+        // 로드 시작
+        waveSurfer.load(content.src);
+        waveInstances.push(waveSurfer);
+
+        // 파형 클릭 재생
+        waveContainer.addEventListener("click", () => {
+            if (waveSurfer.isPlaying()) waveSurfer.pause();
+            else waveSurfer.play();
+        });
+
         if (content.caption) {
             const caption = document.createElement("figcaption");
             caption.textContent = content.caption;
@@ -726,7 +818,6 @@ document.addEventListener("DOMContentLoaded", async() => {
         }
         return audioWrapper;
     }
-
     // ------------------------ Image ------------------------ //
     function createImageContent(content) {
         const imageWrapper = document.createElement("div");
@@ -800,8 +891,8 @@ document.addEventListener("DOMContentLoaded", async() => {
         const videoElem = document.createElement("video");
         videoElem.controls = false; // Remove native controls
         videoElem.setAttribute("preload", "none");
-        videoElem.volume = 1; // Default volume 100%
-        videoElem.loop = true;
+        videoElem.volume = 0.5; // Default volume 50%
+        videoElem.loop = false;
       
         // Append video source
         const sourceElem = document.createElement("source");
@@ -832,13 +923,12 @@ document.addEventListener("DOMContentLoaded", async() => {
         // Sound icon element (default unmuted icon)
         const soundIcon = document.createElement("span");
         soundIcon.innerHTML = `
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-            <polygon points="3,9 7,9 11,5 11,19 7,15 3,15" fill="currentColor"/>
-            <path d="M14.5 9.5c1.2 1.2 1.2 3.8 0 5" />
-            <path d="M16.8 7.2c2 2 2 7.6 0 9.6" />
-            <path d="M19 5c2.8 2.8 2.8 11.2 0 14" />
-          </svg>
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5.73058 14.5859C5.52237 14.6289 5.40093 14.3523 5.5648 14.2169C7.50722 12.6113 7.50722 11.3887 5.5648 9.78312C5.40093 9.64767 5.52228 9.37222 5.73028 9.41624C9.12034 10.1336 10.6085 11.2368 10.6085 12C10.6085 12.768 9.40991 13.826 5.73058 14.5859Z" fill="white"/>
+            <path d="M11.0394 17.3415C10.8764 17.4042 10.7195 17.239 10.7826 17.0762C11.9852 13.9735 11.9852 10.0265 10.7826 6.92377C10.7195 6.76097 10.8766 6.59616 11.0393 6.65976C14.6827 8.08497 15.6301 10.4109 15.6301 12C15.6301 13.594 15.0087 15.8127 11.0394 17.3415Z" fill="white"/>
+            <path d="M16.7859 1.42902C16.6493 1.29251 16.4184 1.41138 16.4504 1.60183C17.7479 9.32229 17.7479 14.6777 16.4504 22.3982C16.4184 22.5886 16.6482 22.7086 16.7848 22.572C23.4167 15.9424 24.0525 8.69168 16.7859 1.42902Z" fill="white"/>
+            <path d="M4.8695 12C4.8695 12.7594 4.22714 13.375 3.43475 13.375C2.64236 13.375 2 12.7594 2 12C2 11.2406 2.64236 10.625 3.43475 10.625C4.22714 10.625 4.8695 11.2406 4.8695 12Z" fill="white"/>
+            </svg>
         `;
         soundButton.appendChild(soundIcon);
       
@@ -863,36 +953,35 @@ document.addEventListener("DOMContentLoaded", async() => {
             if (!isDraggingVolume) {
               volumeSlider.style.display = "none";
               // Restore icon based on mute state
+              
               soundIcon.innerHTML =
                 videoElem.volume === 0
                   ? `
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                      xmlns="http://www.w3.org/2000/svg">
-                      <polygon points="3,9 7,9 11,5 11,19 7,15 3,15" fill="currentColor"/>
-                      <line x1="16" y1="8" x2="22" y2="14"/>
-                      <line x1="22" y1="8" x2="16" y2="14"/>
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.73058 14.5859C5.52237 14.6289 5.40093 14.3523 5.5648 14.2169C7.50722 12.6113 7.50722 11.3887 5.5648 9.78312C5.40093 9.64767 5.52228 9.37222 5.73028 9.41624C9.12034 10.1336 10.6085 11.2368 10.6085 12C10.6085 12.768 9.40991 13.826 5.73058 14.5859Z" fill="white"/>
+                    <path d="M11.0394 17.3415C10.8764 17.4042 10.7195 17.239 10.7826 17.0762C11.9852 13.9735 11.9852 10.0265 10.7826 6.92377C10.7195 6.76097 10.8766 6.59616 11.0393 6.65976C14.6827 8.08497 15.6301 10.4109 15.6301 12C15.6301 13.594 15.0087 15.8127 11.0394 17.3415Z" fill="white"/>
+                    <path d="M16.7859 1.42902C16.6493 1.29251 16.4184 1.41138 16.4504 1.60183C17.7479 9.32229 17.7479 14.6777 16.4504 22.3982C16.4184 22.5886 16.6482 22.7086 16.7848 22.572C23.4167 15.9424 24.0525 8.69168 16.7859 1.42902Z" fill="white"/>
+                    <path d="M4.8695 12C4.8695 12.7594 4.22714 13.375 3.43475 13.375C2.64236 13.375 2 12.7594 2 12C2 11.2406 2.64236 10.625 3.43475 10.625C4.22714 10.625 4.8695 11.2406 4.8695 12Z" fill="white"/>
                     </svg>`
                   : `
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                      xmlns="http://www.w3.org/2000/svg">
-                      <polygon points="3,9 7,9 11,5 11,19 7,15 3,15" fill="currentColor"/>
-                      <path d="M14.5 9.5c1.2 1.2 1.2 3.8 0 5" />
-                      <path d="M16.8 7.2c2 2 2 7.6 0 9.6" />
-                      <path d="M19 5c2.8 2.8 2.8 11.2 0 14" />
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.73058 14.5859C5.52237 14.6289 5.40093 14.3523 5.5648 14.2169C7.50722 12.6113 7.50722 11.3887 5.5648 9.78312C5.40093 9.64767 5.52228 9.37222 5.73028 9.41624C9.12034 10.1336 10.6085 11.2368 10.6085 12C10.6085 12.768 9.40991 13.826 5.73058 14.5859Z" fill="white"/>
+                    <path d="M11.0394 17.3415C10.8764 17.4042 10.7195 17.239 10.7826 17.0762C11.9852 13.9735 11.9852 10.0265 10.7826 6.92377C10.7195 6.76097 10.8766 6.59616 11.0393 6.65976C14.6827 8.08497 15.6301 10.4109 15.6301 12C15.6301 13.594 15.0087 15.8127 11.0394 17.3415Z" fill="white"/>
+                    <path d="M16.7859 1.42902C16.6493 1.29251 16.4184 1.41138 16.4504 1.60183C17.7479 9.32229 17.7479 14.6777 16.4504 22.3982C16.4184 22.5886 16.6482 22.7086 16.7848 22.572C23.4167 15.9424 24.0525 8.69168 16.7859 1.42902Z" fill="white"/>
+                    <path d="M4.8695 12C4.8695 12.7594 4.22714 13.375 3.43475 13.375C2.64236 13.375 2 12.7594 2 12C2 11.2406 2.64236 10.625 3.43475 10.625C4.22714 10.625 4.8695 11.2406 4.8695 12Z" fill="white"/>
                     </svg>`;
+            
             }
           }, 750);
         });
       
         // Volume slider drag events
         volumeSlider.addEventListener("pointerdown", (e) => {
-          e.stopPropagation();
-          isDraggingVolume = true;
-          updateVolume(e);
-          document.addEventListener("mousemove", updateVolume);
-          document.addEventListener("mouseup", stopDragging);
+            e.stopPropagation();
+            isDraggingVolume = true;
+            updateVolume(e);
+            document.addEventListener("mousemove", updateVolume);
+            document.addEventListener("mouseup", stopDragging);
         });
       
         function updateVolume(e) {
@@ -918,9 +1007,9 @@ document.addEventListener("DOMContentLoaded", async() => {
         const playPauseButton = document.createElement("div");
         playPauseButton.classList.add("play-pause-button");
         playPauseButton.innerHTML = `
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <polygon points="6,4 20,12 6,20" />
-          </svg>
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5.78793 21.7594C9.04505 16.0567 9.04505 7.94326 5.78793 2.24055C5.67245 2.03836 5.96022 1.78503 6.14075 1.93209C12.5835 7.18046 16.1256 9.76256 20.5921 11.8152C20.7493 11.8874 20.7493 12.1126 20.5921 12.1848C16.1256 14.2374 12.5835 16.8195 6.14075 22.0679C5.96022 22.215 5.67245 21.9616 5.78793 21.7594Z" fill="white"/>
+            </svg>
         `;
         controlsDiv.appendChild(playPauseButton);
       
@@ -928,10 +1017,10 @@ document.addEventListener("DOMContentLoaded", async() => {
         const fullscreenButton = document.createElement("div");
         fullscreenButton.classList.add("fullscreen-button");
         fullscreenButton.innerHTML = `
-          <svg viewBox="0 0 24 24" fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg">
-            <path d="M16 13h2v5h-5v-2h3v-3zm-8 0v3h3v2H6v-5h2zm0-2H6V6h5v2H8v3zm8 0V8h-3V6h5v5h-2z"/>
-          </svg>
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M14.9942 3.3803C14.8014 3.31546 14.6578 3.55219 14.7895 3.70719C15.3362 4.35047 15.8256 5.13564 15.8256 5.98346C15.8256 8.16426 14.113 9.93216 12.0004 9.93216C9.88775 9.93216 8.17512 8.16426 8.17512 5.98346C8.17512 5.13048 8.6714 4.23784 9.22231 3.546C9.34901 3.3869 9.19996 3.14596 9.00759 3.212C6.22858 4.16601 3.76793 6.33067 2.72868 8.91675C2.65402 9.10254 2.88582 9.26564 3.05687 9.16155C3.74517 8.7427 4.58755 8.49627 5.49744 8.49627C7.82134 8.49627 9.70522 10.1034 9.70522 12.086C9.70522 14.0685 7.82134 15.6757 5.49744 15.6757C4.58709 15.6757 3.74454 15.4288 3.05616 15.0094C2.88514 14.9052 2.65363 15.0683 2.72881 15.2539C3.76832 17.8199 6.2282 19.8559 9.00677 20.7903C9.19955 20.8551 9.34313 20.6185 9.2114 20.4635C8.6648 19.8205 8.17512 19.036 8.17512 18.1885C8.17512 16.0077 9.88775 14.2398 12.0004 14.2398C14.113 14.2398 15.8256 16.0077 15.8256 18.1885C15.8256 19.0361 15.3359 19.8206 14.7893 20.4636C14.6576 20.6185 14.8011 20.8551 14.9939 20.7903C17.7725 19.856 20.2312 17.8198 21.2705 15.2536C21.3457 15.068 21.1143 14.905 20.9433 15.0092C20.2552 15.4285 19.4134 15.6757 18.5033 15.6757C16.1794 15.6757 14.2955 14.0685 14.2955 12.086C14.2955 10.1034 16.1794 8.49627 18.5033 8.49627C19.4134 8.49627 20.2556 8.74301 20.9439 9.1621C21.1149 9.26624 21.3464 9.10321 21.2712 8.91762C20.2317 6.35147 17.7727 4.31465 14.9942 3.3803Z" fill="white"/>
+            <path d="M14.9942 3.3803C14.8014 3.31546 14.6578 3.55219 14.7895 3.70719C15.3362 4.35047 15.8256 5.13564 15.8256 5.98346C15.8256 8.16426 14.113 9.93216 12.0004 9.93216C9.88775 9.93216 8.17512 8.16426 8.17512 5.98346C8.17512 5.13048 8.6714 4.23784 9.22231 3.546C9.34901 3.3869 9.19996 3.14596 9.00759 3.212C6.22858 4.16601 3.76793 6.33067 2.72868 8.91675C2.65402 9.10254 2.88582 9.26564 3.05687 9.16155C3.74517 8.7427 4.58755 8.49627 5.49744 8.49627C7.82134 8.49627 9.70522 10.1034 9.70522 12.086C9.70522 14.0685 7.82134 15.6757 5.49744 15.6757C4.58709 15.6757 3.74454 15.4288 3.05616 15.0094C2.88514 14.9052 2.65363 15.0683 2.72881 15.2539C3.76832 17.8199 6.2282 19.8559 9.00677 20.7903C9.19955 20.8551 9.34313 20.6185 9.2114 20.4635C8.6648 19.8205 8.17512 19.036 8.17512 18.1885C8.17512 16.0077 9.88775 14.2398 12.0004 14.2398C14.113 14.2398 15.8256 16.0077 15.8256 18.1885C15.8256 19.0361 15.3359 19.8206 14.7893 20.4636C14.6576 20.6185 14.8011 20.8551 14.9939 20.7903C17.7725 19.856 20.2312 17.8198 21.2705 15.2536C21.3457 15.068 21.1143 14.905 20.9433 15.0092C20.2552 15.4285 19.4134 15.6757 18.5033 15.6757C16.1794 15.6757 14.2955 14.0685 14.2955 12.086C14.2955 10.1034 16.1794 8.49627 18.5033 8.49627C19.4134 8.49627 20.2556 8.74301 20.9439 9.1621C21.1149 9.26624 21.3464 9.10321 21.2712 8.91762C20.2317 6.35147 17.7727 4.31465 14.9942 3.3803Z" fill="white"/>
+            </svg>
         `;
         controlsDiv.appendChild(fullscreenButton);
       
@@ -945,23 +1034,32 @@ document.addEventListener("DOMContentLoaded", async() => {
                 videoElem.play();
                 // When playing, show pause icon
                 playPauseButton.innerHTML = `
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                    <rect x="6" y="4" width="4" height="16" />
-                    <rect x="14" y="4" width="4" height="16" />
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.5488 22.3247C6.41972 22.4931 6.16036 22.3656 6.20877 22.159C7.66374 15.9503 7.66374 8.04968 6.20877 1.84097C6.16036 1.63438 6.42702 1.50131 6.56311 1.6641C10.9489 6.91048 10.8084 8.58278 11.1452 9.64463C11.1741 9.73602 11.1387 9.83826 11.06 9.89294C7.95045 12.052 10.8867 16.6655 6.5488 22.3247Z" fill="white"/>
+                <path d="M18.4421 1.53089C18.5879 1.38515 18.8256 1.53429 18.7655 1.73149C16.8559 7.99303 16.8559 16.007 18.7655 22.2685C18.8256 22.4657 18.5839 22.6193 18.4331 22.4787C12.7447 17.1769 13.4337 15.5423 13.0771 14.4777C13.0418 14.3724 13.0858 14.2496 13.1833 14.1964C17.1791 12.0156 12.7105 7.25907 18.4421 1.53089Z" fill="white"/>
                 </svg>
                 `;
             } else {
                 videoElem.pause();
                 // When paused, show play icon
                 playPauseButton.innerHTML = `
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                    <polygon points="6,4 20,12 6,20" />
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.78793 21.7594C9.04505 16.0567 9.04505 7.94326 5.78793 2.24055C5.67245 2.03836 5.96022 1.78503 6.14075 1.93209C12.5835 7.18046 16.1256 9.76256 20.5921 11.8152C20.7493 11.8874 20.7493 12.1126 20.5921 12.1848C16.1256 14.2374 12.5835 16.8195 6.14075 22.0679C5.96022 22.215 5.67245 21.9616 5.78793 21.7594Z" fill="white"/>
                 </svg>
                 `;
             }
             showControls();
             hideControlsDelayed();
         }
+
+        videoElem.addEventListener("ended", () => {
+            playPauseButton.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="6,4 20,12 6,20" />
+            </svg>
+            `;
+        });
+
         
         // Toggle fullscreen
         function toggleFullscreen() {
@@ -1051,7 +1149,9 @@ document.addEventListener("DOMContentLoaded", async() => {
             if (
               e.target.closest(".play-pause-button") ||
               e.target.closest(".sound-button") ||
-              e.target.closest(".fullscreen-button")
+              e.target.closest(".fullscreen-button") ||
+              e.target.closest(".volume-slider") ||
+              isDraggingVolume
             ) return;
           
             toggleControls();

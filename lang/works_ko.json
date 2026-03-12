@@ -31,9 +31,307 @@
         }
     },
 
+    "crosstalk": {
+        "layout": [
+            ["img-0", "img-0", "img-0", "txt-0"],
+            ["vid-3", "vid-3", "vid-3", "vid-3"],
+            ["vid-0", "vid-0", "vid-1", "vid-1"],
+            ["vid-2", "vid-2", "vid-4", "vid-4"],
+            ["txt-1", "txt-1", "txt-1", "txt-1"]
+        ],
+        "content": {
+            "img-0": {
+                "src": "https://htmlchedpahc.b-cdn.net/crosstalk/!!!works-thumbnail.jpg",
+                "scale": "100"
+            },
+            "txt-0": {
+                "file": "https://htmlchedpahc.b-cdn.net/crosstalk/!about_crosstalk_ko.txt",
+                "classes": "txt-M",
+                "line": "-3"
+            },
+            "txt-1": {
+                "file": "https://htmlchedpahc.b-cdn.net/crosstalk/!about_crosstalk_ko.txt",
+                "classes": "txt-M",
+                "line": "5-"
+            },
+            "vid-0": {
+                "src": "https://htmlchedpahc.b-cdn.net/crosstalk/sounddesign_snippet_1_conv.mp4",
+                "aspectRatio": "16/9",
+                "poster": "https://htmlchedpahc.b-cdn.net/crosstalk/sounddesign_snippet_1_conv.mp4_poster.jpg"
+            },
+            "vid-1": {
+                "src": "https://htmlchedpahc.b-cdn.net/crosstalk/sounddesign_snippet_2_conv.mp4",
+                "aspectRatio": "16/9",
+                "poster": "https://htmlchedpahc.b-cdn.net/crosstalk/sounddesign_snippet_2_conv.mp4_poster.jpg"
+            },
+            "vid-2": {
+                "src": "https://htmlchedpahc.b-cdn.net/crosstalk/sounddesign_snippet_3_conv.mp4",
+                "aspectRatio": "16/9",
+                "poster": "https://htmlchedpahc.b-cdn.net/crosstalk/sounddesign_snippet_3_conv.mp4_poster.jpg"
+            },
+            "vid-3": {
+                "src": "https://htmlchedpahc.b-cdn.net/crosstalk/sounddesign_snippet_4_conv.mp4",
+                "aspectRatio": "16/9",
+                "poster": "https://htmlchedpahc.b-cdn.net/crosstalk/sounddesign_snippet_4_conv.mp4_poster.jpg",
+                "caption": "사운드 디자인 샘플들"
+            },
+            "vid-4": {
+                "src": "https://htmlchedpahc.b-cdn.net/crosstalk/sounddesign_snippet_5_conv.mp4",
+                "aspectRatio": "16/9",
+                "poster": "https://htmlchedpahc.b-cdn.net/crosstalk/sounddesign_snippet_5_conv.mp4_poster.jpg"
+            }
+        }
+    },
+    
+    "oct-25th-explain-birth": {
+        "layout": [
+            ["img-11", "img-11"],
+            ["txt-0", "txt-0"],
+
+            ["img-7", "img-8"],
+            ["img-0", "img-1"],
+            ["img-3", "img-2"],
+            
+            ["img-4", "img-6"],
+            ["img-5", "img-5"]
+
+        ],
+        "content": {
+            "txt-0": {
+                "file": "https://htmlchedpahc.b-cdn.net/oct-25th-explain-birth/!about_oct-25th-explain-birth_ko.txt",
+                "classes": "txt-M"
+            },
+            "img-0": {
+                "src": "https://htmlchedpahc.b-cdn.net/oct-25th-explain-birth/16b09_still9.png",
+                "scale": "",
+                "caption": ""
+            },
+            "img-1": {
+                "src": "https://htmlchedpahc.b-cdn.net/oct-25th-explain-birth/16b09_still12.png",
+                "scale": "",
+                "caption": ""
+            },
+            "img-2": {
+                "src": "https://htmlchedpahc.b-cdn.net/oct-25th-explain-birth/16b09_still21.png",
+                "scale": "",
+                "caption": ""
+            },
+            "img-3": {
+                "src": "https://htmlchedpahc.b-cdn.net/oct-25th-explain-birth/16b09_still24.png",
+                "scale": "",
+                "caption": ""
+            },
+            "img-4": {
+                "src": "https://htmlchedpahc.b-cdn.net/oct-25th-explain-birth/16b09_still50.jpg",
+                "scale": "",
+                "caption": ""
+            },
+            "img-5": {
+                "src": "https://htmlchedpahc.b-cdn.net/oct-25th-explain-birth/16b09_still42.png",
+                "scale": "",
+                "caption": ""
+            },
+            "img-6": {
+                "src": "https://htmlchedpahc.b-cdn.net/oct-25th-explain-birth/16b09_still51.png",
+                "scale": "",
+                "caption": ""
+            },
+            "img-7": {
+                "src": "https://htmlchedpahc.b-cdn.net/oct-25th-explain-birth/16b09_still70.png",
+                "scale": "",
+                "caption": ""
+            },
+            "img-8": {
+                "src": "https://htmlchedpahc.b-cdn.net/oct-25th-explain-birth/16b09_still94.png",
+                "scale": "",
+                "caption": ""
+            },
+            "img-11": {
+                "src": "https://htmlchedpahc.b-cdn.net/oct-25th-explain-birth/16b09_still117.png",
+                "scale": "",
+                "caption": ""
+            }
+        }
+    },
+    
+    "late": {
+        "layout": [
+            ["txt-ttl0","txt-ttl0","txt-ttl0","txt-ttl0","txt-ttl0","txt-ttl0","txt-ttl0","txt-ttl0"],
+
+            ["img-0","img-0","img-0","txt-1","txt-1","txt-1","txt-1","txt-1"],
+            ["txt-0","txt-0","txt-0","txt-0","txt-0","txt-0","txt-0","txt-0"],
+
+            ["txt-ttl1","txt-ttl1","txt-ttl1","txt-ttl1","txt-ttl1","txt-ttl1","txt-ttl1","txt-ttl1"],
+
+            ["img-1","img-1","img-1","img-1","txt-2","txt-2","txt-2","txt-2"],
+            ["img-2","img-2","img-2","img-2","img-3","img-3","img-3","img-3"],
+
+            ["img-4","img-4","img-4","img-4","img-4","img-4","img-4","img-4"],
+            ["img-5","img-5","img-5","img-5","img-6","img-6","img-6","img-6"],
+            ["img-9","img-9","img-9","img-9","img-11","img-11","img-11","img-11"],
+            ["img-12","img-12","img-12","img-12","img-10","img-10","img-10","img-10"],
+            ["img-8","img-8","img-8","img-8","img-14","img-14","img-14","img-14"],
+            ["img-13","img-13","img-13","img-13","img-13","img-13","img-13","img-13"],
+            ["img-16","img-16","img-16","img-16","img-15","img-15","img-15","img-15"]
+            ],
+        "content": {
+            "txt-ttl0": {
+                "text": "LATE (2025)",
+                "classes": "txt-L"
+            },
+            "txt-ttl1": {
+                "text": "LATE ; PARTY (2025)",
+                "classes": "txt-L"
+            },
+            "txt-0": {
+                "file": "https://htmlchedpahc.b-cdn.net/late/!about_late_ko.txt",
+                "classes": "txt-M",
+                "line": "-6"
+            },
+            "txt-1": {
+                "file": "https://htmlchedpahc.b-cdn.net/late/!about_late_ko.txt",
+                "classes": "txt-S",
+                "line": "9-33"
+            },
+            "txt-2": {
+                "file": "https://htmlchedpahc.b-cdn.net/late/!about_late_ko.txt",
+                "classes": "txt-M",
+                "line": "36-"
+            },
+            "img-0": {
+                "src": "https://htmlchedpahc.b-cdn.net/late/!cover_half.png",
+                "scale": "100",
+                "caption": "Album cover"
+            },
+            "img-1": { "src": "https://htmlchedpahc.b-cdn.net/late/0.jpg", "scale": "100", "caption": "" },
+            "img-2": { "src": "https://htmlchedpahc.b-cdn.net/late/1.jpg", "scale": "100", "caption": "" },
+            "img-3": { "src": "https://htmlchedpahc.b-cdn.net/late/2.jpg", "scale": "100", "caption": "" },
+            "img-4": { "src": "https://htmlchedpahc.b-cdn.net/late/3.jpg", "scale": "100", "caption": "" },
+            "img-5": { "src": "https://htmlchedpahc.b-cdn.net/late/4.jpg", "scale": "100", "caption": "" },
+            "img-6": { "src": "https://htmlchedpahc.b-cdn.net/late/5.jpg", "scale": "100", "caption": "" },
+            "img-7": { "src": "https://htmlchedpahc.b-cdn.net/late/6.jpg", "scale": "100", "caption": "" },
+            "img-8": { "src": "https://htmlchedpahc.b-cdn.net/late/7.jpg", "scale": "100", "caption": "" },
+            "img-9": { "src": "https://htmlchedpahc.b-cdn.net/late/8.jpg", "scale": "100", "caption": "" },
+            "img-10": { "src": "https://htmlchedpahc.b-cdn.net/late/9.jpg", "scale": "100", "caption": "" },
+            "img-11": { "src": "https://htmlchedpahc.b-cdn.net/late/10.jpg", "scale": "100", "caption": "" },
+            "img-12": { "src": "https://htmlchedpahc.b-cdn.net/late/11.jpg", "scale": "100", "caption": "" },
+            "img-13": { "src": "https://htmlchedpahc.b-cdn.net/late/12.jpg", "scale": "100", "caption": "" },
+            "img-14": { "src": "https://htmlchedpahc.b-cdn.net/late/13.jpg", "scale": "100", "caption": "" },
+            "img-15": { "src": "https://htmlchedpahc.b-cdn.net/late/14.jpg", "scale": "100", "caption": "토스트 케이터링" },
+            "img-16": { "src": "https://htmlchedpahc.b-cdn.net/late/16.jpg", "scale": "93.75", "caption": "포스터: 임강민" }
+            }
+    },
+
+    "neokout": {
+        "layout": [
+            ["vid-0", "vid-0"],
+            ["txt-0", "txt-1"]
+        ],
+        "content": {
+            "vid-0": {
+                "src": "https://htmlchedpahc.b-cdn.net/neokout/20251030_neokout_demo.mp4",
+                "aspectRatio": "16/9",
+                "scale": "85",
+                "caption": "Demonstration footage of \"Neokout\" (2025)",
+                "poster": "https://htmlchedpahc.b-cdn.net/neokout/20251030_neokout_demo.mp4_still0.jpg"
+            },
+            "txt-0": {
+                "file": "https://htmlchedpahc.b-cdn.net/neokout/!about_neokout_ko.txt",
+                "classes": "txt-M",
+                "line": "-3"
+            },
+            "txt-1": {
+                "file": "https://htmlchedpahc.b-cdn.net/neokout/!about_neokout_ko.txt",
+                "classes": "txt-M",
+                "line": "6-"
+            }
+        }
+    },
+    
+    "gestac-proto-1": {
+        "layout": [
+            ["vid-0", "vid-0", "txt-0", "txt-0"],
+            ["aud-0", "aud-0", "aud-0", "aud-0"]
+        ],
+        "content": {
+            "vid-0": {
+                "src": "https://htmlchedpahc.b-cdn.net/gestac-proto-1/!excerpt_merge.mp4",
+                "aspectRatio": "9/16",
+                "scale": "50",
+                "caption": "GESTAC PROTO 1(stepsequence) (2025)",
+                "poster": "https://htmlchedpahc.b-cdn.net/gestac-proto-1/!excerpt_merge.mp4_still0.jpg"
+            },
+            "txt-0": {
+                "file": "https://htmlchedpahc.b-cdn.net/gestac-proto-1/!about_gestac-proto-1_ko.txt",
+                "classes": "txt-M",
+                "line": "2-13"
+            },
+            "aud-0": {
+                "src": "https://htmlchedpahc.b-cdn.net/gestac-proto-1/!audiorecord_merge_full.mp3",
+                "caption": "라이브 공연에서의 오디오 녹음"
+            }
+        }
+    },
+
+    "gestac-proto-0": {
+        "layout": [
+            ["vid-0", "vid-0", "vid-0", "vid-0", "vid-0", "vid-0"],
+            ["txt-0", "txt-0", "txt-0", "txt-0", "txt-0", "txt-0"],
+            ["img-flyer", "img-flyer", "img-4", "img-4", "img-4", "img-4"],
+
+            ["img-3", "img-3", "img-3", "img-1", "img-1", "img-1"],
+            ["img-2", "img-2", "img-2", "img-0", "img-0", "img-0"]
+            
+        ],
+        "content": {
+            "vid-0": {
+                "src": "https://htmlchedpahc.b-cdn.net/gestac-proto-0/!cam2sel_merge_conv.mp4",
+                "aspectRatio": "4/3",
+                "scale": "80",
+                "caption": "GESTAC PROTO 0 (2025)",
+                "poster": "https://htmlchedpahc.b-cdn.net/gestac-proto-0/!cam2sel_merge_conv_still0.jpg"
+            },
+            "img-0": {
+                "src": "https://htmlchedpahc.b-cdn.net/gestac-proto-0/!cam1sels_still_1.15.3.png",
+                "scale": "",
+                "caption": ""
+            },
+            "img-1": {
+                "src": "https://htmlchedpahc.b-cdn.net/gestac-proto-0/!cam1sels_still_1.16.3.png",
+                "scale": "",
+                "caption": ""
+            },
+            "img-2": {
+                "src": "https://htmlchedpahc.b-cdn.net/gestac-proto-0/!cam1sels_still_1.17.3.png",
+                "scale": "",
+                "caption": ""
+            },
+            "img-3": {
+                "src": "https://htmlchedpahc.b-cdn.net/gestac-proto-0/!cam1sels_still_1.22.1.png",
+                "scale": "",
+                "caption": ""
+            },
+            "img-4": {
+                "src": "https://htmlchedpahc.b-cdn.net/gestac-proto-0/!cam1sels_still_1.31.2.png",
+                "scale": "",
+                "caption": ""
+            },
+            "img-flyer": {
+                "src": "https://htmlchedpahc.b-cdn.net/gestac-proto-0/!flyer_trippylog.png",
+                "scale": "",
+                "caption": ""
+            },
+            "txt-0": {
+                "file": "https://htmlchedpahc.b-cdn.net/gestac-proto-0/!about_gestac-proto-0_ko.txt",
+                "classes": "txt-M",
+                "line": ""
+            }
+        }
+    },
+
     "gossamer-everything": {
         "layout": [
-            ["vid-1", "vid-1", "txt-1"]
+            ["vid-1", "vid-1", "vid-1", "txt-1"]
 
         ],
         "content": {
@@ -43,7 +341,8 @@
             },
             "vid-1": {
                 "src": "https://htmlchedpahc.b-cdn.net/gossamer-everything/!20250302_gossamer_poster2_motion_conv.mp4",
-                "aspectRatio": "1/1",
+                "scale": "77",
+                "aspectRatio": "4/5",
                 "poster": "https://htmlchedpahc.b-cdn.net/gossamer-everything/!20250302_gossamer_poster2.jpg"
             }
         }
@@ -65,7 +364,7 @@
                 "classes": "txt-L"
             },
             "txt-2": {
-                "text": "Art direction: stnvndijk<br>Production and mixing: stnvndijk<br>Featuring artists: dagerblad<br>Additional credits: anatolemuster<br>Creative direction: novasdemise voremipsum<br>Executive production: optionlist<br>Mastering: tracesmastering<br>Motion Graphics: chedpahc",
+                "text": "Art direction: stnvndijk<br>Production and mixing: stnvndijk<br>Featuring artists: dagerblad<br>Additional credits: anatolemuster<br>Creative direction: novasdemise voremipsum<br>Executive production: optionlist<br>Mastering: tracesmastering<br>Graphics: chedpahc",
                 "classes": "txt-S"
             },
             "txt-3": {
@@ -114,17 +413,18 @@
     },
 
     "tropic": {
-        "layout": [        
-            ["vid-1", "vid-1"],
-            ["vid-2", "vid-3"],
-            ["vid-4", "vid-5"],
+        "layout": [  
+            ["img-0", "img-0"],
             ["txt-1", "txt-1"],
-            ["aud-1", "aud-1"],
-            ["aud-2", "aud-2"],
+            ["vid-1", "vid-2"],
+            ["vid-4", "vid-5"],
             ["aud-3", "aud-3"],
-            ["none", "txt-2"]
+            ["", "txt-2"]
         ],
         "content": {
+            "img-0": {
+                "src": "https://htmlchedpahc.b-cdn.net/tropic/still0.jpg"
+            },
             "txt-1": {
                 "file": "https://htmlchedpahc.b-cdn.net/tropic/!about_tropic_ko.txt",
                 "classes": "txt-M"
@@ -136,7 +436,6 @@
             "vid-1": {
                 "src": "https://htmlchedpahc.b-cdn.net/tropic/tda_snippet1_conv.mp4",
                 "aspectRatio": "16/9",
-                "caption": "",
                 "poster": "https://htmlchedpahc.b-cdn.net/tropic/tda_snippet1_conv_still.jpg"
             },
             "vid-2": {
@@ -144,12 +443,6 @@
                 "aspectRatio": "16/9",
                 "caption": "",
                 "poster": "https://htmlchedpahc.b-cdn.net/tropic/tda_snippet2_conv_still.jpg"
-            },
-            "vid-3": {
-                "src": "https://htmlchedpahc.b-cdn.net/tropic/tda_snippet4_conv.mp4",
-                "aspectRatio": "999/1",
-                "caption": "To be released",
-                "poster": "https://htmlchedpahc.b-cdn.net/tropic/tda_snippet4_conv_still.jpg"
             },
             "vid-4": {
                 "src": "https://htmlchedpahc.b-cdn.net/tropic/tda_snippet5_conv.mp4",
@@ -163,17 +456,9 @@
                 "caption": "",
                 "poster": "https://htmlchedpahc.b-cdn.net/tropic/tda_snippet6_conv_still.jpg"
             },
-            "aud-1": {
-                "src": "https://htmlchedpahc.b-cdn.net/tropic/audiosnippet1.mp3",
-                "caption": "사운드 디자인 샘플 1 : Intro"
-            },
-            "aud-2": {
-                "src": "https://htmlchedpahc.b-cdn.net/tropic/audiosnippet2.mp3",
-                "caption": "사운드 디자인 샘플 2 : Presence"
-            },
             "aud-3": {
                 "src": "https://htmlchedpahc.b-cdn.net/tropic/audiosnippet3.mp3",
-                "caption": "사운드 디자인 샘플 3 : Contact"
+                "caption": "사운드 디자인 샘플들"
             }
         }
     },
@@ -212,12 +497,16 @@
 
     "let": {
         "layout": [
-            ["img-1", "img-1", "img-1", "txt-1", "txt-1", "txt-1"],
-            ["txt-2", "txt-2", "txt-2", "txt-2", "txt-2", "txt-2"],
-            ["vid-0", "vid-0", "vid-1", "vid-1", "vid-2", "vid-2"],
-            ["vid-3", "vid-3", "vid-4", "vid-4", "vid-5", "vid-5"],
-            ["vid-6", "vid-6", "vid-7", "vid-7", "vid-8", "vid-8"],
-            ["vid-9", "vid-9", "vid-10", "vid-10", "vid-11", "vid-11"]
+            ["img-1", "img-1", "img-1", "img-1", "img-1", "img-1", "txt-1", "txt-1", "txt-1", "txt-1"],
+
+            ["txt-2", "txt-2" , "txt-2", "txt-2", "txt-2", "txt-2", "txt-2", "txt-2", "txt-2", "txt-2"],
+            ["vid-3", "vid-3", "vid-3", "vid-3", "vid-2", "vid-2","vid-2", "vid-6", "vid-6", "vid-6"],
+
+            ["vid-4", "vid-4", "vid-4", "vid-1", "vid-1", "vid-1", "vid-5", "vid-5", "vid-5", "vid-5" ],
+            ["vid-0", "vid-0", "vid-0", "vid-1", "vid-1", "vid-1", "vid-5", "vid-5", "vid-5", "vid-5"],
+            ["vid-10", "vid-10", "vid-10","vid-9", "vid-9","vid-9", "vid-11", "vid-11", "vid-11", "vid-11"],
+            ["txt-3", "txt-3", "txt-3", "txt-3", "txt-3", "txt-3", "txt-3", "txt-3", "txt-3", "txt-3"]
+            
         ],
         "content": {
             "txt-1": {
@@ -225,8 +514,12 @@
                 "classes": "txt-M"
             },
             "txt-2": {
-                "text": "다음 영상들은 비주얼라이저다. 소스 출력을 위해 생성형 AI(Stablediffusion)가 사용되었음.",
-                "classes": "txt-M"
+                "text": "\"LET\"을 위한 그래픽 시리즈",
+                "classes": "txt-L"
+            },
+            "txt-3": {
+                "text": "*소스 이미지 출력을 위해 생성형 AI가 사용되었음.",
+                "classes": "txt-S"
             },
             "img-1": {
                 "src": "https://htmlchedpahc.b-cdn.net/let/let_cover_compressed.jpg",
@@ -234,6 +527,7 @@
             },
             "vid-0": {
                 "src": "https://htmlchedpahc.b-cdn.net/let/let0.mp4",
+                "scale": "85",
                 "aspectRatio": "9/16",
                 "caption": "SET+GET",
                 "poster": "https://htmlchedpahc.b-cdn.net/let/let0_poster.jpg"
@@ -241,35 +535,41 @@
             "vid-1": {
                 "src": "https://htmlchedpahc.b-cdn.net/let/let1.mp4",
                 "aspectRatio": "9/16",
+                "scale": "85",
                 "caption": "BET",
                 "poster": "https://htmlchedpahc.b-cdn.net/let/let1_poster.jpg"
             },
             "vid-2": {
                 "src": "https://htmlchedpahc.b-cdn.net/let/let2.mp4",
+                "scale": "100",
                 "aspectRatio": "9/16",
                 "caption": "BRAT",
                 "poster": "https://htmlchedpahc.b-cdn.net/let/let2_poster.jpg"
             },
             "vid-3": {
                 "src": "https://htmlchedpahc.b-cdn.net/let/let3.mp4",
+                "scale": "100",
                 "aspectRatio": "9/16",
                 "caption": "LET",
                 "poster": "https://htmlchedpahc.b-cdn.net/let/let3_poster.jpg"
             },
             "vid-4": {
                 "src": "https://htmlchedpahc.b-cdn.net/let/let4.mp4",
+                "scale": "85",
                 "aspectRatio": "9/16",
                 "caption": "REGRET+FORGET",
                 "poster": "https://htmlchedpahc.b-cdn.net/let/let4_poster.jpg"
             },
             "vid-5": {
                 "src": "https://htmlchedpahc.b-cdn.net/let/let5.mp4",
+                "scale": "95",
                 "aspectRatio": "9/16",
                 "caption": "SWEAT",
                 "poster": "https://htmlchedpahc.b-cdn.net/let/let5_poster.jpg"
             },
             "vid-6": {
                 "src": "https://htmlchedpahc.b-cdn.net/let/let6.mp4",
+                "scale": "90",
                 "aspectRatio": "9/16",
                 "caption": "AT+YET",
                 "poster": "https://htmlchedpahc.b-cdn.net/let/let6_poster.jpg"
@@ -277,31 +577,35 @@
             "vid-7": {
                 "src": "https://htmlchedpahc.b-cdn.net/let/promo1.mp4",
                 "aspectRatio": "9/16",
-                "caption": "프로모션 1",
+                "caption": "",
                 "poster": "https://htmlchedpahc.b-cdn.net/let/promo1_poster.jpg"
             },
             "vid-8": {
                 "src": "https://htmlchedpahc.b-cdn.net/let/promo2.mp4",
+                "scale": "85",
                 "aspectRatio": "9/16",
-                "caption": "프로모션 2",
+                "caption": "‎‎‎ ",
                 "poster": "https://htmlchedpahc.b-cdn.net/let/promo2_poster.jpg"
             },
             "vid-9": {
                 "src": "https://htmlchedpahc.b-cdn.net/let/promo3.mp4",
+                "scale": "90",
                 "aspectRatio": "9/16",
-                "caption": "프로모션 3",
+                "caption": "",
                 "poster": "https://htmlchedpahc.b-cdn.net/let/promo3_poster.jpg"
             },
             "vid-10": {
                 "src": "https://htmlchedpahc.b-cdn.net/let/promo5.mp4",
+                "scale": "80",
                 "aspectRatio": "9/16",
-                "caption": "프로모션 4",
+                "caption": "",
                 "poster": "https://htmlchedpahc.b-cdn.net/let/promo5_poster.jpg"
             },
             "vid-11": {
                 "src": "https://htmlchedpahc.b-cdn.net/let/promo6.mp4",
+                "scale": "90",
                 "aspectRatio": "9/16",
-                "caption": "프로모션 5",
+                "caption": "",
                 "poster": "https://htmlchedpahc.b-cdn.net/let/promo6_poster.jpg"
             }
         }
@@ -315,7 +619,7 @@
             "img-1": {
                 "src": "https://htmlchedpahc.b-cdn.net/gagamsok/poster2_andrzej9k.jpg",
                 "scale": "90",
-                "caption": "포스터 : Andrzej9k"
+                "caption": "포스터: Andrzej9k"
             },
             "txt-1": {
                 "file": "https://htmlchedpahc.b-cdn.net/gagamsok/!about_gagamsok_ko.txt",
@@ -334,7 +638,7 @@
         ],
         "content": {
             "vid-1": {
-                "src": "https://htmlchedpahc.b-cdn.net/dots-stripes-furs/!dsf_6194x1548.mp4",
+                "src": "https://htmlchedpahc.b-cdn.net/dots-stripes-furs/!dsf_6194x1548_loop_weboptimized",
                 "aspectRatio": "21/9",
                 "caption": "점 줄무늬와 털들 (2024)",
                 "poster": "https://htmlchedpahc.b-cdn.net/dots-stripes-furs/cap_dsf_6194x1548_conv_still.jpg"
@@ -345,7 +649,7 @@
             },
             "img-1": {
                 "src": "https://htmlchedpahc.b-cdn.net/dots-stripes-furs/dataset2.jpg",
-                "caption": "AI로 생성한 질감"
+                "caption": "AI로 생성한 질감 샘플들"
             },
             "img-2": {
                 "src": "https://htmlchedpahc.b-cdn.net/dots-stripes-furs/artificial-sun_poster1.jpg"
@@ -357,7 +661,7 @@
             },
             "img-4": {
                 "src": "https://htmlchedpahc.b-cdn.net/dots-stripes-furs/!artificial-sun_photo_lukavenerus1.jpg",
-                "caption": "사진 : Luka Venerus"
+                "caption": "사진: Luka Venerus"
             },
             "txt-2": {
                 "file": "https://htmlchedpahc.b-cdn.net/dots-stripes-furs/!about_artificial-sun_ko.txt",
@@ -381,11 +685,11 @@
             },
             "img-1": {
                 "src": "https://htmlchedpahc.b-cdn.net/cat7/!comfort1.jpg",
-                "caption": "사진 : Hugo"
+                "caption": ""
             },
             "img-2": {
                 "src": "https://htmlchedpahc.b-cdn.net/cat7/!athletic1.jpg",
-                "caption": "사진 : Hugo"
+                "caption": ""
             },
             "txt-1": {
                 "file": "https://htmlchedpahc.b-cdn.net/cat7/!about_cat7_ko.txt",
@@ -499,8 +803,8 @@
             ["vid-e1", "vid-e1", "vid-e1", "txt-e2", "txt-e2", "txt-e2"],
 
             ["txt-trk1", "txt-trk1", "txt-trk1", "txt-trk1", "txt-trk1", "txt-trk1"],
-            ["img-trk1", "img-trk1", "img-trk1", "txt-trk2", "txt-trk2", "txt-trk2"],
-            ["vid-trk1", "vid-trk1", "vid-trk2", "vid-trk2", "txt-trk3", "txt-trk3"]
+            ["img-trk1", "img-trk1", "img-trk1", "vid-trk1", "vid-trk1", "vid-trk1"],
+            ["txt-trk3", "txt-trk3", "txt-trk3", "txt-trk3", "txt-trk3", "txt-trk3"]
 
 
         ],
@@ -560,19 +864,19 @@
                 "classes": "txt-M"
             },
             "vid-b1": {
-                "src": "https://htmlchedpahc.b-cdn.net/saccade/b_blabber_conv.mp4",
+                "src": "https://htmlchedpahc.b-cdn.net/saccade/b_blabber_conv_weboptimized.mp4",
                 "aspectRatio": "9/16",
                 "caption": "BlabberebblaB",
                 "poster": "https://htmlchedpahc.b-cdn.net/saccade/b_still3.jpg"
             },
             "vid-b2": {
-                "src": "https://htmlchedpahc.b-cdn.net/saccade/b_headbutt_conv.mp4",
+                "src": "https://htmlchedpahc.b-cdn.net/saccade/b_headbutt_conv_weboptimized.mp4",
                 "aspectRatio": "9/16",
                 "caption": "Headbutt",
                 "poster": "https://htmlchedpahc.b-cdn.net/saccade/b_still4.jpg"
             },
             "vid-b3": {
-                "src": "https://htmlchedpahc.b-cdn.net/saccade/b_rodeo_conv.mp4",
+                "src": "https://htmlchedpahc.b-cdn.net/saccade/b_rodeo_conv_weboptimized.mp4",
                 "aspectRatio": "9/16",
                 "caption": "Rodeo",
                 "poster": "https://htmlchedpahc.b-cdn.net/saccade/b_still7.jpg"
@@ -633,14 +937,11 @@
                 "src": "https://htmlchedpahc.b-cdn.net/saccade/trkprg_trackerbody.jpg",
                 "caption": "동공 추적기 몸체"
             },
-            "txt-trk2" : {
-                "file": "https://htmlchedpahc.b-cdn.net/saccade/trk_material_ko.txt",
-                "classes": "txt-M"
-            },
             "vid-trk1": {
                 "src": "https://htmlchedpahc.b-cdn.net/saccade/trkprg3_shorts2.mp4",
                 "aspectRatio": "9/16",
-                "caption": "작동 쇼케이스",
+                "caption": "트래커 쇼케이스",
+                "scale": "75",
                 "poster": "https://htmlchedpahc.b-cdn.net/saccade/trkprg3_shorts2_still.jpg"
             },
             "vid-trk2": {
@@ -699,7 +1000,7 @@
         "content": {
             "img-1": {
                 "src": "https://htmlchedpahc.b-cdn.net/horsepower-midissage/still_1.jpg",
-                "caption": "《Horsepower Midissage》 / 영상 : San Jang"
+                "caption": "《Horsepower Midissage》(2024), 촬영: San Jang"
             },
             "img-2": {
                 "src": "https://htmlchedpahc.b-cdn.net/horsepower-midissage/still_2.jpg",
@@ -726,16 +1027,9 @@
 
     "rest...rest": {
         "layout": [
-            ["img-a1", "img-a1", "img-a1"],
-            ["img-n1", "img-n1", "img-n1"],
-            ["img-t1", "img-t1", "img-t1"],
-            ["img-r1", "img-r1", "img-r1"],
-            ["img-f1", "img-f1", "img-f1"],
-
             ["vid-a2", "vid-n2", "vid-t2"],
             ["vid-r2", "vid-n2", "vid-f2"],
 
-            ["txt-1", "txt-1", "txt-1"],
             ["txt-2", "txt-2", "txt-2"],
             ["img-1", "img-1", "img-1"],
             ["txt-3", "txt-3", "txt-3"],
@@ -743,26 +1037,6 @@
             ["img-2", "img-2", "img-2"]
         ],
         "content": {
-            "img-a1": {
-                "src": "https://htmlchedpahc.b-cdn.net/rest...rest/16b09still_1.jpg",
-                "caption": "Angel - 스틸 프레임"
-            },
-            "img-n1": {
-                "src": "https://htmlchedpahc.b-cdn.net/rest...rest/16b09still_2.jpg",
-                "caption": "Nap - 스틸 프레임"
-            },
-            "img-t1": {
-                "src": "https://htmlchedpahc.b-cdn.net/rest...rest/16b09still_6.jpg",
-                "caption": "Think - 스틸 프레임"
-            },
-            "img-r1": {
-                "src": "https://htmlchedpahc.b-cdn.net/rest...rest/16b09still_8.jpg",
-                "caption": "Run - 스틸 프레임"
-            },
-            "img-f1": {
-                "src": "https://htmlchedpahc.b-cdn.net/rest...rest/16b09still_9.jpg",
-                "caption": "Fly - 스틸 프레임"
-            },
             "vid-a2": {
                 "src": "https://htmlchedpahc.b-cdn.net/rest...rest/09b16_angel_kurz1.mp4",
                 "aspectRatio": "9/16",
@@ -779,7 +1053,7 @@
             "vid-n2": {
                 "src": "https://htmlchedpahc.b-cdn.net/rest...rest/09b16_nap_kurz2.mp4",
                 "aspectRatio": "9/16",
-                "caption": "세로 레이아웃, 라이브셋 캡처",
+                "caption": "RESTRESTRESTRESTRESTRESTRESTRESTREST (2023)",
                 "poster": "https://htmlchedpahc.b-cdn.net/rest...rest/09b16still_nap.png"
             },
             "vid-r2": {
@@ -812,7 +1086,7 @@
             },
             "img-2": {
                 "src": "https://htmlchedpahc.b-cdn.net/rest...rest/install_grad_1_edit.jpg",
-                "caption": "학내 전시 전경"
+                "caption": "인터랙티브 설치 전경"
             }
         }
     },
@@ -1010,13 +1284,12 @@
             ["img-1", "img-2"],
             ["img-3", "vid-1"],
             ["txt-3", "txt-3"],
-            ["vid-2", "vid-2"],
-            ["txt-4", "txt-4"]
+            ["vid-2", "vid-2"]
 
         ],
         "content": {
             "txt-1": {
-                "text": "야생 스피커",
+                "text": "야생 스피커 (2020)",
                 "classes": "txt-L"
             },
             "aud-1": {
@@ -1057,12 +1330,12 @@
             },
             "img-1": {
                 "src": "https://htmlchedpahc.b-cdn.net/wild-speakers-echolocation/ws_prototype3.jpg",
-                "caption": "프로토타입1",
+                "caption": "프로토타입",
                 "scale": "70"
             },
             "img-2": {
                 "src": "https://htmlchedpahc.b-cdn.net/wild-speakers-echolocation/ws_prototype2.jpg",
-                "caption": "프로토타입2",
+                "caption": "프로토타입",
                 "scale": "70"
             },
             "img-3": {
@@ -1077,18 +1350,14 @@
                 "poster": "https://htmlchedpahc.b-cdn.net/wild-speakers-echolocation/ws_footage3_still.jpg"
             },
             "txt-3": {
-                "text": "반향정위",
+                "text": "반향정위 (2020)",
                 "classes": "txt-L"
             },
             "vid-2": {
                 "src": "https://htmlchedpahc.b-cdn.net/wild-speakers-echolocation/ech1_edit.mp4",
                 "aspectRatio": "16/9",
-                "caption": "반향정위 (2020)",
+                "caption": "야외 설치 기록",
                 "poster": "https://htmlchedpahc.b-cdn.net/wild-speakers-echolocation/ech1_edit_still.jpg"
-            },
-            "txt-4": {
-                "file": "https://htmlchedpahc.b-cdn.net/wild-speakers-echolocation/!about_echolocation_ko.txt",
-                "classes": "txt-M"
             }
         }
     }
