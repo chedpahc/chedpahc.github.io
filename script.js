@@ -698,11 +698,11 @@ document.addEventListener("DOMContentLoaded", async() => {
         }
 
         // Normalize newlines
-        rawText = rawText.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+        rawText = rawText.replace(/\uFEFF/g, "").replace(/\r\n?/g, "\n");
 
         // If content.line specified, slice lines before further processing
-        if (typeof content === "object" && content.line) {
-            const lines = rawText.split("\n");
+        if (typeof content === "object" && content.line !== undefined) {
+            const lines = rawText.split(/\n/);
             const [start, end] = parseLineRange(content.line, lines.length);
             // if start > end => empty
             rawText = start <= end ? lines.slice(start, end + 1).join("\n") : "";
