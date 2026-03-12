@@ -940,7 +940,7 @@ a:active {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 2vw;
-  height: 750%;
+  height: 600%;
   background: rgba(255, 255, 255, 0.3);
   border-radius: 1vw 10vw;
   cursor: pointer;
@@ -954,7 +954,7 @@ a:active {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 50%; /* 초기 볼륨 25% 반영 */
+  height: 40%; /* 초기 볼륨 25% 반영 */
   background: white;
 }
 
@@ -1027,7 +1027,13 @@ video:fullscreen {
   :root{
     --base-vw: 60vw;
     --gridfreex-wrapper-vw: 85vw;
-    --font-h6: 0.8rem;
+    
+    --font-h1: 2.2rem;
+    --font-h2: 1.7rem;
+    --font-h3: 1.25rem;
+    --font-h4: 1.1rem;
+    --font-h5: 1rem;
+    --font-h6: .8rem;
   }
 
   .cv { padding: 3.5vw 6.7vw; }
@@ -1041,8 +1047,16 @@ video:fullscreen {
   :root{
     --base-vw: 66vw;
     --gridfreex-wrapper-vw: 90vw;
+
+    --font-h1: 2.2rem;
+    --font-h2: 1.7rem;
+    --font-h3: 1.25rem;
+    --font-h4: 0.925rem;
+    --font-h5: 0.875rem;
     --font-h6: 0.75rem;
   }
+
+  .cv { padding: 5vw 7vw; }
   .cvtext { font-size: var(--font-h5); }
 }
 /* tablet tall (<=1024px && tall screens) */
@@ -1057,17 +1071,16 @@ video:fullscreen {
   :root{
     --font-h1: 1.8rem;
     --font-h2: 1.4rem;
-    --font-h3: 1.25rem;
-    --font-h4: 0.8rem;
+    --font-h3: 1.22rem;
+    --font-h4: 0.9rem;
     --font-h5: 0.65rem;
-    --font-h6: 0.4rem;
+    --font-h6: 0.45rem;
 
     --base-vw: 93vw;
     --gridfreex-wrapper-vw: 100vw;
   }
 
   .logo { width: 28%; }
-
 
   .cv{
     border-radius: 2.5rem;
@@ -1116,4 +1129,5 @@ video:fullscreen {
     font-size: calc(1rem - 1.4vw);
     padding: 0.5rem;
   }
+  body {background: rgba (255,255,255,0.5);} /* test */
 }

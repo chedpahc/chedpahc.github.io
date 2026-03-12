@@ -890,7 +890,7 @@ document.addEventListener("DOMContentLoaded", async() => {
         const videoElem = document.createElement("video");
         videoElem.controls = false; // Remove native controls
         videoElem.setAttribute("preload", "none");
-        videoElem.volume = 0.5; // Default volume 50%
+        videoElem.volume = 0.4; // Default volume 50%
         videoElem.loop = false;
       
         // Append video source
