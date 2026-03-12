@@ -752,71 +752,115 @@ document.addEventListener("DOMContentLoaded", async() => {
         const progressColor = getComputedStyle(document.documentElement).getPropertyValue('--color-waveprogress').trim();
 
         function createAudioContent(item, content) {
-        const audioWrapper = document.createElement("div");
-        audioWrapper.classList.add("audio-wrapper");
+            const audioWrapper = document.createElement("div");
+            audioWrapper.classList.add("audio-wrapper");
 
-        const waveContainer = document.createElement("div");
-        waveContainer.classList.add("waveform");
-        waveContainer.id = `waveform-${item}`;
+            const waveContainer = document.createElement("div");
+            waveContainer.classList.add("waveform");
+            waveContainer.id = `waveform-${item}`;
 
-        // 로딩 오버레이
-        const loadingOverlay = document.createElement("div");
-        loadingOverlay.className = "loading-overlay";
+            // 로딩 오버레이
+            const loadingOverlay = document.createElement("div");
+            loadingOverlay.className = "loading-overlay";
 
-        const spinner = document.createElement("div");
-        spinner.className = "loading-spinner";
+            const spinner = document.createElement("div");
+            spinner.className = "loading-spinner";
 
-        loadingOverlay.appendChild(spinner);
+            loadingOverlay.appendChild(spinner);
 
-        audioWrapper.appendChild(waveContainer);
-        audioWrapper.appendChild(loadingOverlay);
+            const waveformFixed = document.createElement("div");
+            waveformFixed.classList.add("waveform-fixed");
+            waveformFixed.appendChild(waveContainer);
 
-        // WaveSurfer 인스턴스 생성
-        const waveSurfer = WaveSurfer.create({
-            container: waveContainer,
-            waveColor: waveColor,
-            progressColor: progressColor,
-            barWidth: 3,
-            cursorColor: progressColor,
-            cursorWidth: 1,
-            responsive: true,
-            backend: 'WebAudio',
-            normalize: true,
-        });
-        
-        // 로딩 표시
-        waveSurfer.on('loading', () => {
-            loadingOverlay.classList.remove('hidden');
-        });
+            audioWrapper.appendChild(waveformFixed);
+            audioWrapper.appendChild(loadingOverlay);
 
-        // 로딩 완료
-        waveSurfer.on('ready', () => {
-            loadingOverlay.classList.add('hidden');
-        });
+            const WAVE_HEIGHT = 128;
 
-        // 에러 시에도 숨김
-        waveSurfer.on('error', (err) => {
-            console.error('WaveSurfer load error', err);
-            loadingOverlay.classList.add('hidden');
-        });
+            const waveSurfer = WaveSurfer.create({
+                container: waveContainer,
+                waveColor: waveColor,
+                progressColor: progressColor,
+                barWidth: 3,
+                cursorColor: progressColor,
+                cursorWidth: 1,
+                responsive: true,
+                backend: 'WebAudio',
+                normalize: true,
+                height: WAVE_HEIGHT,
+            });
 
-        // 로드 시작
-        waveSurfer.load(content.src);
-        waveInstances.push(waveSurfer);
+            const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
+            let vol = 1;
+            let currentHeight = WAVE_HEIGHT;
+            let targetHeight = WAVE_HEIGHT;
+            const MIN_H = 7;
+            const MAX_H = WAVE_HEIGHT;
+            let animating = false;
 
-        // 파형 클릭 재생
-        waveContainer.addEventListener("click", () => {
-            if (waveSurfer.isPlaying()) waveSurfer.pause();
-            else waveSurfer.play();
-        });
+            function animateHeight() {
+                const diff = targetHeight - currentHeight;
+                if (Math.abs(diff) < 0.5) {
+                    currentHeight = targetHeight;
+                    animating = false;
+                    return;
+                }
+                currentHeight += diff * 0.25;
+                waveSurfer.setOptions({ height: Math.round(currentHeight) });
+                requestAnimationFrame(animateHeight);
+            }
 
-        if (content.caption) {
-            const caption = document.createElement("figcaption");
-            caption.textContent = content.caption;
-            audioWrapper.appendChild(caption);
+            if (!isTouchDevice) {
+                audioWrapper.addEventListener('wheel', (ev) => {
+                    ev.preventDefault();
+                    vol = Math.min(1, Math.max(0, vol + (ev.deltaY < 0 ? 0.05 : -0.05)));
+                    if (waveSurfer.media) waveSurfer.media.volume = vol;
+                    targetHeight = MIN_H + vol * (MAX_H - MIN_H);
+                    if (!animating) {
+                        animating = true;
+                        requestAnimationFrame(animateHeight);
+                    }
+
+                    const opacity = 0.5 + vol * 0.5;
+                    waveContainer.style.opacity = opacity;
+                }, { passive: false });
+            }
+            
+            // 로딩 표시
+            waveSurfer.on('loading', () => {
+                loadingOverlay.classList.remove('hidden');
+            });
+
+            // 로딩 완료
+            waveSurfer.on('ready', () => {
+                loadingOverlay.classList.add('hidden');
+            });
+
+            // 에러 시에도 숨김
+            waveSurfer.on('error', (err) => {
+                console.error('WaveSurfer load error', err);
+                loadingOverlay.classList.add('hidden');
+            });
+
+            // 로드 시작
+            waveSurfer.load(content.src);
+            waveInstances.push(waveSurfer);
+
+            // 파형 클릭 재생
+            waveContainer.addEventListener("click", () => {
+                if (waveSurfer.isPlaying()) waveSurfer.pause();
+                else waveSurfer.play();
+            });
+
+            if (content.caption) {
+                const caption = document.createElement("figcaption");
+                caption.textContent = content.caption;
+                audioWrapper.appendChild(caption);
+            }
+            return audioWrapper;
         }
-        return audioWrapper;
-    }
+
+
     // ------------------------ Image ------------------------ //
     function createImageContent(content) {
         const imageWrapper = document.createElement("div");

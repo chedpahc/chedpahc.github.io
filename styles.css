@@ -751,14 +751,23 @@ a:active {
   margin-bottom: 2vh;
 }
 
+.waveform-fixed {
+  width: 100%;
+  height: 128px; /* WAVE_HEIGHT와 동일 */
+  display: flex;
+  align-items: center;  /* 중앙선 고정 */
+  overflow: hidden;
+}
+
 .waveform {
   width: 100%;
-  margin-top: 1vh;
-  margin-bottom: 1vh;
-  filter: url(#deboss);
+  transition: opacity 0.2s ease;
+  
 }
+
 .waveform:hover {
-  filter: brightness(1.2);
+  filter: brightness(1.3);
+  transition: all 0.2s ease ;
 }
 
 /* still image */
