@@ -1044,6 +1044,10 @@ video:fullscreen {
   .cv { padding: 3.5vw 6.7vw; }
   .logo { width: 38%; }
   .logo path { stroke-width: 0; }
+
+  .waveform-fixed {
+    height: 90px;
+  }
 }
 
 /* <= 1024px (pc small) */
@@ -1060,6 +1064,10 @@ video:fullscreen {
     --font-h6: 0.75rem;
   }
   .cv { padding: 6vw 7vw; }
+  
+  .waveform-fixed {
+    height: 85px;
+  }
 }
 /* tablet tall (<=1024px && tall screens) */
 @media (max-width: 1024px) and (min-height: 1024px) {
@@ -1102,6 +1110,10 @@ video:fullscreen {
   .tag-area-text { transform: translateY(calc(var(--header-height) * .25)); }
 
   .gridfreex-cell { padding: 0.66rem 1rem; }
+
+  .waveform-fixed {
+    height: 64px;
+  }
 
   /* video player changes */
   .fullscreen-button, .play-pause-button { width: 8vw; }
