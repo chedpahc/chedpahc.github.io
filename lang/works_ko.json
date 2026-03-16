@@ -33,10 +33,11 @@
 
     "crosstalk": {
         "layout": [
-            ["img-0", "img-0", "img-0", "txt-0"],
-            ["vid-3", "vid-3", "vid-3", "vid-3"],
+            ["img-0", "img-0", "img-0", "img-0"],
+            ["txt-0", "txt-0", "txt-0", "txt-0"],
             ["vid-0", "vid-0", "vid-1", "vid-1"],
             ["vid-2", "vid-2", "vid-4", "vid-4"],
+            ["vid-3", "vid-3", "vid-3", "vid-3"],
             ["txt-1", "txt-1", "txt-1", "txt-1"]
         ],
         "content": {
@@ -52,7 +53,7 @@
             "txt-1": {
                 "file": "https://htmlchedpahc.b-cdn.net/crosstalk/!about_crosstalk_ko.txt",
                 "classes": "txt-M",
-                "line": "5-"
+                "line": "6-"
             },
             "vid-0": {
                 "src": "https://htmlchedpahc.b-cdn.net/crosstalk/sounddesign_snippet_1_conv.mp4",
