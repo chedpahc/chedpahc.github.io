@@ -113,7 +113,6 @@ html {
 body {
   background: var(--color-bg);
   color: var(--color-text);
-  text-shadow: var(--filter-deboss-text);
 }
 
 header {
@@ -188,6 +187,7 @@ a:active {
   transition: background-color 0.15s linear;
 }
 
+
 .nav-link:hover,
 .tag-button:hover,
 .works-item:hover {
@@ -251,12 +251,22 @@ a:active {
   border-radius: 50%;
   font-size: var(--font-h2);
   background-color: var(--color-item);
-  box-shadow: var(--filter-deboss);
 
   /* gap */
   transform: scale(0.98);
   z-index: 99;
 }
+
+.grid3x-blank {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 50;
+  font-size: var(--font-h6);
+  background-color: var(--color-item);
+  grid-column: span 3;
+}
+
 
 .logo{
   display: flex;
